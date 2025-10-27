@@ -1,11 +1,24 @@
-import { useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import Layout from './pages/Layout';
+
+import Proyects from './pages/Proyects';
+import Home from './pages/Home';
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <h1>hi react</h1>
+      
+        <Routes>
+          <Route path="/" element={<Layout/>} >
+            <Route path='/home' element={<Home />}/>
+            <Route path="/proyects" element={<Proyects />} />
+          </Route>
+        </Routes>
+      
     </>
   )
 };
