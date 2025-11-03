@@ -1,66 +1,53 @@
-import React, { useState } from 'react';
-import { authenticate } from '../utils/auth';
-import '../styles/Login.css';
+import { useState } from 'react';
 
 export default function Login() {
-const [username, setUsername] = useState('');
-const [password, setPassword] = useState('');
-const [message, setMessage] = useState(null);
-const [loading, setLoading] = useState(false);
+  const [usuario, setUsuario] = useState('');
+  const [contraseña, setContraseña] = useState('');
+  const [mensaje, setMensaje] = useState('');
 
-const handleSubmit = async (e) => {
-e.preventDefault();
-setMessage(null);
-setLoading(true);
+  const usuarios = [
+    { nombre: 'Ezquizos', clave: 'escabio5' },
+    { nombre: 'Admin', clave: '1234' }
+];
 
-const result = await authenticate(username, password);
-setLoading(false);
+const manejarEnvio = e => {
+    e.preventDefault();
+    
+    const valido = !usuarios.every(
+      u => u.nombre !== usuario || u.clave !== contraseña
+    );
 
-if (result.success) {
-setMessage({ type: 'success', text: `Login exitoso. ¡Bienvenido ${username}!` });
+    if (valido) {
+      setMensaje(`Bienvenido, ${usuario}`);
+    } else {
+      setMensaje('Usuario o contraseña incorrectos');
+    }
+  };
 
-} else {
-setMessage({ type: 'error', text: result.message });
-}
-};
+  return (
+    <div className="login-contenedor">
+      <form className="login-formulario" onSubmit={manejarEnvio}>
+        <h2>Iniciar sesión</h2>
 
-return (
-<div className="login-wrap">
-<form className="login-card" onSubmit={handleSubmit}>
-<h2 className="login-title">Iniciar sesión</h2>
+        <input
+          type="text"
+          placeholder="Usuario"
+          value={usuario}
+          onChange={e => setUsuario(e.target.value)}
+          required
+        />
 
-<label className="label">Usuario</label>
-<input
-className="input"
-value={username}
-onChange={(e) => setUsername(e.target.value)}
-placeholder="Nombre de usuario"
-autoComplete="username"
-required
-/>
+        <input
+          type="password"
+          placeholder="Contraseña"
+          value={contraseña}
+          onChange={e => setContraseña(e.target.value)}
+          required
+        />
 
-<label className="label">Contraseña</label>
-<input
-className="input"
-value={password}
-onChange={(e) => setPassword(e.target.value)}
-type="password"
-placeholder="Contraseña"
-autoComplete="current-password"
-required
-/>
-
-<button className="btn" type="submit" disabled={loading}>
-{loading ? 'Verificando...' : 'Entrar'}
-</button>
-
-{message && (
-<div className={"msg " + (message.type === 'success' ? 'msg-success' : 'msg-error')}>
-{message.text}
-</div>
-)}
-
-</form>
-</div>
-);
+        <button type="submit">Entrar</button>
+        {mensaje && <p>{mensaje}</p>}
+      </form>
+    </div>
+  );
 }
