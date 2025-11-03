@@ -1,74 +1,187 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 
-export default function CasillasActivity() {
-  // indices: a1,a2,a3,b1,b2,b3,c1,c2,c3
-  const initial = { a1:"", a2:"", a3:"", b1:"", b2:"", b3:"", c1:"", c2:"", c3:"" };
-  const [cells, setCells] = useState(initial);
-  const [mensaje, setMensaje] = useState("");
+export default function CalculadorX() {
+  const [casilla, setCasilla] = useState([
+    ["", "", ""],
+    ["", "", ""],
+    ["", "", ""]
+  ]);
+  const [resultado, setResultado] = useState("");
 
-  useEffect(() => {
-    // recalcula cada vez que cambia
-    calcularX();
-  }, [cells]);
+  const actualizarCasilla = (fila, columna, valor) => {
+    if (valor.length > 1) return;
+    valor = valor.toUpperCase();
+    if (valor !== "" && valor !== "X" && isNaN(valor)) return;
 
-  function onChange(id, value) {
-    setCells(prev => ({...prev, [id]: value}));
-  }
+    const nueva = casilla.map((f, i) =>
+      f.map((c, j) => (i === fila && j === columna ? valor : c))
+    );
+    setCasilla(nueva);
+    setResultado("");
+  };
 
-  function calcularX() {
-    setMensaje("");
-    // contar X's
-    const keys = Object.keys(cells);
-    const xs = keys.filter(k => (cells[k]||"").toString().toLowerCase() === "x");
-    if (xs.length === 0) return; // nada que hacer
-    if (xs.length > 1) { setMensaje("Por ahora solo se detecta una única X."); return; }
+  const calcularX = () => {
+    const nueva = casilla.map((fila, i) => [...fila]);
+    let filaX = -1;
+    let colX = -1;
+    let valorX = null;
 
-    const xKey = xs[0];
-    // mapeo de columnas: col1 = a1,b1,c1 ; col2 = a2,b2,c2 ; col3 = a3,b3,c3
-    const colMap = { a1:1,b1:1,c1:1, a2:2,b2:2,c2:2, a3:3,b3:3,c3:3 };
-    const col = colMap[xKey];
-    const colKeys = keys.filter(k => colMap[k] === col);
-    // obtener valores numéricos de las otras dos celdas
-    const others = colKeys.filter(k => k !== xKey);
-    const nums = [];
-    for (const k of others) {
-      const v = cells[k].toString().trim();
-      if (v === "") continue;
-      const n = Number(v);
-      if (!Number.isNaN(n)) nums.push(n);
+    // buscar la posición de X
+    casilla.forEach((fila, i) => {
+      fila.forEach((valor, j) => {
+        if (valor === "X") {
+          filaX = i;
+          colX = j;
+        }
+      });
+    });
+
+    // si no hay X, completa la última fila automáticamente
+    if (filaX === -1 || colX === -1) {
+      // completar fila C (suma de A + B)
+      for (let j = 0; j < 3; j++) {
+        const a = Number(nueva[0][j]);
+        const b = Number(nueva[1][j]);
+        if (!isNaN(a) && !isNaN(b) && nueva[2][j] === "") {
+          nueva[2][j] = String(a + b);
+        }
+      }
+      setCasilla(nueva);
+      setResultado("Fila C completada automáticamente");
+      return;
     }
-    if (nums.length < 2) { setMensaje("Se necesitan 2 números en la columna para calcular X (actualmente faltan)."); return; }
-    // regla: X = suma de las otras dos celdas (implementación razonable)
-    const valorX = nums.reduce((s,n) => s + n, 0);
-    setCells(prev => ({...prev, [xKey]: String(valorX)}));
-    setMensaje(`X calculada en ${xKey} = ${valorX} (suma de la columna).`);
-  }
 
-  function handleKey(e) {
-    if (e.key === "Enter") calcularX();
-  }
+    // calcular X
+    if (filaX === 2 && colX !== -1) {
+      const a = Number(nueva[0][colX]);
+      const b = Number(nueva[1][colX]);
+      if (!isNaN(a) && !isNaN(b)) {
+        valorX = a + b;
+        nueva[2][colX] = "X";
+      }
+    } else if (filaX === 1 && colX !== -1) {
+      const a = Number(nueva[0][colX]);
+      const c = Number(nueva[2][colX]);
+      if (!isNaN(a) && !isNaN(c)) {
+        valorX = c - a;
+        nueva[1][colX] = "X";
+      }
+    } else if (filaX === 0 && colX !== -1) {
+      const b = Number(nueva[1][colX]);
+      const c = Number(nueva[2][colX]);
+      if (!isNaN(b) && !isNaN(c)) {
+        valorX = c - b;
+        nueva[0][colX] = "X";
+      }
+    }
+
+    // completa automáticamente la última si faltan digitos
+    for (let j = 0; j < 3; j++) {
+      const a = Number(nueva[0][j]);
+      const b = Number(nueva[1][j]);
+      if (!isNaN(a) && !isNaN(b) && nueva[2][j] === "") {
+        nueva[2][j] = String(a + b);
+      }
+    }
+
+    if (valorX !== null) {
+      setCasilla(nueva);
+      setResultado(`El valor de X es: ${valorX}`);
+    } else {
+      setCasilla(nueva);
+      setResultado("Fila completada automáticamente");
+    }
+  };
+
+  const limpiar = () => {
+    setCasilla([
+      ["", "", ""],
+      ["", "", ""],
+      ["", "", ""]
+    ]);
+    setResultado("");
+  };
 
   return (
-    <div className="cas-container" onKeyDown={handleKey}>
-      <h1>Actividad Casillas</h1>
-      <div className="grid">
-        {["a1","a2","a3","b1","b2","b3","c1","c2","c3"].map(id => (
-          <input
-            key={id}
-            value={cells[id]}
-            onChange={e=>onChange(id, e.target.value)}
-            placeholder={id}
-          />
-        ))}
+    <div style={{
+      fontFamily: "Arial, sans-serif",
+      textAlign: "center",
+      marginTop: "30px"
+    }}>
+      {/* tabla 3x3 */}
+      <div style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(3, 80px)",
+        gridTemplateRows: "repeat(3, 80px)",
+        gap: "5px",
+        justifyContent: "center",
+        margin: "0 auto"
+      }}>
+        {casilla.map((fila, i) =>
+          fila.map((valor, j) => (
+            <input
+              key={`${i}-${j}`}
+              type="text"
+              value={valor}
+              maxLength={1}
+              onChange={(e) => actualizarCasilla(i, j, e.target.value)}
+              style={{
+                width: "70px",
+                height: "70px",
+                textAlign: "center",
+                fontSize: "24px",
+                border: "2px solid black",
+                borderRadius: "10px"
+              }}
+            />
+          ))
+        )}
       </div>
-      <div className="mensaje">{mensaje}</div>
 
-      <style>{`
-        .cas-container{text-align:center;padding:18px;font-family:Arial}
-        .grid{display:grid;grid-template-columns:repeat(3,90px);gap:8px;justify-content:center;margin:10px auto}
-        input{width:80px;height:58px;text-align:center;font-size:18px;border-radius:8px;border:2px solid #333}
-        .mensaje{margin-top:12px;color:#1f4f7a;font-weight:600}
-      `}</style>
+      {/* resultado */}
+      {resultado && (
+        <div style={{
+          marginTop: "20px",
+          fontSize: "22px",
+          fontWeight: "bold",
+          color: "darkblue"
+        }}>
+          {resultado}
+        </div>
+      )}
+
+      {/* botones */}
+      <div style={{ marginTop: "20px" }}>
+        <button 
+          onClick={calcularX}
+          style={{
+            padding: "10px 20px",
+            fontSize: "16px",
+            backgroundColor: "#4caf50",
+            color: "white",
+            border: "none",
+            borderRadius: "5px",
+            cursor: "pointer",
+            marginRight: "10px"
+          }}
+        >
+          Calcular X
+        </button>
+        <button 
+          onClick={limpiar}
+          style={{
+            padding: "10px 20px",
+            fontSize: "16px",
+            backgroundColor: "#f44336",
+            color: "white",
+            border: "none",
+            borderRadius: "5px",
+            cursor: "pointer"
+          }}
+        >
+          Limpiar
+        </button>
+      </div>
     </div>
   );
 }
