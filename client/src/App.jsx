@@ -14,9 +14,9 @@ function App() {
         {/* <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Login />} /> */}
         <Route path="/proyecto2" element={<Proyecto2 />} />
-        {/* <Route path="/proyecto3" element={<Proyecto3 />} />
+        <Route path="/proyecto3" element={<Proyecto3 />} />
         <Route path="/proyecto4" element={<Proyecto4 />} />
-        <Route path="/proyecto5" element={<Proyecto5 />} /> */}
+        <Route path="/proyecto5" element={<Proyecto5 />} />
       </Routes>
     </Router>
   );
