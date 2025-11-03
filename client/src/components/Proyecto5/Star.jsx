@@ -1,3 +1,5 @@
+import React from 'react';
+
 export default function Star({ star, onCatch }) {
   return (
     <div
