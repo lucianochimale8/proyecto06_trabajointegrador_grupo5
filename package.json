@@ -17,6 +17,7 @@
     "mongoose": "^8.19.2",
     "nodemon": "^3.1.10",
     "react-bootstrap": "^2.10.10",
-    "react-router-dom": "^7.9.4"
+    "react-router-dom": "^7.9.4",
+    "use-sound": "^5.0.0"
   }
 }
