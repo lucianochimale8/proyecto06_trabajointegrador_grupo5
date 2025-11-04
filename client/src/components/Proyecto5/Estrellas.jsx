@@ -26,8 +26,8 @@ export default function Estrellas() {
   const generarEstrella = () => {
     const nueva = {
       id: Date.now() + Math.random(),
-      left: Math.random() * (window.innerWidth - 40) + "px",
-      top: Math.random() * (window.innerHeight - 100) + "px",
+      left: Math.random() * 700 + "px",
+      top: Math.random() * 500 + "px",
       size: Math.random() * 30 + 22,
       color: STAR_COLORS[Math.floor(Math.random() * STAR_COLORS.length)],
     };
@@ -91,14 +91,18 @@ export default function Estrellas() {
         background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
         position: "relative",
         overflow: "hidden",
+        margin: 0,
+        padding: 0,
+        border: "none",
       }}
     >
       <div
         className="bloom-effect rounded-4 border-0"
         style={{
-          width: "100%",
-          maxWidth: "900px",
-          height: "600px",
+          width: "90%",
+          maxWidth: "700px",
+          height: "500px",
+          margin: "0 auto",
           background: "linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(135,206,235,0.1) 50%, rgba(176,224,230,0.1) 100%)",
           backdropFilter: "blur(20px)",
           border: "3px solid rgba(255,255,255,0.3)",
