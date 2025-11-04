@@ -6,13 +6,14 @@ export default function Navbar() {
 
   const tabs = [
     { path: "/login", label: "Login" },
+    {path: "/Home", label: "Home" },
+    { path: "/aboutMiembros", label: "Miembros" },
     { label: "Proyectos", dropdown: [
       { path: "/proyecto2", label: "Proyecto 2" },
       { path: "/proyecto3", label: "Proyecto 3" },
       { path: "/proyecto4", label: "Proyecto 4" },
       { path: "/proyecto5", label: "Proyecto 5" },
     ]},
-    { path: "/aboutMiembros", label: "Miembros" },
   ];
 
   return (
@@ -45,6 +46,7 @@ export default function Navbar() {
                   color: "white",
                   fontSize: "16px",
                   cursor: "pointer",
+                  padding: "8px 12px",
                 }}
               >
                 {tab.label} ▾
@@ -53,23 +55,35 @@ export default function Navbar() {
                 <div
                   style={{
                     position: "absolute",
-                    top: "30px",
+                    top: "35px",
                     background: "white",
                     borderRadius: "8px",
-                    padding: "10px",
-                    boxShadow: "0 5px 10px rgba(0,0,0,0.15)",
+                    padding: "8px 0",
+                    boxShadow: "0 5px 10px rgba(0,0,0,0.2)",
+                    minWidth: "150px",
+                    zIndex: 10,
                   }}
                 >
                   {tab.dropdown.map((item, i) => (
                     <NavLink
                       key={i}
                       to={item.path}
-                      style={{
+                      style={({ isActive}) => ({
                         display: "block",
-                        padding: "5px 10px",
+                        padding: "10px 16px",
                         textDecoration: "none",
-                        color: "#333",
-                      }}
+                        color: "#a74fafff",
+                        background: isActive? "#ffffffff" : "white",
+                        transition: "background 0.2s",
+                      })}
+                      onMouseEnter={(e)=>
+                      (e.target.style.background = "#e6a964ff")
+                      }
+                      onMouseLeave={(e)=>
+                      (e.target.style.background = isActive
+                        ? "#ffffffff"  
+                        : "white")
+                      }
                     >
                       {item.label}
                     </NavLink>
