@@ -72,18 +72,18 @@ export default function Navbar() {
                         display: "block",
                         padding: "10px 16px",
                         textDecoration: "none",
-                        color: "#a74fafff",
+                        color: "#050505ff",
                         background: isActive? "#ffffffff" : "white",
-                        transition: "background 0.2s",
+                        transition: "background 0.2s, color 0.2s",
                       })}
-                      onMouseEnter={(e)=>
-                      (e.target.style.background = "#e6a964ff")
-                      }
-                      onMouseLeave={(e)=>
-                      (e.target.style.background = isActive
-                        ? "#ffffffff"  
-                        : "white")
-                      }
+                      onMouseEnter={(e) => {
+                        e.target.style.background = "#f3f4f6";
+                        e.target.style.color = "#313c9eff";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.target.style.background = "white";
+                        e.target.style.color = "#000000ff";
+                      }}
                     >
                       {item.label}
                     </NavLink>
