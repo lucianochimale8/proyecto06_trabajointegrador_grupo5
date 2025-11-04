@@ -100,7 +100,7 @@ export default function Estrellas() {
         padding: 0,
       }}
     >
-      {/* Marco principal del juego */}
+
       <div
         ref={contenedorRef}
         className="bloom-effect rounded-4 border-0"
@@ -108,16 +108,16 @@ export default function Estrellas() {
           width: "90%",
           maxWidth: "700px",
           height: "500px",
-          background: "linear-gradient(135deg, rgba(245, 245, 245, 1) 0%, rgba(128, 189, 212, 1) 50%, rgba(160, 131, 194, 1) 100%)",
+          background: "linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(135,206,235,0.8) 50%, rgba(139,92,246,0.6) 100%)",
           backdropFilter: "blur(20px)",
-          border: "3px solid rgba(255, 255, 255, 1)",
+          border: "3px solid rgba(99, 151, 201, 1)",
           borderRadius: "20px",
           boxShadow: "0 10px 40px rgba(255,255,255,0.1)",
           position: "relative",
           overflow: "hidden",
         }}
       >
-        {/* Marcador */}
+
         {gameState === "jugando" && (
           <div
             style={{
@@ -140,11 +140,11 @@ export default function Estrellas() {
           </div>
         )}
 
-        {/* Estrellas */}
+        
         {gameState === "jugando" &&
           stars.map((s) => <Star key={s.id} star={s} onCatch={handleCatch} />)}
 
-        {/* Pantalla de inicio */}
+        
         {gameState === "inicio" && (
           <div
             className="d-flex flex-column justify-content-center align-items-center text-center"
@@ -171,7 +171,7 @@ export default function Estrellas() {
           </div>
         )}
 
-        {/* Pantalla de victoria */}
+      
         {gameState === "ganaste" && (
           <div
             className="d-flex flex-column justify-content-center align-items-center text-center"
