@@ -8,7 +8,7 @@ export default function Navbar() {
     { path: "/proyecto3", label: "Proyecto 3" },
     { path: "/proyecto4", label: "Proyecto 4" },
     { path: "/proyecto5", label: "Proyecto 5" },
-    { path: "/aboutMiembros", label: "Mienbros" },
+    { path: "/Aboutmiembros", label: "Miembros" },
     ];
 
     return (

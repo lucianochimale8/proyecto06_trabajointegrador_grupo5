@@ -5,6 +5,7 @@ import Proyecto2 from "./components/Proyecto2/Proyecto2";
 import Proyecto3 from "./components/Proyecto3/Proyecto3";
 import Proyecto4 from "./components/Proyecto4/Proyecto4";
 import Proyecto5 from "./components/Proyecto5/Proyecto5";
+import AboutMiembros from "./common/AboutMiembros";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/proyecto3" element={<Proyecto3 />} />
         <Route path="/proyecto4" element={<Proyecto4 />} />
         <Route path="/proyecto5" element={<Proyecto5 />} />
+        <Route path="/AboutMiembros" element={<AboutMiembros />} />
       </Routes>
     </Router>
   );
