@@ -19,15 +19,19 @@ export default function Estrellas() {
 
   const intervalRef = useRef(null);
   const timeoutsRef = useRef(new Map());
+  const contenedorRef = useRef(null);
 
-  const [playSonidoEstrella] = useSound( sonidoEstrella, { volume: 0.7});
-  const [playSonidoVictoria] = useSound( sonidoVictoria, { volume: 0.9});
+  const [playSonidoEstrella] = useSound(sonidoEstrella, { volume: 0.7 });
+  const [playSonidoVictoria] = useSound(sonidoVictoria, { volume: 0.9 });
 
   const generarEstrella = () => {
+    if (!contenedorRef.current) return;
+    const rect = contenedorRef.current.getBoundingClientRect();
+
     const nueva = {
       id: Date.now() + Math.random(),
-      left: Math.random() * 700 + "px",
-      top: Math.random() * 500 + "px",
+      left: Math.random() * (rect.width - 60) + "px",
+      top: Math.random() * (rect.height - 60) + "px",
       size: Math.random() * 30 + 22,
       color: STAR_COLORS[Math.floor(Math.random() * STAR_COLORS.length)],
     };
@@ -58,7 +62,6 @@ export default function Estrellas() {
   }, [gameState]);
 
   const handleCatch = (id) => {
-
     playSonidoEstrella();
 
     const timeoutId = timeoutsRef.current.get(id);
@@ -87,31 +90,36 @@ export default function Estrellas() {
     <div
       className="d-flex flex-column justify-content-center align-items-center"
       style={{
-        minHeight: "100vh",
-        background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-        position: "relative",
+        width: "100%",
+        height: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
         overflow: "hidden",
         margin: 0,
         padding: 0,
-        border: "none",
       }}
     >
+
       <div
+        ref={contenedorRef}
         className="bloom-effect rounded-4 border-0"
         style={{
           width: "90%",
           maxWidth: "700px",
           height: "500px",
-          margin: "0 auto",
-          background: "linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(135,206,235,0.1) 50%, rgba(176,224,230,0.1) 100%)",
+          background: "linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(135,206,235,0.8) 50%, rgba(139,92,246,0.6) 100%)",
           backdropFilter: "blur(20px)",
-          border: "3px solid rgba(255,255,255,0.3)",
-          boxShadow: "0 20px 40px rgba(255,255,255,0.2)"
+          border: "3px solid rgba(99, 151, 201, 1)",
+          borderRadius: "20px",
+          boxShadow: "0 10px 40px rgba(255,255,255,0.1)",
+          position: "relative",
+          overflow: "hidden",
         }}
       >
+
         {gameState === "jugando" && (
           <div
-            className="pulse-glow floating"
             style={{
               position: "absolute",
               top: "15px",
@@ -125,46 +133,48 @@ export default function Estrellas() {
               color: "white",
               backdropFilter: "blur(10px)",
               border: "2px solid rgba(255,255,255,0.3)",
-              boxShadow: "0 10px 20px rgba(135,206,235,0.4)"
+              boxShadow: "0 10px 20px rgba(135,206,235,0.4)",
             }}
           >
-            <i className="fas fa-star me-2" style={{color: '#87ceeb'}}></i> {score}
+            <i className="fas fa-star me-2" style={{ color: "#87ceeb" }}></i> {score}
           </div>
         )}
 
+        
         {gameState === "jugando" &&
           stars.map((s) => <Star key={s.id} star={s} onCatch={handleCatch} />)}
 
+        
         {gameState === "inicio" && (
           <div
-            className="d-flex flex-column justify-content-center align-items-center text-center floating"
+            className="d-flex flex-column justify-content-center align-items-center text-center"
             style={{ height: "100%", color: "white" }}
           >
-            <h1 className="mb-4" 
-            style={{ 
-              fontSize: "3.5rem",
-              background: 'linear-gradient(45deg, #ffffff, #87ceeb, #b0e0e6, #e6e6fa)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              textShadow: '0 0 30px rgba(135, 206, 235, 0.5)'
-            }}>
-              <i className="fas fa-sparkles me-3"></i>
+            <h1
+              className="mb-4"
+              style={{
+                fontSize: "3.2rem",
+                background: "linear-gradient(45deg, #ffffff, #87ceeb, #b0e0e6, #e6e6fa)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                textShadow: "0 0 30px rgba(135, 206, 235, 0.5)",
+              }}
+            >
               ¡Atrapa las Estrellas!
-              <i className="fas fa-sparkles ms-3"></i>
             </h1>
             <p className="lead mb-4 text-light">
               Haz clic en las estrellas que aparezcan para ganar puntos
             </p>
-            <button className="game-btn pulse-glow" onClick={startGame}>
-              <i className="fas fa-play me-2"></i>
-              Iniciar Juego
+            <button className="game-btn" onClick={startGame}>
+              <i className="fas fa-play me-2"></i> Iniciar Juego
             </button>
           </div>
         )}
 
+      
         {gameState === "ganaste" && (
           <div
-            className="d-flex flex-column justify-content-center align-items-center text-center floating"
+            className="d-flex flex-column justify-content-center align-items-center text-center"
             style={{
               position: "absolute",
               top: 0,
@@ -179,28 +189,29 @@ export default function Estrellas() {
               color: "white",
             }}
           >
-            <h2 className="mb-4" style={{ 
-              fontSize: "4rem",
-              color: "#ffffff",
-              textShadow: '0 2px 4px rgba(0,0,0,0.5)'
-            }}>
-              <i className="fas fa-trophy me-3"></i>
+            <h2
+              className="mb-4"
+              style={{
+                fontSize: "4rem",
+                color: "#ffffff",
+                textShadow: "0 2px 4px rgba(0,0,0,0.5)",
+              }}
+            >
               ¡Ganaste!
-              <i className="fas fa-trophy ms-3"></i>
             </h2>
-            <p className="mb-4 lead" style={{ 
-              fontSize: "1.8rem", 
-              color: "#ffffff",
-              textShadow: '0 2px 4px rgba(0,0,0,0.5)',
-              fontWeight: 'bold'
-            }}>
-              <i className="fas fa-star me-2"></i>
+            <p
+              className="mb-4 lead"
+              style={{
+                fontSize: "1.8rem",
+                color: "#ffffff",
+                textShadow: "0 2px 4px rgba(0,0,0,0.5)",
+                fontWeight: "bold",
+              }}
+            >
               Puntuación final: {score}
-              <i className="fas fa-star ms-2"></i>
             </p>
-            <button className="game-btn pulse-glow" onClick={startGame}>
-              <i className="fas fa-redo me-2"></i>
-              Jugar de nuevo
+            <button className="game-btn" onClick={startGame}>
+              <i className="fas fa-redo me-2"></i> Jugar de nuevo
             </button>
           </div>
         )}

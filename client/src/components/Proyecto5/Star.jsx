@@ -41,7 +41,7 @@ export default function Star({ star, onCatch }) {
           textShadow: "0 0 20px rgba(255,255,255,0.8)",
           filter: "brightness(1.2) contrast(1.1)"
         }}></i>
-        {/* Efecto de brillo adicional */}
+        
         <div style={{
           position: "absolute",
           top: "50%",
