@@ -5,15 +5,16 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   const tabs = [
-    { path: "/login", label: "Login" },
-    {path: "/Home", label: "Home" },
-    { path: "/aboutMiembros", label: "Miembros" },
     { label: "Proyectos", dropdown: [
-      { path: "/proyecto2", label: "Proyecto 2" },
-      { path: "/proyecto3", label: "Proyecto 3" },
-      { path: "/proyecto4", label: "Proyecto 4" },
+      { path: "/proyecto2", label: "Simulador de Salario Mensual" },
+      { path: "/proyecto3", label: "Valor de X" },
+      { path: "/proyecto4/AdivinaElnumero", label: "Adivinar el Numero" },
+      { path: "/proyecto4/JuegoDeColores", label: "Juego de Colores" },
       { path: "/proyecto5", label: "Proyecto 5" },
-    ]},
+    ]},    
+    { path: "/Home", label: "Home" },
+    { path: "/aboutMiembros", label: "Miembros" },
+    { path: "/login", label: "Login" },
   ];
 
   return (

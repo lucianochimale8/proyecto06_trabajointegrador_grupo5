@@ -3,7 +3,8 @@ import Navbar from "./common/Navbar";
 import Login from "./common/Login";
 import Proyecto2 from "./components/Proyecto2/Proyecto2";
 import Proyecto3 from "./components/Proyecto3/Proyecto3";
-import Proyecto4 from "./components/Proyecto4/Proyecto4";
+import AdivinaElNumero from "./components/Proyecto4/AdivinaElNumero/GuessTheNumber";
+import JuegoDeColores from "./components/Proyecto4/JuegoDeColores/GameOfColours";
 import Proyecto5 from "./components/Proyecto5/Proyecto5";
 import AboutMiembros from "./common/AboutMiembros";
 
@@ -16,7 +17,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/proyecto2" element={<Proyecto2 />} />
         <Route path="/proyecto3" element={<Proyecto3 />} />
-        <Route path="/proyecto4" element={<Proyecto4 />} />
+        <Route path="/proyecto4/AdivinaElNumero" element={<AdivinaElNumero />} />
+        <Route path="/proyecto4/JuegoDeColores" element={<JuegoDeColores />} />
         <Route path="/proyecto5" element={<Proyecto5 />} />
         <Route path="/AboutMiembros" element={<AboutMiembros />} />
       </Routes>

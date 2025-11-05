@@ -1,6 +1,6 @@
 import React from "react";
-import AboutMiembros from "../../common/AboutMiembros";
-import Formulario from "../../common/Formulario";
+
+import Formulario from "./Formulario";
 import Estrellas from "./Estrellas";
 
 export default function Proyecto5() {
