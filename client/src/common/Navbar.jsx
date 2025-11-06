@@ -46,9 +46,9 @@ export default function Navbar() {
                   background: "transparent",
                   border: "none",
                   color: "white",
-                  fontSize: "16px",
+                  fontSize: "20px",
                   cursor: "pointer",
-                  padding: "8px 12px",
+                  padding: "1px 10px",
                 }}
               >
                 {tab.label} ▾
@@ -57,7 +57,7 @@ export default function Navbar() {
                 <div
                   style={{
                     position: "absolute",
-                    top: "35px",
+                    top: "29px",
                     background: "white",
                     borderRadius: "8px",
                     padding: "8px 0",
@@ -103,7 +103,7 @@ export default function Navbar() {
             style={{
               color: "white",
               textDecoration: "none",
-              fontSize: "16px",
+              fontSize: "20px",
             }}
           >
             {tab.label}
