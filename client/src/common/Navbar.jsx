@@ -6,8 +6,13 @@ export default function Navbar() {
 
   const tabs = [
     { label: "Proyectos", dropdown: [
-      { path: "/proyecto2", label: "Simulador de Salario Mensual" },
-      { path: "/proyecto3", label: "Valor de X" },
+      { path: "/proyecto2/CalculadorDePromedio", label: "Calculadora de Promedio" },
+      { path: "/proyecto2/FormularioUNJU", label: "Formulario UNJU" },
+      { path: "/proyecto2/NumeroMayor", label: "Numero más Alto" },
+      { path: "/proyecto2/SimuladorDeSalario", label: "Simulador de Salario Mensual" },
+      { path: "/proyecto2/SumaLaterales", label: "Suma de los Laterales de !" },
+      { path: "/proyecto3/RegistroMascotas", label: "RegistroMascotas" },
+      { path: "/proyecto3/ValorX", label: "Valor de X" },
       { path: "/proyecto4/AdivinaElnumero", label: "Adivinar el Numero" },
       { path: "/proyecto4/JuegoDeColores", label: "Juego de Colores" },
       { path: "/proyecto5/FormularioDeRegistro", label: "Formulario de Registro" },
@@ -46,9 +51,9 @@ export default function Navbar() {
                   background: "transparent",
                   border: "none",
                   color: "white",
-                  fontSize: "16px",
+                  fontSize: "20px",
                   cursor: "pointer",
-                  padding: "8px 12px",
+                  padding: "0px 10px",
                 }}
               >
                 {tab.label} ▾
@@ -57,7 +62,7 @@ export default function Navbar() {
                 <div
                   style={{
                     position: "absolute",
-                    top: "35px",
+                    top: "29px",
                     background: "white",
                     borderRadius: "8px",
                     padding: "8px 0",
@@ -103,7 +108,7 @@ export default function Navbar() {
             style={{
               color: "white",
               textDecoration: "none",
-              fontSize: "16px",
+              fontSize: "20px",
             }}
           >
             {tab.label}

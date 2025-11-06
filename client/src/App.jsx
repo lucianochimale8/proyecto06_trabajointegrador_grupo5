@@ -1,8 +1,13 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./common/Navbar";
 import Login from "./common/Login";
-import Proyecto2 from "./components/Proyecto2/Proyecto2";
-import Proyecto3 from "./components/Proyecto3/Proyecto3";
+import CalculadorDePromedio from "./components/Proyecto2/CalculadorDePromedio/AverageCalculator";
+import FormUNJU from "./components/Proyecto2/FormularioUNJU/FormUNJU";
+import NumeroMayor from "./components/Proyecto2/NumeroMayor/MaxNumber";
+import SimuladorDeSalario from "./components/Proyecto2/SimuladorDeSalario/SalarySimulator";
+import SumaLaterales from "./components/Proyecto2/SumaLaterales/ReplaceQuestionMarks";
+import RegistroMascotas from "./components/Proyecto3/RegistroMascotas/PetRegistry";
+import ValorX from "./components/Proyecto3/ValorX/CasillasActivity";
 import AdivinaElNumero from "./components/Proyecto4/AdivinaElNumero/GuessTheNumber";
 import JuegoDeColores from "./components/Proyecto4/JuegoDeColores/GameOfColours";
 import Formulario from "./components/Proyecto5/FormularioDeRegistro/Formulario";
@@ -16,8 +21,13 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/proyecto2" element={<Proyecto2 />} />
-        <Route path="/proyecto3" element={<Proyecto3 />} />
+        <Route path="/proyecto2/CalculadorDePromedio" element={<CalculadorDePromedio />} />
+        <Route path="/proyecto2/FormularioUNJU" element={<FormUNJU />} />
+        <Route path="/proyecto2/NumeroMayor" element={<NumeroMayor />} />
+        <Route path="/proyecto2/SimuladorDeSalario" element={<SimuladorDeSalario />} />
+        <Route path="/proyecto2/SumaLaterales" element={<SumaLaterales />} />
+        <Route path="/proyecto3/RegistroMascotas" element={<RegistroMascotas />} />
+        <Route path="/proyecto3/ValorX" element={<ValorX />} />
         <Route path="/proyecto4/AdivinaElNumero" element={<AdivinaElNumero />} />
         <Route path="/proyecto4/JuegoDeColores" element={<JuegoDeColores />} />
         <Route path="/proyecto5/FormularioDeRegistro" element={<Formulario />} />
