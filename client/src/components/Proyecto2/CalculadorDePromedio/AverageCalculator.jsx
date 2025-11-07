@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
+
+
 
 export default function AverageCalculator() {
   const [a, setA] = useState("");
@@ -25,12 +27,6 @@ export default function AverageCalculator() {
       <button onClick={calcularPromedio}>Calcular promedio</button>
       {resultado && <div className="resultado">{resultado}</div>}
 
-      <style>{`
-        .avg-container{text-align:center;padding:18px;font-family:Inter}
-        input{display:block;margin:8px auto;padding:8px;width:260px;border-radius:6px;border:1px solid #bbb}
-        button{margin-top:10px;padding:10px 18px;border-radius:8px;border:none;background:#222;color:#fff;cursor:pointer}
-        .resultado{margin-top:12px;font-weight:700}
-      `}</style>
     </div>
   );
 }
