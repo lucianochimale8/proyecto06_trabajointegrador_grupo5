@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import React, { useState } from "react";
+import { useState } from "react";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -29,7 +29,7 @@ export default function Navbar() {
         display: "flex",
         justifyContent: "center",
         gap: "1rem",
-        background: "linear-gradient(90deg, #8b5cf6, #6366f1, #3b82f6)",
+        background: "linear-gradient(90deg, #adebb3ff, #7aec86ff, #adebb3ff)",
         padding: "15px",
         borderRadius: "12px",
         width: "90%",
@@ -50,8 +50,9 @@ export default function Navbar() {
                 style={{
                   background: "transparent",
                   border: "none",
-                  color: "white",
+                  color: "black",
                   fontSize: "20px",
+                  fontFamily: "Arial, sans-serif",
                   cursor: "pointer",
                   padding: "0px 10px",
                 }}
@@ -62,10 +63,10 @@ export default function Navbar() {
                 <div
                   style={{
                     position: "absolute",
-                    top: "29px",
+                    top: "20px",
                     background: "white",
+                    fontFamily: "Arial, sans-serif",
                     borderRadius: "8px",
-                    padding: "8px 0",
                     boxShadow: "0 5px 10px rgba(0,0,0,0.2)",
                     minWidth: "150px",
                     zIndex: 10,
@@ -84,8 +85,8 @@ export default function Navbar() {
                         transition: "background 0.2s, color 0.2s",
                       })}
                       onMouseEnter={(e) => {
-                        e.target.style.background = "#f3f4f6";
-                        e.target.style.color = "#313c9eff";
+                        e.target.style.background = "#adebb3ff";
+                        e.target.style.color = "#4400ffff";
                       }}
                       onMouseLeave={(e) => {
                         e.target.style.background = "white";
@@ -106,9 +107,11 @@ export default function Navbar() {
             key={index}
             to={tab.path}
             style={{
-              color: "white",
+              color: "black",
               textDecoration: "none",
               fontSize: "20px",
+              fontFamily: "Arial, sans-serif",
+              padding:"0px 30px",
             }}
           >
             {tab.label}
