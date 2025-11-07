@@ -13,6 +13,7 @@ import JuegoDeColores from "./components/Proyecto4/JuegoDeColores/GameOfColours"
 import Formulario from "./components/Proyecto5/FormularioDeRegistro/Formulario";
 import JuegoEstrellas from "./components/Proyecto5/JuegoEstrellas/Estrellas";
 import AboutMiembros from "./common/AboutMiembros";
+import Error from "./common/Error";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path="/proyecto5/FormularioDeRegistro" element={<Formulario />} />
         <Route path="/proyecto5/JuegoEstrellas" element={<JuegoEstrellas />} />
         <Route path="/AboutMiembros" element={<AboutMiembros />} />
+        <Route path="/*" element={<Error/>}/>
       </Routes>
     </Router>
   );
