@@ -53,24 +53,22 @@ const Animales = () => {
     generarJuego();
   }, []);
 
-  const manejarRespuesta = (colorSeleccionado) => {
-    if (modoJuego === 'textoAColor') {
-      // texto arriba, botones de colores abajo
-      if (colorSeleccionado.nombre === colorActual.nombre) {
-        setPuntaje(puntaje + 1);
-        setMensaje('¡Correcto!');
-      } else {
-        setMensaje(`¡Oops! Era ${colorActual.espanol}`);
-      }
-    } else {
-      // color arriba, botones de texto abajo
-      if (colorSeleccionado.nombre === colorActual.nombre) {
-        setPuntaje(puntaje + 1);
-        setMensaje('¡Correcto!');
-      } else {
-        setMensaje(`¡Oops! Era ${colorActual.nombre}`);
-      }
-    }
+    const manejarRespuesta = (animalSeleccionado) => {
+        if (modoJuego === 'textoAImagen') {
+            if (animalSeleccionado.nombre === animalActual.nombre) {
+                setPuntaje(puntaje + 1);
+                setMensaje('¡Correcto!');
+            } else {
+                setMensaje(`¡Oops! Era ${animalActual.espanol}`);
+            }
+        } else {
+            if (animalSeleccionado.nombre === animalActual.nombre) {
+                setPuntaje(puntaje + 1);
+                setMensaje('¡Correcto!');
+            } else {
+                setMensaje(`¡Oops! Era ${animalActual.espanol}`);
+            }
+        }
     
     setTimeout(() => {
       generarJuego();
@@ -85,66 +83,71 @@ const Animales = () => {
   };
 
   return (
-    <div className="juego-colores">
-      <div className="encabezado-juego">
-        <h1 className="titulo-juego">Ejercicio de Colores</h1>
-        <div className="puntaje">Puntos: {puntaje}</div>
-      </div>
-
-      <div className="instrucciones">
-        <p>
-          {modoJuego === 'textoAColor' 
-            ? 'Presiona el botón del color que coincide con la palabra'
-            : 'Presiona la palabra que coincide con el color del círculo'}
-        </p>
-      </div>
-
-      <div className="contenedor-juego">
-        <div className="area-pregunta">
-          {modoJuego === 'textoAColor' ? (
-            <div className="palabra-color" style={{ color: colorActual?.codigo }}>
-              {colorActual?.nombre}
+    <div className="juego-animales">
+            <div className="encabezado-juego">
+                <h1 className="titulo-juego">Ejercicio de Animales</h1>
+                <div className="puntaje">Puntos: {puntaje}</div>
             </div>
-          ) : (
-            <div 
-              className="circulo-color" 
-              style={{ backgroundColor: colorActual?.codigo }}
-            ></div>
-          )}
+
+            <div className="instrucciones">
+                <p>
+                    {modoJuego === 'textoAImagen' 
+                        ? 'Presiona la imagen que coincide con la palabra'
+                        : 'Presiona la palabra que coincide con la imagen'}
+                </p>
+            </div>
+
+            <div className="contenedor-juego">
+                <div className="area-pregunta">
+                    {modoJuego === 'textoAImagen' ? (
+                        <div className="palabra-animal">
+                            {animalActual?.espanol}
+                        </div>
+                    ) : (
+                        <div className="imagen-animal">
+                            <img 
+                                src={animalActual?.imagen} 
+                                alt={animalActual?.espanol}
+                                className="imagen-pregunta"
+                            />
+                        </div>
+                    )}
+                </div>
+
+                <div className="area-opciones">
+                    {opciones.map((animal, indice) => (
+                        <button
+                            key={indice}
+                            className="boton-opcion"
+                            onClick={() => manejarRespuesta(animal)}
+                        >
+                            {modoJuego === 'textoAImagen' ? (
+                                <div className="opcion-imagen">
+                                    <img 
+                                        src={animal.imagen} 
+                                        alt={animal.espanol}
+                                        className="imagen-opcion"
+                                    />
+                                </div>
+                            ) : (
+                                <span className="opcion-texto">{animal.espanol}</span>
+                            )}
+                        </button>
+                    ))}
+                </div>
+
+                {mensaje && (
+                    <div className="mensaje">
+                        {mensaje}
+                    </div>
+                )}
+
+                <button className="boton-cambiar-modo" onClick={cambiarModoJuego}>
+                    Cambiar Modo de Juego
+                </button>
+            </div>
         </div>
-
-        <div className="area-opciones">
-          {opciones.map((color, indice) => (
-            <button
-              key={indice}
-              className="boton-opcion"
-              onClick={() => manejarRespuesta(color)}
-            >
-              {modoJuego === 'textoAColor' ? (
-                <div 
-                  className="opcion-color" 
-                  style={{ backgroundColor: color.codigo }}
-                  title={color.espanol}
-                ></div>
-              ) : (
-                <span className="opcion-texto">{color.nombre}</span>
-              )}
-            </button>
-          ))}
-        </div>
-
-        {mensaje && (
-          <div className="mensaje">
-            {mensaje}
-          </div>
-        )}
-
-        <button className="boton-cambiar-modo" onClick={cambiarModoJuego}>
-          Cambiar Modo de Juego
-        </button>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default Animales;
