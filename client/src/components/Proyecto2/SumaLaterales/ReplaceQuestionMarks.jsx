@@ -36,12 +36,6 @@ export default function ReplaceQuestionMarks() {
       <button onClick={procesar}>Procesar</button>
       <div className="result-box">{salida || "Esperando entrada..."}</div>
 
-      <style>{`
-        .q-container{font-family:Segoe UI;padding:18px;text-align:center}
-        input{width:320px;padding:8px;border-radius:8px;border:1px solid #ddd}
-        button{margin-left:8px;padding:8px 12px;border-radius:8px;border:none;background:linear-gradient(45deg,#ff6b9d,#ff8fab);color:white}
-        .result-box{margin-top:12px;padding:12px;background:#f8f9fa;border-radius:8px;font-family:monospace}
-      `}</style>
     </div>
   );
 }

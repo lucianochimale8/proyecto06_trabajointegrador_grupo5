@@ -39,6 +39,7 @@ export default function PetRegistry() {
         <input type="number" placeholder="Edad (años)" value={edad} onChange={e=>setEdad(e.target.value)} />
         <input placeholder="Nombre del dueño" value={duenio} onChange={e=>setDuenio(e.target.value)} />
         <div className="radios">
+          <h2>¿Su mascota ha sido vacunada?</h2>
           <label><input type="radio" name="vac" value="si" checked={vacunada==="si"} onChange={e=>setVacunada(e.target.value)} /> Sí</label>
           <label><input type="radio" name="vac" value="no" checked={vacunada==="no"} onChange={e=>setVacunada(e.target.value)} /> No</label>
         </div>
@@ -63,18 +64,6 @@ export default function PetRegistry() {
         )}
       </section>
 
-      <style>{`
-        .pet-container{font-family:Comfortaa,Arial;padding:18px;max-width:900px;margin:0 auto}
-        form{display:flex;flex-direction:column;gap:8px;background:#fff;padding:12px;border-radius:10px}
-        input,select{padding:8px;border-radius:8px;border:1px solid #ddd}
-        .radios{display:flex;gap:12px;align-items:center}
-        button{padding:10px;border-radius:10px;border:none;background:linear-gradient(135deg,#ffd700,#ffb347);font-weight:700;cursor:pointer}
-        .list{margin-top:16px}
-        .card{display:flex;justify-content:space-between;align-items:center;padding:12px;border-radius:12px;background:rgba(255,255,255,0.9);box-shadow:0 8px 20px rgba(0,0,0,0.06);margin-bottom:10px}
-        .titulo{font-weight:700;color:#a855f7}
-        .del{background:#ff6b6b;color:white;padding:8px 12px;border-radius:8px;border:none;cursor:pointer}
-        .stats{margin-top:12px;padding:10px;background:#f7f3ff;border-radius:10px}
-      `}</style>
     </div>
   );
 }
