@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./common/Navbar";
 import Login from "./common/Login";
+import Colours from "./pages/DiagnosticoIngles/Ejercicio1/Colours";
 import CalculadorDePromedio from "./pages/Proyecto2/CalculadorDePromedio/AverageCalculator";
 import FormUNJU from "./pages/Proyecto2/FormularioUNJU/FormUNJU";
 import NumeroMayor from "./pages/Proyecto2/NumeroMayor/MaxNumber";
@@ -24,6 +25,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/DiagnosticoIngles/Ejercicio1" element={<Colours />} />
         <Route path="/proyecto2/CalculadorDePromedio" element={<CalculadorDePromedio />} />
         <Route path="/proyecto2/FormularioUNJU" element={<FormUNJU />} />
         <Route path="/proyecto2/NumeroMayor" element={<NumeroMayor />} />
