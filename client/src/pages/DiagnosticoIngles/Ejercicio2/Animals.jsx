@@ -7,40 +7,39 @@ import jirafa from "../../../assets/img/imageAnimal/jirafa.png";
 import tigre from "../../../assets/img/imageAnimal/tigre.png";
 import hipopotamo from "../../../assets/img/imageAnimal/hipopotamo.png";
 
+
 import '../../../styles/colores.css';
 
-const Animales = () => {
-  const animales = [
-        { nombre: 'cebra', ingles: 'zebra', imagen: cebra },
-        { nombre: 'leon', ingles: 'lion', imagen: leon },
-        { nombre: 'rinoceronte', ingles: 'rinoceronte', imagen: elefante },
-        { nombre: 'jirafa', ingles: 'giraffe', imagen: jirafa },
-        { nombre: 'tigre', ingles: 'tiger', imagen: tigre },
-        { nombre: 'hipopotamo', ingles: 'hippo', imagen: hipopotamo },
-  ];
+const Animals = () => {
+    const animales = [
+        { nombre: 'zebra', espanol: 'zebra', imagen: cebra },
+        { nombre: 'lion', espanol: 'lion', imagen: leon },
+        { nombre: 'rinoceronte', espanol: 'rinoceronte', imagen: elefante },
+        { nombre: 'jirafa', espanol: 'giraffe', imagen: jirafa },
+        { nombre: 'tigre', espanol: 'tiger', imagen: tigre },
+        { nombre: 'hipopotamo', espanol: 'hippo', imagen: hipopotamo },
+    ];
 
-  const [animalActual, setAnimalActual] = useState(null);
-  const [opciones, setOpciones] = useState([]);
-  const [puntaje, setPuntaje] = useState(0);
-  const [mensaje, setMensaje] = useState('');
-  const [modoJuego, setModoJuego] = useState('textoAImage');
+    const [animalActual, setAnimalActual] = useState(null);
+    const [opciones, setOpciones] = useState([]);
+    const [puntaje, setPuntaje] = useState(0);
+    const [mensaje, setMensaje] = useState('');
+    const [modoJuego, setModoJuego] = useState('textoAImagen');
 
-  const generarJuego = () => {
-  // selcciona la imagen de manera aleatoria por indice
-  const indiceAleatorio = Math.floor(Math.random() * animales.length);
-  const animalObjetivo = animales[indiceAleatorio];
-  setAnimalActual(animalObjetivo);
+    const generarJuego = () => {
+        const indiceAleatorio = Math.floor(Math.random() * animales.length);
+        const animalObjetivo = animales[indiceAleatorio];
+        setAnimalActual(animalObjetivo);
 
-  // genera las opciones
-  const opcionesAleatorias = [...animales]
+        const opcionesAleatorias = [...animales]
             .sort(() => Math.random() - 0.5)
             .slice(0, 3);
 
         const objetivoPresente = opcionesAleatorias.find(opcion => 
             opcion.nombre === animalObjetivo.nombre
         );
-// Mezclamos las opciones 
-  if (!objetivoPresente) {
+
+        if (!objetivoPresente) {
             opcionesAleatorias[0] = animalObjetivo;
         }
 
@@ -49,9 +48,9 @@ const Animales = () => {
         setMensaje('');
     };
 
-  useEffect(() => {
-    generarJuego();
-  }, []);
+    useEffect(() => {
+        generarJuego();
+    }, []);
 
     const manejarRespuesta = (animalSeleccionado) => {
         if (modoJuego === 'textoAImagen') {
@@ -69,21 +68,21 @@ const Animales = () => {
                 setMensaje(`¡Oops! Era ${animalActual.espanol}`);
             }
         }
-    
-    setTimeout(() => {
-      generarJuego();
-    }, 1500);
-  };
+        
+        setTimeout(() => {
+            generarJuego();
+        }, 1500);
+    };
 
-  const cambiarModoJuego = () => {
-    setModoJuego(modoJuego === 'textoAColor' ? 'colorATexto' : 'textoAColor');
-    setTimeout(() => {
-      generarJuego();
-    }, 300);
-  };
+    const cambiarModoJuego = () => {
+        setModoJuego(modoJuego === 'textoAImagen' ? 'imagenATexto' : 'textoAImagen');
+        setTimeout(() => {
+            generarJuego();
+        }, 300);
+    };
 
-  return (
-    <div className="juego-animales">
+    return (
+        <div className="juego-animales">
             <div className="encabezado-juego">
                 <h1 className="titulo-juego">Ejercicio de Animales</h1>
                 <div className="puntaje">Puntos: {puntaje}</div>
@@ -150,4 +149,4 @@ const Animales = () => {
     );
 };
 
-export default Animales;
+export default Animals;
