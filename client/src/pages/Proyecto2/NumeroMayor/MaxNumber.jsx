@@ -25,12 +25,6 @@ export default function MaxNumber() {
       <button onClick={calcular}>Calcular</button>
       {mensaje && <div className="mensaje">{mensaje}</div>}
 
-      <style>{`
-        .max-container{font-family:Arial;text-align:center;padding:18px;}
-        input{display:block;margin:10px auto;padding:8px;width:220px;border-radius:6px;border:1px solid #999}
-        button{padding:8px 16px;border-radius:6px;border:none;cursor:pointer;background:#5b9bd5;color:white}
-        .mensaje{margin-top:12px;font-weight:600;color:#1f4f7a}
-      `}</style>
     </div>
   );
 }

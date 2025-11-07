@@ -1,7 +1,5 @@
 import { useState } from "react";
 
-
-
 export default function AverageCalculator() {
   const [a, setA] = useState("");
   const [b, setB] = useState("");
@@ -26,7 +24,7 @@ export default function AverageCalculator() {
       <input placeholder="Número C" value={c} onChange={e=>setC(e.target.value)} />
       <button onClick={calcularPromedio}>Calcular promedio</button>
       {resultado && <div className="resultado">{resultado}</div>}
-
+      
     </div>
   );
 }

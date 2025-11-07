@@ -29,12 +29,6 @@ export default function FormUNJU() {
         </div>
       )}
 
-      <style>{`
-        .formu-container{text-align:center;padding:18px;font-family:Times New Roman}
-        input{display:block;margin:8px auto;padding:8px;width:300px;border-radius:6px;border:1px solid #ccc}
-        button{margin-top:10px;padding:10px 16px;border-radius:8px;border:none;background:#bd4aa0;color:#fff}
-        .datos{margin-top:12px;background:#fff;padding:10px;border-radius:8px;display:inline-block;text-align:left}
-      `}</style>
     </div>
   );
 }
