@@ -1,0 +1,150 @@
+.juego-colores {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial Rounded MT Bold', sans-serif;
+  background: linear-gradient(#adebb3ff, #7aec86ff, #adebb3ff);
+  min-height: 100vh;
+  border-radius: 20px;
+}
+
+.encabezado-juego {
+  text-align: center;
+  margin-bottom: 30px;
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.encabezado-juego h1 {
+  color: #000000;
+  margin: 0 0 10px 0;
+}
+
+.puntaje {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #6BCEFF;
+  background: white;
+  padding: 10px 20px;
+  border-radius: 25px;
+  display: inline-block;
+  border: 3px solid #6BCEFF;
+}
+
+.instrucciones {
+  text-align: center;
+  margin-bottom: 30px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 15px;
+  border-radius: 15px;
+}
+
+.instrucciones p {
+  color: #000000;
+  margin: 0;
+}
+
+.contenedor-juego {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+}
+
+.area-pregunta {
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 30px;
+  border-radius: 20px;
+  border: 3px solid #e0e0e0;
+}
+
+.palabra-color {
+  font-size: 4em;
+  font-weight: bold;
+  margin: 0;
+}
+
+.circulo-color {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  margin: 0 auto;
+  border: 5px solid white;
+}
+
+.area-opciones {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.boton-opcion {
+  border: none;
+  border-radius: 15px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: white;
+  border: 3px solid transparent;
+}
+
+.boton-opcion:hover {
+  transform: translateY(-5px);
+  border-color: #6BCEFF;
+}
+
+.boton-opcion:active {
+  transform: translateY(0);
+}
+
+.opcion-color {
+  width: 100%;
+  height: 80px;
+  border-radius: 10px;
+  border: 3px solid white;
+}
+
+.opcion-texto {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #4a4a4a;
+  display: block;
+  padding: 15px;
+}
+
+.mensaje {
+  text-align: center;
+  font-size: 1.8em;
+  font-weight: bold;
+  margin: 20px 0;
+  padding: 15px;
+  border-radius: 15px;
+  border: 2px solid #7BCF7B;
+  color: #2d5a2d;
+  animation: aparecer 0.5s ease;
+}
+
+@keyframes aparecer {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.boton-cambiar-modo {
+  display: block;
+  margin: 20px auto 0;
+  padding: 15px 30px;
+  font-size: 1.1em;
+  background: linear-gradient(135deg, #FFB347, #FFD93D);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.boton-cambiar-modo:hover {
+  transform: translateY(-3px);
+}
