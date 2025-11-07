@@ -8,23 +8,22 @@ import tigre from "../../../assets/img/imageAnimal/tigre.png";
 import hipopotamo from "../../../assets/img/imageAnimal/hipopotamo.png";
 
 
-import '../../../styles/colores.css';
+import '../../../styles/animales.css';
 
 const Animals = () => {
     const animales = [
-        { nombre: 'zebra', espanol: 'zebra', imagen: cebra },
-        { nombre: 'lion', espanol: 'lion', imagen: leon },
-        { nombre: 'rinoceronte', espanol: 'rinoceronte', imagen: elefante },
-        { nombre: 'jirafa', espanol: 'giraffe', imagen: jirafa },
-        { nombre: 'tigre', espanol: 'tiger', imagen: tigre },
-        { nombre: 'hipopotamo', espanol: 'hippo', imagen: hipopotamo },
+        { nombre: 'cebra', english: 'zebra', imagen: cebra },
+        { nombre: 'león', english: 'lion', imagen: leon },
+        { nombre: 'rinoceronte', english: 'rinoceronte', imagen: elefante },
+        { nombre: 'jirafa', english: 'giraffe', imagen: jirafa },
+        { nombre: 'tigre', english: 'tiger', imagen: tigre },
+        { nombre: 'hipopotamo', english: 'hippopotamus', imagen: hipopotamo },
     ];
 
     const [animalActual, setAnimalActual] = useState(null);
     const [opciones, setOpciones] = useState([]);
     const [puntaje, setPuntaje] = useState(0);
     const [mensaje, setMensaje] = useState('');
-    const [modoJuego, setModoJuego] = useState('textoAImagen');
 
     const generarJuego = () => {
         const indiceAleatorio = Math.floor(Math.random() * animales.length);
@@ -53,32 +52,16 @@ const Animals = () => {
     }, []);
 
     const manejarRespuesta = (animalSeleccionado) => {
-        if (modoJuego === 'textoAImagen') {
-            if (animalSeleccionado.nombre === animalActual.nombre) {
-                setPuntaje(puntaje + 1);
-                setMensaje('¡Correcto!');
-            } else {
-                setMensaje(`¡Oops! Era ${animalActual.espanol}`);
-            }
+        if (animalSeleccionado.nombre === animalActual.nombre) {
+            setPuntaje(puntaje + 1);
+            setMensaje('¡Correcto!');
         } else {
-            if (animalSeleccionado.nombre === animalActual.nombre) {
-                setPuntaje(puntaje + 1);
-                setMensaje('¡Correcto!');
-            } else {
-                setMensaje(`¡Oops! Era ${animalActual.espanol}`);
-            }
+            setMensaje(`¡Oops! Era ${animalActual.english}`);
         }
         
         setTimeout(() => {
             generarJuego();
         }, 1500);
-    };
-
-    const cambiarModoJuego = () => {
-        setModoJuego(modoJuego === 'textoAImagen' ? 'imagenATexto' : 'textoAImagen');
-        setTimeout(() => {
-            generarJuego();
-        }, 300);
     };
 
     return (
@@ -89,28 +72,18 @@ const Animals = () => {
             </div>
 
             <div className="instrucciones">
-                <p>
-                    {modoJuego === 'textoAImagen' 
-                        ? 'Presiona la imagen que coincide con la palabra'
-                        : 'Presiona la palabra que coincide con la imagen'}
-                </p>
+                <p>Presiona la palabra que coincide con la imagen</p>
             </div>
 
             <div className="contenedor-juego">
                 <div className="area-pregunta">
-                    {modoJuego === 'textoAImagen' ? (
-                        <div className="palabra-animal">
-                            {animalActual?.espanol}
-                        </div>
-                    ) : (
-                        <div className="imagen-animal">
-                            <img 
-                                src={animalActual?.imagen} 
-                                alt={animalActual?.espanol}
-                                className="imagen-pregunta"
-                            />
-                        </div>
-                    )}
+                    <div className="imagen-animal">
+                        <img 
+                            src={animalActual?.imagen} 
+                            alt={animalActual?.english}
+                            className="imagen-pregunta"
+                        />
+                    </div>
                 </div>
 
                 <div className="area-opciones">
@@ -120,17 +93,7 @@ const Animals = () => {
                             className="boton-opcion"
                             onClick={() => manejarRespuesta(animal)}
                         >
-                            {modoJuego === 'textoAImagen' ? (
-                                <div className="opcion-imagen">
-                                    <img 
-                                        src={animal.imagen} 
-                                        alt={animal.espanol}
-                                        className="imagen-opcion"
-                                    />
-                                </div>
-                            ) : (
-                                <span className="opcion-texto">{animal.espanol}</span>
-                            )}
+                            <span className="opcion-texto">{animal.english}</span>
                         </button>
                     ))}
                 </div>
@@ -140,10 +103,6 @@ const Animals = () => {
                         {mensaje}
                     </div>
                 )}
-
-                <button className="boton-cambiar-modo" onClick={cambiarModoJuego}>
-                    Cambiar Modo de Juego
-                </button>
             </div>
         </div>
     );

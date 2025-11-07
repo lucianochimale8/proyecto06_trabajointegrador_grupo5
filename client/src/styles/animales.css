@@ -1,0 +1,174 @@
+.juego-animales {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+.encabezado-juego {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.titulo-juego {
+    color: #333;
+    margin: 0;
+}
+
+.puntaje {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+.instrucciones {
+    margin-bottom: 30px;
+}
+
+.instrucciones p {
+    font-size: 1.1em;
+    color: #666;
+}
+
+.contenedor-juego {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.area-pregunta {
+    margin-bottom: 40px;
+    min-height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.palabra-animal {
+    font-size: 3em;
+    font-weight: bold;
+    color: #333;
+    text-transform: capitalize;
+}
+
+.imagen-animal {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imagen-pregunta {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.area-opciones {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.boton-opcion {
+    background-color: white;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.boton-opcion:hover {
+    border-color: #4CAF50;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.opcion-imagen {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imagen-opcion {
+    max-width: 100%;
+    max-height: 80px;
+    object-fit: contain;
+}
+
+.opcion-texto {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+    text-transform: capitalize;
+}
+
+.mensaje {
+    font-size: 1.3em;
+    font-weight: bold;
+    margin: 20px 0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.mensaje:not(:empty) {
+    background-color: #e8f5e8;
+    color: #4CAF50;
+    border: 1px solid #4CAF50;
+}
+
+.boton-cambiar-modo {
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.boton-cambiar-modo:hover {
+    background-color: #1976D2;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .area-opciones {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .palabra-animal {
+        font-size: 2.5em;
+    }
+    
+    .imagen-animal {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    .area-opciones {
+        grid-template-columns: 1fr;
+    }
+    
+    .palabra-animal {
+        font-size: 2em;
+    }
+}
