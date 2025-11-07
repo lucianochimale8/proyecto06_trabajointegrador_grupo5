@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import Estrella from "./Star.jsx";
 import "../../../styles/Estrella.css";
+import sonidoEstrella from "../../../assets/audio/sonidoEstrella.mp3";
+import sonidoVictoria from "../../../assets/audio/victoria.mp3";
 
 const COLORES_ESTRELLAS = ["#ffffff", "#87ceeb", "#b0e0e6", "#e6e6fa", "#d8bfd8", "#f8f9ff"];
 const TIEMPO_APARICION = 700;
@@ -13,11 +15,30 @@ export default function Estrellas() {
   const [estadoJuego, setEstadoJuego] = useState("inicio");
   const PUNTOS_GANAR = 15;
 
+  const sonidoEstrellaRef = useRef(null);
+  const sonidoVictoriaRef = useRef(null);
+
+  useEffect(() => {
+    sonidoEstrellaRef.current = new Audio(sonidoEstrella);
+    sonidoEstrellaRef.current.volume = 0.5;
+    
+    sonidoVictoriaRef.current = new Audio(sonidoVictoria);
+    sonidoVictoriaRef.current.volume = 0.6;
+  }, []);
+
   const intervaloRef = useRef(null);
   const timeoutsRef = useRef(new Map());
   const contenedorRef = useRef(null);
 
   const atraparEstrella = (id) => {
+    // sonido al atrapar estrelas
+    if (sonidoEstrellaRef.current) {
+      sonidoEstrellaRef.current.currentTime = 0;
+      sonidoEstrellaRef.current.play().catch(error => {
+        console.log("Error al reproducir sonido:", error);
+      });
+    }
+
     const timeoutId = timeoutsRef.current.get(id);
     if (timeoutId) {
       clearTimeout(timeoutId);
@@ -28,6 +49,13 @@ export default function Estrellas() {
       const nuevosPuntos = p + 1;
       if (nuevosPuntos >= PUNTOS_GANAR) {
         setEstadoJuego("ganaste");
+        // sonido de victoria cuando se gana
+        if (sonidoVictoriaRef.current) {
+          sonidoVictoriaRef.current.currentTime = 0;
+          sonidoVictoriaRef.current.play().catch(error => {
+            console.log("Error al reproducir sonido de victoria:", error);
+          });
+        }
       }
       return nuevosPuntos;
     });
