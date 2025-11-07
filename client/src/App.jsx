@@ -15,6 +15,8 @@ import JuegoEstrellas from "./components/Proyecto5/JuegoEstrellas/Estrellas";
 import AboutMiembros from "./common/AboutMiembros";
 import Error from "./common/Error";
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 function App() {
   return (
     <Router>
