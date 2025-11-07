@@ -3,18 +3,35 @@ import Estrella from "./Star.jsx";
 import "../../../styles/Estrella.css";
 
 const COLORES_ESTRELLAS = ["#ffffff", "#87ceeb", "#b0e0e6", "#e6e6fa", "#d8bfd8", "#f8f9ff"];
-const TIEMPO_APARICION = 600;
-const TIEMPO_VIDA = 2500;
-const MAX_ESTRELLAS = 3;
+const TIEMPO_APARICION = 700;
+const TIEMPO_VIDA = 4500;
+const MAX_ESTRELLAS = 4;
 
 export default function Estrellas() {
   const [estrellas, setEstrellas] = useState([]);
   const [puntos, setPuntos] = useState(0);
   const [estadoJuego, setEstadoJuego] = useState("inicio");
+  const PUNTOS_GANAR = 15;
 
   const intervaloRef = useRef(null);
   const timeoutsRef = useRef(new Map());
   const contenedorRef = useRef(null);
+
+  const atraparEstrella = (id) => {
+    const timeoutId = timeoutsRef.current.get(id);
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+      timeoutsRef.current.delete(id);
+    }
+    setEstrellas((prev) => prev.filter((s) => s.id !== id));
+    setPuntos((p) => {
+      const nuevosPuntos = p + 1;
+      if (nuevosPuntos >= PUNTOS_GANAR) {
+        setEstadoJuego("ganaste");
+      }
+      return nuevosPuntos;
+    });
+  };
 
   // nueva estrella
   const crearEstrella = () => {
@@ -89,7 +106,7 @@ export default function Estrellas() {
             <Estrella 
               key={estrella.id} 
               estrella={estrella} 
-              onAtrapar={() => {}} 
+              onAtrapar={atraparEstrella} 
             />
           ))}
 
