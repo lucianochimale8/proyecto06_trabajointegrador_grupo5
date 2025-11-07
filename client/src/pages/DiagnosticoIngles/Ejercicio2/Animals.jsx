@@ -19,45 +19,35 @@ const Animales = () => {
         { nombre: 'hipopotamo', ingles: 'hippo', imagen: hipopotamo },
   ];
 
-  const [colorActual, setColorActual] = useState(null);
+  const [animalActual, setAnimalActual] = useState(null);
   const [opciones, setOpciones] = useState([]);
   const [puntaje, setPuntaje] = useState(0);
   const [mensaje, setMensaje] = useState('');
-  const [modoJuego, setModoJuego] = useState('textoAColor');
+  const [modoJuego, setModoJuego] = useState('textoAImage');
 
   const generarJuego = () => {
-  // selcciona el color de manera aleatoria por indice
-  const indiceAleatorio = Math.floor(Math.random() * colores.length);
-  const colorObjetivo = colores[indiceAleatorio];
-  setColorActual(colorObjetivo);
+  // selcciona la imagen de manera aleatoria por indice
+  const indiceAleatorio = Math.floor(Math.random() * animales.length);
+  const animalObjetivo = animales[indiceAleatorio];
+  setAnimalActual(animalObjetivo);
 
   // genera las opciones
-  const tresOpciones = colores.reduce((acumulador, color) => {
-    if (acumulador.length < 3) {
-      acumulador.push(color);
-    }
-    return acumulador;
-  }, []);
+  const opcionesAleatorias = [...animales]
+            .sort(() => Math.random() - 0.5)
+            .slice(0, 3);
 
-  // mezcla las opciones
-  const opcionesMezcladas = tresOpciones.reduce((acumulador, color) => {
-    const posAleatoria = Math.floor(Math.random() * (acumulador.length + 1));
-    acumulador.splice(posAleatoria, 0, color);
-    return acumulador;
-  }, []);
-
-  // verifica que esté la opcion corrrecta
-  const objetivoPresente = opcionesMezcladas.find(opcion => 
-    opcion.nombre === colorObjetivo.nombre
-  );
-
+        const objetivoPresente = opcionesAleatorias.find(opcion => 
+            opcion.nombre === animalObjetivo.nombre
+        );
+// Mezclamos las opciones 
   if (!objetivoPresente) {
-    opcionesMezcladas[0] = colorObjetivo;
-  }
+            opcionesAleatorias[0] = animalObjetivo;
+        }
 
-  setOpciones(opcionesMezcladas);
-  setMensaje('');
-};
+        const opcionesMezcladas = [...opcionesAleatorias].sort(() => Math.random() - 0.5);
+        setOpciones(opcionesMezcladas);
+        setMensaje('');
+    };
 
   useEffect(() => {
     generarJuego();
