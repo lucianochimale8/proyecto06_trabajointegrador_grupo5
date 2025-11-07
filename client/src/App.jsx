@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import Navbar from "./common/Navbar";
 import Login from "./common/Login";
 import Colours from "./pages/DiagnosticoIngles/Ejercicio1/Colours";
+import Animals from "./pages/DiagnosticoIngles/Ejercicio2/Animals";
 import CalculadorDePromedio from "./pages/Proyecto2/CalculadorDePromedio/AverageCalculator";
 import FormUNJU from "./pages/Proyecto2/FormularioUNJU/FormUNJU";
 import NumeroMayor from "./pages/Proyecto2/NumeroMayor/MaxNumber";
@@ -26,6 +27,7 @@ function App() {
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Login />} />
         <Route path="/DiagnosticoIngles/Ejercicio1" element={<Colours />} />
+        <Route path="/DiagnosticoIngles/Ejercicio2" element={<Animals />} />
         <Route path="/proyecto2/CalculadorDePromedio" element={<CalculadorDePromedio />} />
         <Route path="/proyecto2/FormularioUNJU" element={<FormUNJU />} />
         <Route path="/proyecto2/NumeroMayor" element={<NumeroMayor />} />
