@@ -34,7 +34,7 @@ routes.get('/obtenerUsuarios', async(req,res)=>
         res.send(docs);
     }catch(error){
         console.error("Error al obtener usuarios:",error);
-        res.status(500).send({message: "Error interno del servidor al obtener usuarios", error: "Error"})
+        res.status(500).send({message: "Error interno del servidor al obtener usuarios", error: error.message})
     }
 });
 
