@@ -1,6 +1,3 @@
-const express = require('express');
-const routes = express.Router();
-
 // modelo de Datos
 const mongoose = require('mongoose');
 const esquema = mongoose.Schema;
@@ -12,30 +9,17 @@ const esquemaUsuario = new esquema({
     name: String
 });
 
-const listaUsuarios = mongoose.model('users', esquemaUsuario);
+const cors = require('cors');
 
-// rutas, endpoints
-// promesa
-// routes.get('/obtenerUsuarios',(req,res)=>{
-// obtener lista
-//  listaUsuarios.find().then(docs => {
-//    res.send(docs)
-//      }).catch(err => {
-//      res.send(err)
-//    }) 
-//});
+const app = express();
 
-// async
+// Configurar CORS
+app.use(cors({
+    origin: 'http://localhost:5173', // URL de tu frontend
+    credentials: true
+}));
 
-routes.get('/obtenerUsuarios', async(req,res)=>
-{
-    try{
-        const docs = await listaUsuarios.find();
-        res.send(docs);
-    }catch(error){
-        console.error("Error al obtener usuarios:",error);
-        res.status(500).send({message: "Error interno del servidor al obtener usuarios", error: "Error"})
-    }
-});
+// O si quieres permitir todos los orígenes (solo desarrollo)
+app.use(cors());
 
-module.exports = routes;
+module.exports = mongoose.model('users', esquemaUsuario);
