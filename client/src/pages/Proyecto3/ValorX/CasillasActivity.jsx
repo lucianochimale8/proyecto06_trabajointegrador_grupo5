@@ -21,7 +21,7 @@ export default function CalculadorX() {
   };
 
   const calcularX = () => {
-    const nueva = casilla.map((fila, i) => [...fila]);
+  const nueva = casilla.map((fila) => [...fila]);
     let filaX = -1;
     let colX = -1;
     let valorX = null;

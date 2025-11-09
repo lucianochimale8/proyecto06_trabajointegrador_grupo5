@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./common/Navbar";
+import Header from "./common/Header";
 import Login from "./common/Login";
 import Colours from "./pages/DiagnosticoIngles/Ejercicio1/Colours";
 import ColoresTexto from "./pages/DiagnosticoIngles/Ejercicio1/ColoresTexto";
@@ -23,7 +24,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
   return (
     <Router>
-      <Navbar />
+  <Header />
+  <Navbar />
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Login />} />
