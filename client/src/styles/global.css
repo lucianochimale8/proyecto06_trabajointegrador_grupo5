@@ -841,7 +841,7 @@ h6 {
   font-family: 'KG Candy Cane Stripe', cursive;
 }
 
-.avg-container button {
+.avg-container button:not(.modern-btn) {
   margin-top: 10px;
   padding: 12px 18px;
   border-radius: 20px;
@@ -849,6 +849,11 @@ h6 {
   background: linear-gradient(135deg, var(--kawaii-green), var(--kawaii-yellow));
   color: var(--kawaii-brown);
   font-weight: 800;
+  cursor: pointer;
+}
+
+.avg-container .modern-btn {
+  margin-top: 10px;
   cursor: pointer;
 }
 

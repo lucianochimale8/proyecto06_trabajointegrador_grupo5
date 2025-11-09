@@ -28,24 +28,50 @@ const Colores = () => {
   useEffect(() => {
     sonidoCorrectoRef.current = new Audio(sonidoCorrecto);
     sonidoCorrectoRef.current.volume = 0.5;
+    sonidoCorrectoRef.current.preload = 'auto';
     
     sonidoErrorRef.current = new Audio(sonidoError);
     sonidoErrorRef.current.volume = 0.5;
+    sonidoErrorRef.current.preload = 'auto';
     
     sonidoNextLevelRef.current = new Audio(sonidoNextLevel);
     sonidoNextLevelRef.current.volume = 0.6;
+    sonidoNextLevelRef.current.preload = 'auto';
     
     sonidoGanarRef.current = new Audio(sonidoGanar);
     sonidoGanarRef.current.volume = 0.6;
+    sonidoGanarRef.current.preload = 'auto';
   }, []);
 
   // funcion para reproducir sonidos
   const reproducirSonido = (sonidoRef) => {
-    if (sonidoRef.current) {
-      sonidoRef.current.currentTime = 0;
-      sonidoRef.current.play().catch(error => {
-        console.log("Error al reproducir sonido:", error);
-      });
+    if (sonidoRef && sonidoRef.current) {
+      try {
+        // Resetear al inicio sin pausar (pausar puede causar problemas)
+        if (sonidoRef.current.currentTime > 0) {
+          sonidoRef.current.currentTime = 0;
+        }
+        // Reproducir directamente
+        const playPromise = sonidoRef.current.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(error => {
+            // Si falla, intentar recargar y reproducir
+            if (error.name !== 'NotAllowedError' && error.name !== 'NotSupportedError') {
+              try {
+                sonidoRef.current.load();
+                sonidoRef.current.currentTime = 0;
+                sonidoRef.current.play().catch(() => {
+                  // Ignorar errores silenciosamente
+                });
+              } catch (e) {
+                // Ignorar errores silenciosamente
+              }
+            }
+          });
+        }
+      } catch (error) {
+        // Ignorar errores silenciosamente
+      }
     }
   };
   //Estados del componente
@@ -133,10 +159,23 @@ const Colores = () => {
   // use effect que se ejecuta cuando el juego se activa
   // genera la primera ronda al iniciar el componente
   useEffect(() => {
-    if (juegoActivo) {
+    if (juegoActivo && modoJuego === 'textoAColor' && opciones.length === 0) {
       generarJuego();
     }
-  }, [juegoActivo]);
+  }, [juegoActivo, modoJuego]);
+
+  // useEffect para generar juego cuando cambia al segundo nivel
+  useEffect(() => {
+    if (modoJuego === 'colorATexto' && juegoActivo && intentosRestantes === 6 && opciones.length === 0) {
+      // Esperar un momento después del cambio de modo para generar el juego
+      const timer = setTimeout(() => {
+        setMensaje('');
+        generarJuego();
+      }, 2500);
+      return () => clearTimeout(timer);
+    }
+  }, [modoJuego, juegoActivo, intentosRestantes]);
+
   // manejo de respuesta del usuario
   // procesar la respuesta del usuario cuando selecciona una opcion
   const manejarRespuesta = (colorSeleccionado, indice) => {
@@ -182,9 +221,15 @@ const Colores = () => {
         // Cambiar al segundo juego
         setTimeout(() => {
             reproducirSonido(sonidoNextLevelRef);
-            setModoJuego('colorATexto');
-            setIntentosRestantes(6); // reiniciar intentos
             setMensaje('¡Segundo juego! Adivina el nombre del color');
+            setBotonSeleccionado(null);
+            setRespuestaCorrecta(null);
+            setIntentosRestantes(6); // reiniciar intentos
+            // Limpiar opciones y color actual
+            setOpciones([]);
+            setColorActual(null);
+            // Cambiar el modo y luego generar el juego
+            setModoJuego('colorATexto');
         }, 2000); // 2 seg antes de cambiar
       } else {
         // Terminar ambos juegos
