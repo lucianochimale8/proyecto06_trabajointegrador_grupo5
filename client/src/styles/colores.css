@@ -1,21 +1,20 @@
 .juego-colores {
-  max-width: 900px;
+  max-width: 1100px;
   margin: 20px auto;
   padding: 24px;
   font-family: 'KG Candy Cane Stripe', cursive;
-  background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,242,204,0.8));
+  background: linear-gradient(180deg, rgba(255,255,255,0.9), #D6D8A0);
   min-height: 100vh;
   border-radius: 22px;
   box-shadow: 0 8px 20px rgba(139,69,19,0.08);
 }
 
 .encabezado-juego {
+  max-width: 1100px;
+  margin: 0 auto 22px auto;
   text-align: center;
-  margin-bottom: 22px;
-  background: var(--card-bg);
-  padding: 18px;
-  border-radius: 14px;
-  border: var(--border-kawaii);
+  padding: 12px 0;
+  background: transparent;
 }
 
 .encabezado-juego h1 {
@@ -23,17 +22,23 @@
   margin: 0 0 6px 0;
   font-family: 'Roundabout', cursive;
   font-size: 28px;
+  text-align: center;
 }
 
 .puntaje {
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 700;
-  color: var(--kawaii-brown);
-  background: var(--kawaii-yellow);
-  padding: 6px 14px;
+  color: beige;
+  background: #E14D43;
+  padding: 8px 14px;
   border-radius: 20px;
   display: inline-block;
-  border: 3px solid rgba(139,69,19,0.2);
+  border: 3px solid #8B4513;
+}
+
+.titulo-juego {
+  text-align: center;
+  margin: 0 0 6px 0;
 }
 
 .instrucciones {
@@ -93,14 +98,28 @@
   padding: 14px;
   cursor: pointer;
   transition: all 0.25s ease;
-  background: var(--kawaii-yellow);
-  border: 3px solid rgba(139,69,19,0.06);
-  box-shadow: 0 6px 0 rgba(139,69,19,0.06);
+  background: var(--kawaii-pink);
+  border: 4px solid var(--kawaii-brown);
+  box-shadow: 0 8px 0 rgba(139,69,19,0.08), inset 0 -6px 0 rgba(0,0,0,0.04);
+  position: relative;
+  z-index: 1;
 }
 
 .boton-opcion:hover {
   transform: translateY(-4px);
-  box-shadow: 0 4px 0 rgba(139,69,19,0.05);
+  box-shadow: 0 6px 0 rgba(139,69,19,0.06), inset 0 -4px 0 rgba(255,255,255,0.04);
+}
+
+.boton-opcion::after {
+  content: '';
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: -10px;
+  height: 12px;
+  background: rgba(139,69,19,0.14);
+  border-radius: 8px;
+  z-index: 0;
 }
 
 .boton-opcion:active {
@@ -122,37 +141,223 @@
   padding: 8px;
 }
 
+/* Estilos para botones correctos e incorrectos */
+.boton-opcion.boton-correcto {
+  background-color: #7CB342 !important;
+  border-color: #558B2F !important;
+}
+
+.boton-opcion.boton-incorrecto {
+  background-color: #EF9A9A !important;
+  border-color: #E57373 !important;
+}
+
+.boton-opcion.boton-correcto:hover,
+.boton-opcion.boton-incorrecto:hover {
+  transform: translateY(0);
+  cursor: not-allowed;
+}
+
+/* Contenedor del mensaje con posición fija */
+.contenedor-mensaje {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 60px;
+  margin: 16px 0;
+}
+
 .mensaje {
   text-align: center;
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   font-weight: 800;
-  margin: 12px 0;
-  padding: 10px;
+  padding: 12px 24px;
   border-radius: 12px;
-  border: 2px solid rgba(139,69,19,0.08);
-  color: var(--kawaii-brown);
-  animation: aparecer 0.45s ease;
+  border: 3px solid;
+  animation: aparecer 0.3s ease-out;
+  display: inline-block;
+  max-width: 90%;
+  box-sizing: border-box;
+  transform-origin: center;
+  margin: 0 auto;
+}
+
+.mensaje-correcto {
+  background-color: #C8E6C9;
+  border-color: #7CB342;
+  color: #2E7D32;
+}
+
+.mensaje-incorrecto {
+  background-color: #FFCDD2;
+  border-color: #EF9A9A;
+  color: #C62828;
 }
 
 @keyframes aparecer {
-  0% { transform: scale(0.8); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
+  0% { 
+    opacity: 0; 
+    transform: translateY(-10px) scale(0.9);
+  }
+  100% { 
+    opacity: 1; 
+    transform: translateY(0) scale(1);
+  }
 }
 
 .boton-cambiar-modo {
   display: block;
   margin: 12px auto 0;
-  padding: 10px 22px;
-  font-size: 1rem;
-  background: linear-gradient(135deg, var(--kawaii-green), var(--kawaii-pink));
-  color: var(--kawaii-brown);
-  border: 3px solid rgba(139,69,19,0.08);
-  border-radius: 22px;
+  padding: 12px 24px;
+  font-size: 1.1em;
+  background: var(--kawaii-pink);
+  color: var(--kawaii-yellow);
+  border: 4px solid var(--kawaii-brown);
+  border-radius: 25px;
   cursor: pointer;
-  font-weight: 800;
-  transition: transform 0.2s ease;
+  font-weight: 900;
+  text-transform: capitalize;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  box-shadow: 0 8px 0 rgba(139,69,19,0.08), inset 0 -6px 0 rgba(0,0,0,0.04);
+  position: relative;
+  overflow: hidden;
+}
+
+.boton-cambiar-modo::before {
+  content: '♥';
+  position: absolute;
+  left: 10px;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.boton-cambiar-modo::after {
+  content: '♥';
+  position: absolute;
+  right: 10px;
+  opacity: 0;
+  transition: all 0.3s ease;
 }
 
 .boton-cambiar-modo:hover {
-  transform: translateY(-3px);
+  transform: translateY(2px);
+  box-shadow: 0 6px 0 rgba(139,69,19,0.06);
+  padding-left: 34px;
+  padding-right: 34px;
+}
+
+.boton-cambiar-modo:hover::before,
+.boton-cambiar-modo:hover::after {
+  opacity: 1;
+}
+
+.boton-cambiar-modo:active {
+  background: var(--kawaii-green);
+  color: var(--kawaii-brown);
+  transform: translateY(0) scale(0.995);
+  box-shadow: 0 4px 0 rgba(139,69,19,0.06) inset;
+}
+
+.boton-reiniciar {
+  display: block;
+  margin: 20px auto 0;
+  padding: 12px 24px;
+  font-size: 1.1em;
+  background: var(--kawaii-pink);
+  color: var(--kawaii-yellow);
+  border: 4px solid var(--kawaii-brown);
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 900;
+  text-transform: capitalize;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  box-shadow: 0 8px 0 rgba(139,69,19,0.08), inset 0 -6px 0 rgba(0,0,0,0.04);
+  position: relative;
+  overflow: hidden;
+  font-family: 'KG Candy Cane Stripe', cursive;
+}
+
+.boton-reiniciar::before {
+  content: '♥';
+  position: absolute;
+  left: 10px;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.boton-reiniciar::after {
+  content: '♥';
+  position: absolute;
+  right: 10px;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.boton-reiniciar:hover {
+  transform: translateY(2px);
+  box-shadow: 0 6px 0 rgba(139,69,19,0.06);
+  padding-left: 34px;
+  padding-right: 34px;
+}
+
+.boton-reiniciar:hover::before,
+.boton-reiniciar:hover::after {
+  opacity: 1;
+}
+
+.boton-reiniciar:active {
+  background: var(--kawaii-green);
+  color: var(--kawaii-brown);
+  transform: translateY(0) scale(0.995);
+  box-shadow: 0 4px 0 rgba(139,69,19,0.06) inset;
+}
+
+.contenedor-resultados {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.resultado-juego {
+  margin-bottom: 25px;
+}
+
+.resultado-juego h3 {
+  color: var(--kawaii-brown);
+  font-family: 'Roundabout', cursive;
+  margin: 0 0 10px 0;
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.resultado-juego p {
+  color: var(--kawaii-brown);
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.resultado-total {
+  margin: 30px 0;
+}
+
+.resultado-total h2 {
+  color: var(--kawaii-brown);
+  font-family: 'Roundabout', cursive;
+  margin: 0 0 15px 0;
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+.resultado-total p {
+  color: var(--kawaii-brown);
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin: 10px 0;
+}
+
+.resultado-total .porcentaje {
+  font-size: 1.8rem;
+  color: #E14D43;
+  font-weight: 900;
 }

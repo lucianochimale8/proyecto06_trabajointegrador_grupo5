@@ -8,10 +8,12 @@
   margin: 0;
   padding: 0;
 }
+ 
+
 
 .game-container {
   width: 90%;
-  max-width: 900px;
+  max-width: 1100px;
   height: 700px;
   background-color: #162447;
   border: 4px solid #1f4068;
@@ -22,16 +24,16 @@
 
 .puntaje {
   position: absolute;
-  top: 15px;
+  top: 35px;
   left: 15px;
   z-index: 10;
-  background-color: #1f4068;
-  padding: 12px 18px;
-  border-radius: 10px;
+  background-color: #E14D43;
+  padding: 8px 14px;
+  border-radius: 20px;
   font-weight: bold;
-  font-size: 1.5rem;
-  color: #ffffff;
-  border: 2px solid #ffffff;
+  font-size: 1.1rem;
+  color: beige;
+  border: 2px solid #8B4513;
 }
 
 .pantalla-inicio,
@@ -48,7 +50,8 @@
 .titulo-juego {
   font-size: 2.5rem;
   color: #ffffff;
-  margin-bottom: 2rem;
+  margin: 0 0 2rem 0;
+  text-align: center;
   font-weight: bold;
 }
 
@@ -86,21 +89,41 @@
 }
 
 .boton-juego {
-  background-color: #1f4068;
-  border: 3px solid #ffffff;
-  color: #ffffff;
-  font-weight: bold;
-  padding: 20px 40px;
-  border-radius: 15px;
-  font-size: 1.3rem;
-  transition: all 0.3s ease;
+  background: var(--kawaii-pink);
+  border: 4px solid var(--kawaii-brown);
+  color: var(--kawaii-yellow);
+  font-weight: 900;
+  padding: 18px 36px;
+  border-radius: 14px;
+  font-size: 1.15rem;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
   cursor: pointer;
+  box-shadow: 0 8px 0 rgba(139,69,19,0.08), inset 0 -8px 0 rgba(0,0,0,0.06);
+  position: relative;
+  z-index: 1;
 }
 
 .boton-juego:hover {
-  background-color: #ffffff;
-  color: #1f4068;
-  transform: scale(1.05);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 6px 0 rgba(139,69,19,0.06), inset 0 -6px 0 rgba(255,255,255,0.06);
+}
+
+.boton-juego:active {
+  background: var(--kawaii-green);
+  color: var(--kawaii-brown);
+  transform: translateY(0) scale(0.995);
+}
+
+.boton-juego::after {
+  content: '';
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  bottom: -12px;
+  height: 14px;
+  background: rgba(139,69,19,0.16);
+  border-radius: 8px;
+  z-index: 0;
 }
 
 .estrella-elemento {

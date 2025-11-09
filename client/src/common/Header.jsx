@@ -17,7 +17,7 @@ export default function Header()
                 </div>
 
                 <div className="header-right">
-                    {/* Removed Online and Contacto buttons as requested */}
+                    {}
                 </div>
             </div>
         </header>
