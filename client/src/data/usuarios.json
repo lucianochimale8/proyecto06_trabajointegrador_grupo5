@@ -4,13 +4,13 @@
         "username": "admin",
         "password": "1234",
         "rol": "ADMINISTRADOR",
-        "name": "gutso"
+        "name": "Administrador"
     },
     {
         "id": "alumno456",
         "username": "alumno",
         "password": "1234",
         "rol": "ALUMNO",
-        "name": "alumnoPrueba"
+        "name": "Alumno"
     }
 ]
