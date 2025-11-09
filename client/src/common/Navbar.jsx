@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -25,75 +25,47 @@ export default function Navbar() {
     { path: "/login", label: "Login" },
   ];
 
+  const navRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (navRef.current && !navRef.current.contains(e.target)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, []);
+
   return (
-    <nav
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        gap: "1rem",
-        background: "linear-gradient(90deg, #adebb3ff, #7aec86ff, #adebb3ff)",
-        padding: "15px",
-        borderRadius: "12px",
-        width: "90%",
-        margin: "20px auto",
-        boxShadow: "0 5px 15px rgba(0,0,0,0.2)",
-      }}
-    >
+    <nav ref={navRef} className="app-navbar">
       {tabs.map((tab, index) => {
         if (tab.dropdown) {
           return (
             <div
               key={index}
-              style={{ position: "relative" }}
+              className="navbar-dropdown"
               onMouseEnter={() => setOpen(true)}
               onMouseLeave={() => setOpen(false)}
             >
               <button
-                style={{
-                  background: "transparent",
-                  border: "none",
-                  color: "black",
-                  fontSize: "20px",
-                  fontFamily: "Arial, sans-serif",
-                  cursor: "pointer",
-                  padding: "0px 10px",
-                }}
+                className="navbar-dropdown-button"
+                aria-expanded={open}
+                aria-haspopup="menu"
+                onClick={(e) => { e.stopPropagation(); setOpen(prev => !prev); }}
               >
                 {tab.label} ▾
               </button>
               {open && (
-                <div
-                  style={{
-                    position: "absolute",
-                    top: "20px",
-                    background: "white",
-                    fontFamily: "Arial, sans-serif",
-                    borderRadius: "8px",
-                    boxShadow: "0 5px 10px rgba(0,0,0,0.2)",
-                    minWidth: "150px",
-                    zIndex: 10,
-                  }}
-                >
+                <div className="navbar-dropdown-menu" role="menu">
                   {tab.dropdown.map((item, i) => (
                     <NavLink
                       key={i}
                       to={item.path}
-                      style={({ isActive}) => ({
-                        display: "block",
-                        padding: "10px 16px",
-                        textDecoration: "none",
-                        color: "#050505ff",
-                        background: isActive? "#ffffffff" : "white",
-                        transition: "background 0.2s, color 0.2s",
-                      })}
-                      onMouseEnter={(e) => {
-                        e.target.style.background = "#adebb3ff";
-                        e.target.style.color = "#4400ffff";
-                      }}
-                      onMouseLeave={(e) => {
-                        e.target.style.background = "white";
-                        e.target.style.color = "#000000ff";
-                      }}
+                      className={({ isActive }) =>
+                        isActive ? "navbar-dropdown-item active" : "navbar-dropdown-item"
+                      }
+                      onClick={() => setOpen(false)}
                     >
                       {item.label}
                     </NavLink>
@@ -108,13 +80,7 @@ export default function Navbar() {
           <NavLink
             key={index}
             to={tab.path}
-            style={{
-              color: "black",
-              textDecoration: "none",
-              fontSize: "20px",
-              fontFamily: "Arial, sans-serif",
-              padding:"0px 30px",
-            }}
+            className="navbar-link"
           >
             {tab.label}
           </NavLink>

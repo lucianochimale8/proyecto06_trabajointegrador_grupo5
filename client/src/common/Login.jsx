@@ -25,11 +25,14 @@ const manejarEnvio = e => {
   };
 
   return (
-    <div className="login-contenedor">
-      <form className="login-formulario" onSubmit={manejarEnvio}>
-        <h2>Iniciar sesión</h2>
+    <div className="login-container">
+      <form 
+        className="login-form"
+        onSubmit={manejarEnvio}>
+        <h2 className="login-heading">Iniciar sesión</h2>
 
         <input
+          className="modern-input"
           type="text"
           placeholder="Usuario"
           value={usuario}
@@ -38,6 +41,7 @@ const manejarEnvio = e => {
         />
 
         <input
+          className="modern-input"
           type="password"
           placeholder="Contraseña"
           value={contraseña}
@@ -45,8 +49,8 @@ const manejarEnvio = e => {
           required
         />
 
-        <button type="submit">Entrar</button>
-        {mensaje && <p>{mensaje}</p>}
+        <button className="modern-btn" type="submit">Entrar</button>
+        {mensaje && <p className="login-message">{mensaje}</p>}
       </form>
     </div>
   );

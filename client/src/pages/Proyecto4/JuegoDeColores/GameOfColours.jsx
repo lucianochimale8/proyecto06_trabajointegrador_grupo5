@@ -7,7 +7,7 @@ function Colores(){
     const [colorDeBotones, setColorDeBotones] = useState(colores);
     const [mensaje, setMensaje] = useState("");
     // Funcion que manejara el cambio de color dentro del boton
-    const manejarClickEnElBoton = (index) => {
+    const manejarClickEnElBoton = () => {
         // .map recorre todos los elementos del arreglo
         const nuevosColores = colorDeBotones.map(() => {
             // indice devuelve un numero entero entre los espacios del arreglo
@@ -34,7 +34,7 @@ function Colores(){
                 {colorDeBotones.map((color, index) => (
                 <button
                     key={index}
-                    onClick={() => manejarClickEnElBoton(index)}
+                    onClick={() => manejarClickEnElBoton()}
                     style={{backgroundColor: color}}
                     >
                     boton{index+1}
