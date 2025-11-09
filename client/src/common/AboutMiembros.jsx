@@ -26,7 +26,7 @@ const AboutMiembros = () => {
   return (
     <>
     <section className="container py-5">
-      {/* Header Section */}
+      {}
       <div className="text-center mb-5">
         <div className="floating">
           <h2 className="display-3 mb-4 about-heading">

@@ -5,6 +5,7 @@ import sonidoCorrecto from "../../../assets/audio/correct.mp3";
 import sonidoError from "../../../assets/audio/gameover.mp3";
 import sonidoNextLevel from "../../../assets/audio/next-level-m.mp3";
 import sonidoGanar from "../../../assets/audio/win.mp3";
+// import Confetti from '../../../common/Confetti.jsx';
 
 const Colores = () => {
     // Definicion de datos y estados
@@ -65,6 +66,9 @@ const Colores = () => {
   const [juegoActivo, setJuegoActivo] = useState(true);
   // almacenar los resultados finales al terminar ambos juegos
   const [resultados, setResultados] = useState(null);
+  // rastrear qué botón fue seleccionado y si fue correcto
+  const [botonSeleccionado, setBotonSeleccionado] = useState(null);
+  const [respuestaCorrecta, setRespuestaCorrecta] = useState(null);
 
   // funcion para generar una ronda nueva del juego:
   // seleccionar un color objetivo aleatorio
@@ -73,11 +77,37 @@ const Colores = () => {
   const generarJuego = () => {
     // verificar si el juego no esta activo para no generar una nueva ronda
     if (!juegoActivo) return;
-    // seleccionar color objetivo aleatorio
-    // generar indice aleatorio
-    const indiceAleatorio = Math.floor(Math.random() * colores.length);
-    // crear un color objetivo en base a ese indice dentro de colores
-    const colorObjetivo = colores[indiceAleatorio];
+    // seleccionar color objetivo aleatorio, evitando repetir el color anterior
+    let colorObjetivo;
+    let intentos = 0;
+    const maxIntentos = 20;
+    
+    do {
+      // generar indice aleatorio
+      const indiceAleatorio = Math.floor(Math.random() * colores.length);
+      // crear un color objetivo en base a ese indice dentro de colores
+      colorObjetivo = colores[indiceAleatorio];
+      intentos++;
+      
+      // Si no hay color anterior o el color es diferente al anterior, usarlo
+      if (!colorActual || colorObjetivo.nombre !== colorActual.nombre) {
+        break;
+      }
+      
+      // Si después de varios intentos aún es el mismo, forzar un cambio
+      if (intentos >= maxIntentos) {
+        // Filtrar colores diferentes al anterior
+        const coloresDiferentes = colores.filter(c => 
+          !colorActual || c.nombre !== colorActual.nombre
+        );
+        if (coloresDiferentes.length > 0) {
+          const indiceAleatorio = Math.floor(Math.random() * coloresDiferentes.length);
+          colorObjetivo = coloresDiferentes[indiceAleatorio];
+        }
+        break;
+      }
+    } while (intentos < maxIntentos);
+    
     // seleccionar color como objetivo
     setColorActual(colorObjetivo);
     // Crear opciones únicas excluyendo el color objetivo
@@ -96,6 +126,8 @@ const Colores = () => {
     // actualizar estado con las nuevas opciones
     setOpciones(opcionesMezcladas);
     setMensaje(''); // Limpiar mensaje anterior
+    setBotonSeleccionado(null); // Resetear botón seleccionado
+    setRespuestaCorrecta(null); // Resetear respuesta correcta
   };
   // para iniciar el juego
   // use effect que se ejecuta cuando el juego se activa
@@ -107,13 +139,18 @@ const Colores = () => {
   }, [juegoActivo]);
   // manejo de respuesta del usuario
   // procesar la respuesta del usuario cuando selecciona una opcion
-  const manejarRespuesta = (colorSeleccionado) => {
+  const manejarRespuesta = (colorSeleccionado, indice) => {
     // si el juego no esta activo ignorar clicks
     if (!juegoActivo) return;
+    // si ya se seleccionó un botón, no hacer nada
+    if (botonSeleccionado !== null) return;
     // verificar si la respuesta es correcta
     let esCorrecto = colorSeleccionado.nombre === colorActual.nombre;
     // calcular intentos restantes despues de esta respuesta
     let nuevoIntentos = intentosRestantes - 1;
+    // Marcar el botón seleccionado
+    setBotonSeleccionado(indice);
+    setRespuestaCorrecta(esCorrecto);
     // reproducir sonido según si acerto o fallo
     if (esCorrecto) {
       reproducirSonido(sonidoCorrectoRef);
@@ -152,7 +189,6 @@ const Colores = () => {
       } else {
         // Terminar ambos juegos
         setTimeout(() => {
-            reproducirSonido(sonidoGanarRef);
           finalizarJuegos();
         }, 2000);
       }
@@ -174,6 +210,8 @@ const Colores = () => {
       total: puntajeTextoAColor + puntajeColorATexto, // el total
       maximo: 12 // los intentos maximos posibles
     });
+    // Reproducir sonido de victoria cuando se muestra la pantalla de resultados
+    reproducirSonido(sonidoGanarRef);
   };
   // reiniciar a estado inicial
   const reiniciarJuego = () => {
@@ -185,6 +223,8 @@ const Colores = () => {
     setJuegoActivo(true);
     setResultados(null);
     setMensaje('');
+    setBotonSeleccionado(null);
+    setRespuestaCorrecta(null);
   };
   // cambio manual de modo de juego por parte del usuario
   const cambiarModoJuego = () => {
@@ -227,6 +267,7 @@ const Colores = () => {
             Jugar Nuevamente
           </button>
         </div>
+        {/* <Confetti colors={['#E14D43', '#D6D8A0', 'beige', '#8B4513']} /> */}
       </div>
     );
   }
@@ -237,12 +278,11 @@ const Colores = () => {
         <h1 className="titulo-juego">Ejercicio de Colores</h1>
         <div className="contadores">
             {/* mostrar puntaje del juego actual */}
-          <div className="puntaje">
-            {modoJuego === 'textoAColor' ? 'Texto→Color' : 'Color→Texto'}:{' '}
-            {modoJuego === 'textoAColor' ? puntajeTextoAColor : puntajeColorATexto}/6
+          <div className="puntaje" style={{ marginTop: '15px' }}>
+            Puntos: {modoJuego === 'textoAColor' ? puntajeTextoAColor : puntajeColorATexto}/6
           </div>
           {/* mostrar intentos restantes */}
-          <div className="intentos">Intentos: {intentosRestantes}/6</div>
+
         </div>
       </div>
         {/* intrucciones del juego */}
@@ -272,31 +312,38 @@ const Colores = () => {
         </div>
           {/* respuestas de ronda */}
         <div className="area-opciones">
-          {opciones.map((color, indice) => (
-            <button
-              key={indice}
-              className="boton-opcion"
-              onClick={() => manejarRespuesta(color)}
-              disabled={!juegoActivo}
-            >
-              {modoJuego === 'textoAColor' ? (
-                <div 
-                  className="opcion-color" 
-                  style={{ backgroundColor: color.codigo }}
-                  title={color.espanol}
-                ></div>
-              ) : (
-                <span className="opcion-texto">{color.nombre}</span>
-              )}
-            </button>
-          ))}
+          {opciones.map((color, indice) => {
+            const esSeleccionado = botonSeleccionado === indice;
+            const esCorrecto = esSeleccionado && respuestaCorrecta;
+            const esIncorrecto = esSeleccionado && !respuestaCorrecta;
+            return (
+              <button
+                key={indice}
+                className={`boton-opcion ${esCorrecto ? 'boton-correcto' : ''} ${esIncorrecto ? 'boton-incorrecto' : ''}`}
+                onClick={() => manejarRespuesta(color, indice)}
+                disabled={!juegoActivo || botonSeleccionado !== null}
+              >
+                {modoJuego === 'textoAColor' ? (
+                  <div 
+                    className="opcion-color" 
+                    style={{ backgroundColor: color.codigo }}
+                    title={color.espanol}
+                  ></div>
+                ) : (
+                  <span className="opcion-texto">{color.nombre}</span>
+                )}
+              </button>
+            );
+          })}
         </div>
-          {/* mensaje segun si es correcto o incorrecto */}
-        {mensaje && (
-          <div className={`mensaje ${mensaje.includes('¡Correcto!') ? 'correcto' : 'incorrecto'}`}>
-            {mensaje}
-          </div>
-        )}
+        {/* Cartel de mensaje */}
+        <div className="contenedor-mensaje">
+          {mensaje && !mensaje.includes('¡Segundo juego!') && (
+            <div className={`mensaje ${mensaje.includes('¡Correcto!') ? 'mensaje-correcto' : 'mensaje-incorrecto'}`}>
+              {mensaje}
+            </div>
+          )}
+        </div>
         {/* boton para alternar juego */}
         <button 
           className="boton-cambiar-modo" 

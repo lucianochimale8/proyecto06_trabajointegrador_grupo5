@@ -135,12 +135,6 @@ const Colores = () => {
           ))}
         </div>
 
-        {mensaje && (
-          <div className="mensaje">
-            {mensaje}
-          </div>
-        )}
-
         <button className="boton-cambiar-modo" onClick={cambiarModoJuego}>
           Cambiar Modo de Juego
         </button>
