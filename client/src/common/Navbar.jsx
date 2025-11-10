@@ -26,6 +26,7 @@ export default function Navbar() {
     { label: "Juegos", dropdown: [
       { path: "/DiagnosticoIngles/Ejercicio2", label: "Animals" },
       { path: "/DiagnosticoIngles/Ejercicio1", label: "Colors" },
+      { path: "/DiagnosticoIngles/Ejercicio3", label: "Numbers & Days" },
     ], id: "juegos" },
     { path: "/Home", label: "Home" },
     { path: "/aboutMiembros", label: "Miembros" },

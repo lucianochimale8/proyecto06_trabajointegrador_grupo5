@@ -26,6 +26,43 @@
   margin-left: -100px; /* desplazar 80px a la izquierda */
 }
 
+/* Overrides específicos para Numbers & Days (no afecta a otros juegos) */
+.numbers-header h1 {
+  margin-left: 320px; /* desplazar 100px a la derecha */
+  margin-top: 6px; /* un poco más abajo */
+  margin-bottom: 30px; /* más espacio para el subtítulo */
+}
+.numbers-header .about-subtitle {
+  margin-top: 0;
+  color: var(--kawaii-brown); /* marrón oscuro pastel */
+  background: rgba(255, 255, 255, 0.95);
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: 2px dashed rgba(139,69,19,0.06);
+  display: inline-block;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  top: 50px; /* bajar 50px */
+  left: -370px; /* mover 150px a la izquierda */
+}
+.numbers-header {
+  position: relative; /* para posicionar el puntaje a la izquierda */
+  text-align: center; /* centrar el contenedor del subtítulo */
+  margin-bottom: 100px; /* más espacio antes del contenedor del juego */
+}
+.numbers-header .puntaje {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Bajar un poco la sección del juego solo en Numbers para dar más espacio al subtítulo */
+.numbers-header + .contenedor-juego {
+  margin-top: 40px;
+}
 .puntaje {
   font-size: 1.1rem;
   font-weight: 700;

@@ -17,8 +17,7 @@ export default function Login() {
   // Si ya está autenticado, redirigir
   useEffect(() => {
     if (isAuthenticated) {
-      const from = fromProtectedRoute || '/AboutMiembros';
-      navigate(from, { replace: true });
+      navigate('/Home', { replace: true });
     }
   }, [isAuthenticated, navigate, fromProtectedRoute]);
   
@@ -66,10 +65,9 @@ const manejarEnvio = e => {
       setMensaje(`Bienvenido, ${usuario}`);
       login(usuario); // Guardar estado de autenticación con el nombre de usuario
       
-      // Redirigir a la ruta que intentaba acceder o a home
-      const from = location.state?.from || '/AboutMiembros';
+      // Redirigir siempre al Home
       setTimeout(() => {
-        navigate(from, { replace: true });
+        navigate('/Home', { replace: true });
       }, 1000);
     } else {
       setMensaje('Usuario o contraseña incorrectos');
