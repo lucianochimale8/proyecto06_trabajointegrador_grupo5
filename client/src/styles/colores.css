@@ -23,6 +23,7 @@
   font-family: 'Roundabout', cursive;
   font-size: 28px;
   text-align: center;
+  margin-left: -100px; /* desplazar 80px a la izquierda */
 }
 
 .puntaje {

@@ -35,10 +35,10 @@
     /* Prueba: posicionamiento absoluto para control exacto en píxeles */
     /* Colocado respecto a .encabezado-juego (position: relative) */
     position: absolute;
-    left: 295px; /* movido 10px a la izquierda desde 305px */
-    top: -7px; /* 5px más abajo */
+  left: 105px; /* 80px más a la izquierda para centrar */
+    top: 20px; /* 5px más abajo */
     transform: none;
-    text-align: left;
+    text-align: center;
 }
 
 .contenedor-resultados .encabezado-juego .titulo-juego {

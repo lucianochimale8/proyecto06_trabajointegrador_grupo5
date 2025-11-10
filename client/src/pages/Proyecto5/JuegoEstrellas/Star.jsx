@@ -5,18 +5,12 @@ export default function Estrella({ estrella, onAtrapar }) {
       aria-label="Estrella"
       title="Click para atrapar"
       onClick={() => onAtrapar(estrella.id)}
-      className="estrella-elemento"
+      className={`estrella-elemento ${estrella.fadingOut ? "fade-out" : ""}`}
       style={{
         left: estrella.left,
         top: estrella.top,
         fontSize: estrella.size,
         color: "#ffffff",
-      }}
-      onMouseEnter={(e) => {
-        e.target.style.transform = "translate(-50%,-50%) scale(1.15)";
-      }}
-      onMouseLeave={(e) => {
-        e.target.style.transform = "translate(-50%,-50%) scale(1)";
       }}
     >
       <div className="contenido-estrella">

@@ -179,7 +179,8 @@ export default function Navbar() {
           <span style={{ 
             color: 'var(--kawaii-brown)', 
             fontWeight: '600',
-            fontSize: '16px'
+            fontSize: '16px',
+            fontFamily: "'KG Candy Cane Stripe', cursive"
           }}>
             Hola, {username}
           </span>
