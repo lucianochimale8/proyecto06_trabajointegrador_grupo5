@@ -44,6 +44,7 @@ export default function Navbar() {
         { path: "/DiagnosticoIngles/Ejercicio1", label: "Colours" },
         { path: "/DiagnosticoIngles/Ejercicio2", label: "Animals" },
         { path: "/DiagnosticoIngles/Ejercicio3", label: "Numbers" },
+        { path: "/DiagnosticoIngles/Ejercicio4", label: "Body Parts" },
       ],
     }
   ];

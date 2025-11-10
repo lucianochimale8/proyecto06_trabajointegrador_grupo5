@@ -1,0 +1,76 @@
+.body-game-container {
+  text-align: center;
+  color: white;
+  font-family: "Poppins", sans-serif;
+  position: relative;
+  height: 100vh;
+  background: linear-gradient(135deg, #003049, #1a659e);
+}
+
+.body-area {
+  position: relative;
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.cuerpo {
+  width: 350px;
+  user-select: none;
+  pointer-events: none;
+}
+
+.slot {
+  width: 40px;
+  height: 40px;
+  border: 2px dashed rgba(255, 255, 255, 0.6);
+  border-radius: 8px;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.slot.filled {
+  background: rgba(0, 255, 0, 0.3);
+  border: none;
+}
+
+.slot.shake {
+  animation: shake 0.3s ease;
+}
+
+@keyframes shake {
+  0% { transform: translate(0); }
+  25% { transform: translate(-5px, 0); }
+  50% { transform: translate(5px, 0); }
+  75% { transform: translate(-5px, 0); }
+  100% { transform: translate(0); }
+}
+
+.parts-container {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+.part {
+  width: 60px;
+  height: 60px;
+  cursor: grab;
+  transition: transform 0.2s;
+}
+
+.part:hover {
+  transform: scale(1.1);
+}
+
+.part.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.congratulations {
+  margin-top: 25px;
+  font-size: 1.4rem;
+  color: #00ff95;
+  font-weight: bold;
+}
