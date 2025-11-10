@@ -43,10 +43,8 @@ export default function Navbar() {
       ],
     },
 
-    [
       { path: "/Home", label: "Home" },
-      { path: "/aboutMiembros", label: "Miembros" },
-    ],
+      { path: "/aboutMiembros", label: "Miembros" }
   ];
 
   const { user, isAuthenticated, logout } = useAutorizacion();
