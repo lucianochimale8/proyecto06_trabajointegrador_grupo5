@@ -59,11 +59,7 @@ export default function BodyParts() {
       <h2>Completa el juego con las partes que le corresponda</h2>
 
       <div className="cuerpo-area">
-        <img
-          src="/img/ImageBody/cuerpo.png"
-          alt="Cuerpo"
-          className="cuerpo"
-        />
+        <img src={cuerpo} alt="Cuerpo" className="cuerpo"/>
         {slots.map((slot, index) => (
           <div
             key={slot.id}
