@@ -698,6 +698,9 @@ h6 {
 }
 
 .id-card-image-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   max-width: 1600px;
   border-radius: 20px;

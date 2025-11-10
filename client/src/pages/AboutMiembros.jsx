@@ -64,7 +64,12 @@ const AboutMiembros = () => {
                   src={miembroActual.img}
                   alt={miembroActual.name}
                   className="id-card-image-only"
-                  style={{ cursor: "pointer" }}
+                  style={{ 
+                    cursor: "pointer",
+                    width: "820px",
+                    height: "580px",
+                    objectFit: "cover"
+                  }}
                 />
               </a>
             </div>
