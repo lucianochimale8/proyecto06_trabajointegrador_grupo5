@@ -6,6 +6,7 @@ import Login from "./common/Login";
 import ColoresTexto from "./pages/DiagnosticoIngles/Ejercicio1/ColoresTexto";
 import Animals from "./pages/DiagnosticoIngles/Ejercicio2/Animals";
 import Numbers from "./pages/DiagnosticoIngles/Ejercicio3/NumbersDays"
+import BodyParts from "./pages/DiagnosticoIngles/Ejercicio4/BodyParts";
 import CalculadorDePromedio from "./pages/Proyecto2/CalculadorDePromedio/AverageCalculator";
 import FormUNJU from "./pages/Proyecto2/FormularioUNJU/FormUNJU";
 import NumeroMayor from "./pages/Proyecto2/NumeroMayor/MaxNumber";
@@ -62,6 +63,14 @@ function App() {
               <Numbers />
             </ProtectorRutas>
           }  
+        />
+        <Route
+         path="/DiagnosticoIngles/Ejercicio4"
+         element={
+          <ProtectorRutas>
+            <BodyParts />
+          </ProtectorRutas>
+         }
         />
         <Route
           path="/proyecto2/CalculadorDePromedio"
