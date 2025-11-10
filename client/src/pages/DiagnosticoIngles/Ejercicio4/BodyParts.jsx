@@ -3,7 +3,6 @@ import "../../../styles/cuerpo.css";
 
 import cuerpo from "../../../assets/img/ImageBody/cuerpo.png";
 
-
 import head from "../../../assets/img/ImageBody/cabeza.png";
 import ear from "../../../assets/img/ImageBody/oreja.png";
 import eye from "../../../assets/img/ImageBody/ojo.png";
@@ -13,6 +12,7 @@ import arm from "../../../assets/img/ImageBody/brazo.png";
 import hand from "../../../assets/img/ImageBody/mano.png";
 import leg from "../../../assets/img/ImageBody/piernas.png";
 import foot from "../../../assets/img/ImageBody/pie.png";
+import lip from "../../../assets/img/ImageBody/labios.png";
 
 const BodyParts = () => {
   // piezas disponibles
@@ -26,6 +26,7 @@ const BodyParts = () => {
     { id: "hand", img: hand },
     { id: "leg", img: leg },
     { id: "foot", img: foot },
+    { id: "lip", img: lip },
   ];
 
   const [slots, setSlots] = useState([
@@ -38,6 +39,7 @@ const BodyParts = () => {
     { id: "hand", filled: false },
     { id: "leg", filled: false },
     { id: "foot", filled: false },
+    { id: "lip", filled: false },
   ]);
 
   const [completed, setCompleted] = useState(false);
@@ -83,15 +85,16 @@ const BodyParts = () => {
 
   // posiciones de los slots sobre el cuerpo
   const posiciones = {
-    head: { top: "40px", left: "180px" },
-    ear: { top: "90px", left: "240px" },
-    eye: { top: "90px", left: "120px" },
-    nose: { top: "130px", left: "175px" },
-    mouth: { top: "160px", left: "175px" },
-    arm: { top: "230px", left: "60px" },
-    hand: { top: "260px", left: "30px" },
-    leg: { top: "380px", left: "175px" },
-    foot: { top: "480px", left: "175px" },
+    head: { top: "30px", left: "35px" },
+    ear: { top: "95px", left: "35px" },
+    eye: { top: "30px", left: "255px" },
+    nose: { top: "160px", left: "35px" },
+    mouth: { top: "225px", left: "35px" },
+    arm: { top: "160px", left: "255px" },
+    hand: { top: "290px", left: "35px" },
+    leg: { top: "225px", left: "255px" },
+    foot: { top: "290px", left: "255px" },
+    lip: { top: "95px", left: "255px" },
   };
 
   return (

@@ -3,8 +3,8 @@
   color: white;
   font-family: "Poppins", sans-serif;
   position: relative;
-  height: 100vh;
-  background: linear-gradient(135deg, #003049, #1a659e);
+  height: 90%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.95), #D6D8A0);
 }
 
 .body-area {
@@ -14,14 +14,14 @@
 }
 
 .cuerpo {
-  width: 350px;
+  width: 30%;
   user-select: none;
   pointer-events: none;
 }
 
 .slot {
-  width: 40px;
-  height: 40px;
+  width: 52px;
+  height: 52px;
   border: 2px dashed rgba(255, 255, 255, 0.6);
   border-radius: 8px;
   transition: background 0.3s, transform 0.3s;
