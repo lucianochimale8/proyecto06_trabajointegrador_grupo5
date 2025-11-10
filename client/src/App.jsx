@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
 import Navbar from "./common/Navbar";
 import Header from "./common/Header";
 import Login from "./common/Login";
@@ -18,35 +19,53 @@ import Formulario from "./pages/Proyecto5/FormularioDeRegistro/Formulario";
 import JuegoEstrellas from "./pages/Proyecto5/JuegoEstrellas/Estrellas";
 import AboutMiembros from "./common/AboutMiembros";
 import Error from "./common/Error";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
-    <Router>
-  <Header />
-  <Navbar />
-      <Routes>
-        <Route path="/" element={<Navigate to="/login" />} />
-        <Route path="/login" element={<Login />} />
-        {/*<Route path="/DiagnosticoIngles/Ejercicio1" element={<Colours />} />*/}
-        <Route path="/DiagnosticoIngles/Ejercicio1" element={<ColoresTexto />} />
-        <Route path="/DiagnosticoIngles/Ejercicio2" element={<Animals />} />
-        <Route path="/proyecto2/CalculadorDePromedio" element={<CalculadorDePromedio />} />
-        <Route path="/proyecto2/FormularioUNJU" element={<FormUNJU />} />
-        <Route path="/proyecto2/NumeroMayor" element={<NumeroMayor />} />
-        <Route path="/proyecto2/SimuladorDeSalario" element={<SimuladorDeSalario />} />
-        <Route path="/proyecto2/SumaLaterales" element={<SumaLaterales />} />
-        <Route path="/proyecto3/RegistroMascotas" element={<RegistroMascotas />} />
-        <Route path="/proyecto3/ValorX" element={<ValorX />} />
-        <Route path="/proyecto4/AdivinaElNumero" element={<AdivinaElNumero />} />
-        <Route path="/proyecto4/JuegoDeColores" element={<JuegoDeColores />} />
-        <Route path="/proyecto5/FormularioDeRegistro" element={<Formulario />} />
-        <Route path="/proyecto5/JuegoEstrellas" element={<JuegoEstrellas />} />
-        <Route path="/AboutMiembros" element={<AboutMiembros />} />
-        <Route path="/*" element={<Error/>}/>
-      </Routes>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Header />
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Navigate to="/login" replace />} />
+          <Route path="/login" element={<Login />} />
+          {/* Rutas protegidas de juegos */}
+          <Route 
+            path="/DiagnosticoIngles/Ejercicio1" 
+            element={
+              <ProtectedRoute>
+                <ColoresTexto />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/DiagnosticoIngles/Ejercicio2" 
+            element={
+              <ProtectedRoute>
+                <Animals />
+              </ProtectedRoute>
+            } 
+          />
+          {/* Rutas públicas de proyectos */}
+          <Route path="/proyecto2/CalculadorDePromedio" element={<CalculadorDePromedio />} />
+          <Route path="/proyecto2/FormularioUNJU" element={<FormUNJU />} />
+          <Route path="/proyecto2/NumeroMayor" element={<NumeroMayor />} />
+          <Route path="/proyecto2/SimuladorDeSalario" element={<SimuladorDeSalario />} />
+          <Route path="/proyecto2/SumaLaterales" element={<SumaLaterales />} />
+          <Route path="/proyecto3/RegistroMascotas" element={<RegistroMascotas />} />
+          <Route path="/proyecto3/ValorX" element={<ValorX />} />
+          <Route path="/proyecto4/AdivinaElNumero" element={<AdivinaElNumero />} />
+          <Route path="/proyecto4/JuegoDeColores" element={<JuegoDeColores />} />
+          <Route path="/proyecto5/FormularioDeRegistro" element={<Formulario />} />
+          <Route path="/proyecto5/JuegoEstrellas" element={<JuegoEstrellas />} />
+          <Route path="/AboutMiembros" element={<AboutMiembros />} />
+          <Route path="/*" element={<Error/>}/>
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
 
