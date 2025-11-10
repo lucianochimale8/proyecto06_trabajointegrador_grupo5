@@ -135,11 +135,10 @@ export default function NumbersDays() {
           }, 1200);
         } else {
           // ganar
+          // Reproducir sonido de victoria inmediatamente dentro del gesto del usuario
+          reproducirSonido(sonidoGanarRef);
           setJuegoActivo(false);
           setAciertosNivel2(nuevos);
-          setTimeout(() => {
-            reproducirSonido(sonidoGanarRef);
-          }, 400);
         }
       } else {
         setTimeout(() => generarRonda(), 1200);
