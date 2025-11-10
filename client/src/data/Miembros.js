@@ -1,8 +1,8 @@
-import luciano from "../assets/img/luciano.jpg";
+import luciano from "../assets/img/chimale.jpg";
 import victor from "../assets/img/victor.jpg";
-import pato from "../assets/img/pato.png";
+import pato from "../assets/img/pato.jpg";
 import gallo from "../assets/img/gallo.jpg";
-import val from "../assets/img/val.jpeg";
+import val from "../assets/img/val.jpg";
 
 const miembros = [
   {
