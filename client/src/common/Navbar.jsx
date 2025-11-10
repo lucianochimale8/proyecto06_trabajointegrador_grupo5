@@ -6,6 +6,10 @@ export default function Navbar() {
   const [openDropdown, setOpenDropdown] = useState(null);
 
   const tabs = [
+
+    { path: "/Home", label: "Home" },
+    { path: "/aboutMiembros", label: "Miembros" },
+
     {
       label: "Proyectos",
       dropdown: [
@@ -41,9 +45,7 @@ export default function Navbar() {
         { path: "/DiagnosticoIngles/Ejercicio2", label: "Animals" },
         { path: "/DiagnosticoIngles/Ejercicio3", label: "Numbers" },
       ],
-    },
-    { path: "/Home", label: "Home" },
-    { path: "/aboutMiembros", label: "Miembros" },
+    }
   ];
 
   const { user, isAuthenticated, logout } = useAutorizacion();
