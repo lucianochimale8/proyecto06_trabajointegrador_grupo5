@@ -4,16 +4,15 @@ import "../../../styles/Estrella.css";
 import sonidoEstrella from "../../../assets/audio/sonidoEstrella.mp3";
 import sonidoVictoria from "../../../assets/audio/victoria.mp3";
 
-const COLORES_ESTRELLAS = ["#ffffff", "#87ceeb", "#b0e0e6", "#e6e6fa", "#d8bfd8", "#f8f9ff"];
-const TIEMPO_APARICION = 700;
-const TIEMPO_VIDA = 4500;
-const MAX_ESTRELLAS = 4;
+const TIEMPO_APARICION = 5000; // 5 segundos
+const TIEMPO_VIDA = 10000; // 10 segundos de vida
+const PUNTOS_GANAR = 10; // Terminar al captar 10 estrellas
+const AREA_SEGURA_TOP = 100; // Área superior donde no aparecen estrellas (para el contador)
 
 export default function Estrellas() {
   const [estrellas, setEstrellas] = useState([]);
   const [puntos, setPuntos] = useState(0);
   const [estadoJuego, setEstadoJuego] = useState("inicio");
-  const PUNTOS_GANAR = 15;
 
   const sonidoEstrellaRef = useRef(null);
   const sonidoVictoriaRef = useRef(null);
@@ -66,31 +65,20 @@ export default function Estrellas() {
     if (!contenedorRef.current) return;
     const medidas = contenedorRef.current.getBoundingClientRect();
 
+    // Asegurar que no aparezca en el área del contador (superior izquierda)
+    const minTop = AREA_SEGURA_TOP;
+    const maxTop = medidas.height - 60;
+    const top = Math.random() * (maxTop - minTop) + minTop;
+
     const nuevaEstrella = {
       id: Date.now() + Math.random(),
       left: Math.random() * (medidas.width - 60) + "px",
-      top: Math.random() * (medidas.height - 60) + "px",
-      size: Math.random() * 30 + 22,
-      color: COLORES_ESTRELLAS[Math.floor(Math.random() * COLORES_ESTRELLAS.length)],
+      top: top + "px",
+      size: Math.random() * 30 + 25, // Tamaños diferentes entre 25 y 55
+      color: "#ffffff", // Siempre blanco
     };
 
-    setEstrellas((prev) => {
-      if (prev.length >= MAX_ESTRELLAS) {
-        const nuevasEstrellas = [];
-        for (let i = 1; i < prev.length; i++) {
-          nuevasEstrellas.push(prev[i]);
-        }
-        nuevasEstrellas.push(nuevaEstrella);
-        return nuevasEstrellas;
-      } else {
-        const nuevasEstrellas = [];
-        for (let i = 0; i < prev.length; i++) {
-          nuevasEstrellas.push(prev[i]);
-        }
-        nuevasEstrellas.push(nuevaEstrella);
-        return nuevasEstrellas;
-      }
-    });
+    setEstrellas((prev) => [...prev, nuevaEstrella]);
 
     // temporizador de vida de la estrella
     const timeoutId = setTimeout(() => {
@@ -124,8 +112,8 @@ export default function Estrellas() {
     <div className="estrellas-container">
       <div ref={contenedorRef} className="game-container">
         {estadoJuego === "jugando" && (
-          <div className="puntaje">
-            <i className="fas fa-star me-2"></i> {puntos}
+          <div className="puntaje-estrellas">
+            <i className="fas fa-star"></i> {puntos}/{PUNTOS_GANAR}
           </div>
         )}
 
@@ -156,15 +144,18 @@ export default function Estrellas() {
 
         {estadoJuego === "ganaste" && (
           <div className="pantalla-ganar">
-            <h2 className="titulo-ganar">¡Ganaste!</h2>
-            <p className="puntos-finales">Puntuación final: {puntos}</p>
-            <button className="modern-btn" onClick={iniciarJuego} style={{
-              marginTop: "20px",
-              fontSize: "1.2rem",
-              padding: "15px 30px"
-            }}>
-              <i className="fas fa-redo me-2"></i> Jugar de nuevo
-            </button>
+            <div className="contenedor-resultados">
+              <div className="resultado-total">
+                <h2>¡Felicidades! ¡Has ganado!</h2>
+                <p>Estrellas capturadas: {puntos}/{PUNTOS_GANAR}</p>
+                <p className="porcentaje">
+                  {Math.round((puntos / PUNTOS_GANAR) * 100)}% completado
+                </p>
+              </div>
+              <button className="boton-reiniciar" onClick={iniciarJuego}>
+                Jugar de Nuevo
+              </button>
+            </div>
           </div>
         )}
       </div>

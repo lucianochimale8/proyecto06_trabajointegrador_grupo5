@@ -29,8 +29,7 @@ export default function Navbar() {
     ], id: "juegos" },
     { path: "/Home", label: "Home" },
     { path: "/aboutMiembros", label: "Miembros" },
-    // Login solo se muestra si no está autenticado
-    ...(isAuthenticated ? [] : [{ path: "/login", label: "Login" }]),
+    { path: "/login", label: "Login" },
   ];
 
   const navRef = useRef(null);
@@ -71,7 +70,7 @@ export default function Navbar() {
         </div>
       )}
       <nav ref={navRef} className="app-navbar" style={{ position: 'relative' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', justifyContent: 'center', flex: 1 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', justifyContent: 'center', width: '100%' }}>
         {tabs.map((tab, index) => {
         if (tab.dropdown) {
           const isOpen = openDropdown === tab.id;
@@ -138,6 +137,20 @@ export default function Navbar() {
                 </div>
               )}
             </div>
+          );
+        }
+
+        // Ocultar Login si está autenticado pero mantener el espacio
+        if (tab.path === "/login" && isAuthenticated) {
+          return (
+            <NavLink
+              key={index}
+              to={tab.path}
+              className="navbar-link"
+              style={{ visibility: 'hidden', width: 0, padding: 0, margin: 0 }}
+            >
+              {tab.label}
+            </NavLink>
           );
         }
 
