@@ -1,9 +1,13 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
+import { useAuth } from "../context/AuthContext";
 
 export default function Navbar() {
   const [openDropdown, setOpenDropdown] = useState(null);
+  const [showMessage, setShowMessage] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
 
   const tabs = [
     { label: "Proyectos", dropdown: [
@@ -46,8 +50,27 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav ref={navRef} className="app-navbar">
-      {tabs.map((tab, index) => {
+    <>
+      {showMessage && (
+        <div 
+          style={{
+            position: 'fixed',
+            top: '20px',
+            right: '20px',
+            backgroundColor: '#ff6b6b',
+            color: 'white',
+            padding: '15px 20px',
+            borderRadius: '8px',
+            boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+            zIndex: 9999,
+            animation: 'fadeIn 0.3s ease-in'
+          }}
+        >
+          Inicia sesión para acceder a esta sección
+        </div>
+      )}
+      <nav ref={navRef} className="app-navbar">
+        {tabs.map((tab, index) => {
         if (tab.dropdown) {
           const isOpen = openDropdown === tab.id;
           const isActive = (tab.id === "proyectos" && isProjectPage) || (tab.id === "juegos" && isGamePage);
@@ -72,18 +95,39 @@ export default function Navbar() {
               </button>
               {isOpen && (
                 <div className="navbar-dropdown-menu" role="menu">
-                  {tab.dropdown.map((item, i) => (
-                    <NavLink
-                      key={i}
-                      to={item.path}
-                      className={({ isActive }) =>
-                        isActive ? "navbar-dropdown-item active" : "navbar-dropdown-item"
-                      }
-                      onClick={() => setOpenDropdown(null)}
-                    >
-                      {item.label}
-                    </NavLink>
-                  ))}
+                  {tab.dropdown.map((item, i) => {
+                    // Si es la sección de juegos y no está autenticado
+                    if (tab.id === "juegos" && !isAuthenticated) {
+                      return (
+                        <div
+                          key={i}
+                          className="navbar-dropdown-item"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setOpenDropdown(null);
+                            setShowMessage(true);
+                            setTimeout(() => setShowMessage(false), 3000);
+                            navigate('/login');
+                          }}
+                          style={{ cursor: 'pointer' }}
+                        >
+                          {item.label}
+                        </div>
+                      );
+                    }
+                    return (
+                      <NavLink
+                        key={i}
+                        to={item.path}
+                        className={({ isActive }) =>
+                          isActive ? "navbar-dropdown-item active" : "navbar-dropdown-item"
+                        }
+                        onClick={() => setOpenDropdown(null)}
+                      >
+                        {item.label}
+                      </NavLink>
+                    );
+                  })}
                 </div>
               )}
             </div>
@@ -100,6 +144,7 @@ export default function Navbar() {
           </NavLink>
         );
       })}
-    </nav>
+      </nav>
+    </>
   );
 }
