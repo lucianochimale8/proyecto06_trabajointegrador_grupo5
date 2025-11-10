@@ -12,30 +12,13 @@ const esquemaUsuario = new esquema({
     name: String
 });
 
-const listaUsuarios = mongoose.model('users', esquemaUsuario);
+const cors = require('cors');
 
-// rutas, endpoints
-// promesa
-// routes.get('/obtenerUsuarios',(req,res)=>{
-// obtener lista
-//  listaUsuarios.find().then(docs => {
-//    res.send(docs)
-//      }).catch(err => {
-//      res.send(err)
-//    }) 
-//});
+app.use(cors({
+    origin: 'http://localhost:5173', // URL de tu frontend
+    credentials: true
+}));
 
-// async
+app.use(cors());
 
-routes.get('/obtenerUsuarios', async(req,res)=>
-{
-    try{
-        const docs = await listaUsuarios.find();
-        res.send(docs);
-    }catch(error){
-        console.error("Error al obtener usuarios:",error);
-        res.status(500).send({message: "Error interno del servidor al obtener usuarios", error: "Error"})
-    }
-});
-
-module.exports = routes;
+module.exports = mongoose.model('users', esquemaUsuario);
