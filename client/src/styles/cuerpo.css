@@ -1,86 +1,108 @@
 .body-game {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: #f0f6ff;
+  text-align: center;
+  background-color: #e9f2fa;
   min-height: 100vh;
+  padding: 30px 0;
   font-family: "Poppins", sans-serif;
-  padding: 20px;
 }
 
-h2 {
-  color: #444;
-  margin-bottom: 20px;
+.body-game h2 {
+  font-size: 28px;
+  margin-bottom: 30px;
+  color: #222;
+  font-weight: 700;
+  letter-spacing: 1px;
 }
 
 .character-area {
   position: relative;
+  display: inline-block;
+  width: 400px;
+  height: 550px;
+  margin-bottom: 50px;
+}
+
+.character-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* --- SLOTS --- */
+.slot {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  border: 2px dashed #aaa;
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.7);
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.character {
-  height: 420px;
-  z-index: 1;
-}
-
-.slot {
-  position: absolute;
-  background: rgba(255, 255, 255, 0.8);
-  border: 2px dashed #ccc;
-  border-radius: 10px;
-  width: 80px;
-  height: 50px;
-  color: #777;
-  text-align: center;
-  line-height: 50px;
+  font-size: 13px;
+  color: #333;
   font-weight: bold;
-  transition: all 0.3s ease;
   cursor: pointer;
-}
-
-.slot:hover {
-  border-color: #6a9ae2;
+  transition: transform 0.15s ease;
 }
 
 .slot.filled {
-  border: none;
-  background: transparent;
+  border: 2px solid #4caf50;
+  background-color: rgba(76, 175, 80, 0.2);
 }
 
 .slot-img {
-  width: 60px;
-  height: 60px;
+  width: 100%;
+  height: auto;
+  pointer-events: none;
 }
 
+/* --- ANIMACIÓN DE SACUDIDA --- */
+.slot.shake {
+  animation: shake 0.3s;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-8px); }
+  50% { transform: translateX(8px); }
+  75% { transform: translateX(-5px); }
+}
+
+/* --- PARTES ARRASTRABLES --- */
 .draggable-parts {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 40px;
   gap: 20px;
 }
 
 .draggable-img {
-  width: 80px;
-  height: 80px;
-  border-radius: 10px;
-  border: 2px solid #ccc;
+  width: 70px;
+  height: 70px;
+  border-radius: 12px;
+  background-color: #fff;
+  border: 2px solid #bbb;
+  padding: 8px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
   cursor: grab;
-  background: #fff;
-  padding: 5px;
-  transition: 0.2s;
+}
+
+.draggable-img:active {
+  cursor: grabbing;
 }
 
 .draggable-img:hover {
-  border-color: #6a9ae2;
   transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
 }
 
+/* --- MENSAJE FINAL --- */
 .success-msg {
   margin-top: 25px;
-  color: #2e8b57;
-  font-size: 1.2rem;
-  font-weight: bold;
+  color: #4caf50;
+  font-size: 22px;
+  font-weight: 700;
 }
