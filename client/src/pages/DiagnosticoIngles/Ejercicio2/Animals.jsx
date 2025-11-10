@@ -44,21 +44,37 @@ const Animals = () => {
     useEffect(() => {
         sonidoCorrectoRef.current = new Audio(sonidoCorrecto);
         sonidoCorrectoRef.current.volume = 0.5;
+        sonidoCorrectoRef.current.preload = 'auto';
         
         sonidoErrorRef.current = new Audio(sonidoError);
         sonidoErrorRef.current.volume = 0.5;
+        sonidoErrorRef.current.preload = 'auto';
         
         sonidoGanarRef.current = new Audio(sonidoGanar);
         sonidoGanarRef.current.volume = 0.6;
+        sonidoGanarRef.current.preload = 'auto';
     }, []);
 
-    // funcion para reproducir sonidos
+    // funcion robusta para reproducir sonidos
     const reproducirSonido = (sonidoRef) => {
-        if (sonidoRef.current) {
-            sonidoRef.current.currentTime = 0;
-            sonidoRef.current.play().catch(error => {
-                console.log("Error al reproducir sonido:", error);
-            });
+        if (sonidoRef && sonidoRef.current) {
+            try {
+                if (sonidoRef.current.currentTime > 0) {
+                    sonidoRef.current.currentTime = 0;
+                }
+                const playPromise = sonidoRef.current.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        if (error.name !== 'NotAllowedError' && error.name !== 'NotSupportedError') {
+                            try {
+                                sonidoRef.current.load();
+                                sonidoRef.current.currentTime = 0;
+                                sonidoRef.current.play().catch(() => {});
+                            } catch (e) {}
+                        }
+                    });
+                }
+            } catch (error) {}
         }
     };
 
