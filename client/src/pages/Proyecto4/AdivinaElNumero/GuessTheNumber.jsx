@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import "../../../styles/App.css";
 
 //estructura basica
 function Juego() {
@@ -93,64 +92,102 @@ function Juego() {
 
   if (mostrarInicio) {
     return (
-      <div className="Juego">
-        <div className="container">
-          <h1>Adivina el número</h1>
-          <p>Ingresa un número entre 1 y 100.</p>
-          <p>Cantidad de intentos: 0</p>
-          <button onClick={iniciarJuego} className="btn-iniciar">
-            Iniciar Juego
-          </button>
-        </div>
+      <div className="avg-container">
+        <h1>Adivina el número</h1>
+        <p style={{
+          fontFamily: "'KG Candy Cane Stripe', cursive",
+          color: "var(--kawaii-brown)",
+          fontSize: "1.1rem",
+          margin: "10px 0"
+        }}>Ingresa un número entre 1 y 100.</p>
+        <p style={{
+          fontFamily: "'KG Candy Cane Stripe', cursive",
+          color: "var(--kawaii-brown)",
+          fontSize: "1rem",
+          margin: "10px 0"
+        }}>Cantidad de intentos: 0</p>
+        <button onClick={iniciarJuego} className="modern-btn">
+          Iniciar Juego
+        </button>
       </div>
     );
   }
 
   return (
-    <div className="Juego">
-      <div className="container">
-        <h1>Adivina el número</h1>
-        <p>Ingresa un número entre 1 y 100</p>
-        <p>Cantidad de intentos: {intentos}</p>
+    <div className="avg-container">
+      <h1>Adivina el número</h1>
+      <p style={{
+        fontFamily: "'KG Candy Cane Stripe', cursive",
+        color: "var(--kawaii-brown)",
+        fontSize: "1.1rem",
+        margin: "10px 0"
+      }}>Ingresa un número entre 1 y 100</p>
+      <p style={{
+        fontFamily: "'KG Candy Cane Stripe', cursive",
+        color: "var(--kawaii-brown)",
+        fontSize: "1rem",
+        margin: "10px 0"
+      }}>Cantidad de intentos: {intentos}</p>
 
-        <input
-          type="number"
-          min="1"
-          max="100"
-          value={numeroUsuario}
-          onChange={(e) => setNumeroUsuario(e.target.value)}
-          placeholder="Ingresa tu número"
-          className="input-numero"
+      <input
+        type="number"
+        min="1"
+        max="100"
+        value={numeroUsuario}
+        onChange={(e) => setNumeroUsuario(e.target.value)}
+        placeholder="Ingresa tu número"
+        disabled={juegoTerminado}
+        style={{
+          opacity: juegoTerminado ? 0.6 : 1,
+          cursor: juegoTerminado ? "not-allowed" : "text"
+        }}
+      />
+
+      <div style={{ 
+        display: "flex", 
+        gap: "10px", 
+        justifyContent: "center",
+        flexWrap: "wrap",
+        marginTop: "15px"
+      }}>
+        <button
+          onClick={verificarNumero}
+          className="modern-btn"
           disabled={juegoTerminado}
-        />
+          style={{
+            opacity: juegoTerminado ? 0.6 : 1,
+            cursor: juegoTerminado ? "not-allowed" : "pointer"
+          }}
+        >
+          Verificar
+        </button>
+        <button
+          onClick={rendirse}
+          className="modern-btn"
+          disabled={juegoTerminado}
+          style={{
+            background: "var(--kawaii-green)",
+            color: "var(--kawaii-brown)",
+            opacity: juegoTerminado ? 0.6 : 1,
+            cursor: juegoTerminado ? "not-allowed" : "pointer"
+          }}
+        >
+          Me rindo
+        </button>
+      </div>
 
-        <div className="botones">
-          <button
-            onClick={verificarNumero}
-            className="btn-verificar"
-            disabled={juegoTerminado}
-          >
-            Verificar
-          </button>
-          <button
-            onClick={rendirse}
-            className="btn-rendirse"
-            disabled={juegoTerminado}
-          >
-            Me rindo
+      {mensaje && <div className="resultado" style={{
+        marginTop: "20px",
+        textAlign: "center"
+      }}>{mensaje}</div>}
+
+      {juegoTerminado && (
+        <div style={{ marginTop: '20px', textAlign: "center" }}>
+          <button onClick={reiniciarJuego} className="modern-btn">
+            Volver al inicio
           </button>
         </div>
-
-        {mensaje && <div className="mensaje">{mensaje}</div>}
-
-        {juegoTerminado && (
-          <div style={{ marginTop: '12px' }}>
-            <button onClick={reiniciarJuego} className="btn-reiniciar">
-              Volver al inicio
-            </button>
-          </div>
-        )}
-      </div>
+      )}
     </div>
   );
 }

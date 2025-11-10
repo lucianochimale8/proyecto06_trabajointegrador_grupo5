@@ -22,32 +22,33 @@ export default function SalarySimulator() {
   }
 
   return (
-    <div className="sim-container">
+    <div className="avg-container">
       <h1>Simulador de Salario Mensual</h1>
 
-      <div className="form">
-        <label>Nombre</label>
-        <input value={nombre} onChange={(e) => setNombre(e.target.value)} />
+      <input 
+        placeholder="Nombre" 
+        value={nombre} 
+        onChange={(e) => setNombre(e.target.value)} 
+      />
 
-        <label>Horas trabajadas por mes</label>
-        <input
-          type="number"
-          value={horas}
-          onChange={(e) => setHoras(e.target.value)}
-        />
+      <input
+        type="number"
+        placeholder="Horas trabajadas por mes"
+        value={horas}
+        onChange={(e) => setHoras(e.target.value)}
+      />
 
-        <label>Pago por hora</label>
-        <input
-          type="number"
-          value={pagoHora}
-          onChange={(e) => setPagoHora(e.target.value)}
-        />
+      <input
+        type="number"
+        placeholder="Pago por hora"
+        value={pagoHora}
+        onChange={(e) => setPagoHora(e.target.value)}
+      />
 
-        <button onClick={calcularPago}>Calcular Pago</button>
+      <button className="modern-btn" onClick={calcularPago}>Calcular Pago</button>
 
-        {error && <div className="error">{error}</div>}
-        {resultado && <div className="resultado">{resultado}</div>}
-      </div>
+      {error && <div className="resultado" style={{background: "#ffebee", borderColor: "#f44336"}}>{error}</div>}
+      {resultado && <div className="resultado">{resultado}</div>}
 
     </div>
   );

@@ -30,11 +30,11 @@ export default function ReplaceQuestionMarks() {
   }
 
   return (
-    <div className="q-container">
+    <div className="avg-container">
       <h1>Reemplazar signos de pregunta</h1>
       <input placeholder="Ej: 1?4?34?" value={input} onKeyDown={e=>{ if(e.key==='Enter') procesar();}} onChange={e=>setInput(e.target.value)} />
-      <button onClick={procesar}>Procesar</button>
-      <div className="result-box">{salida || "Esperando entrada..."}</div>
+      <button className="modern-btn" onClick={procesar}>Procesar</button>
+      <div className="resultado">{salida || "Esperando entrada..."}</div>
 
     </div>
   );

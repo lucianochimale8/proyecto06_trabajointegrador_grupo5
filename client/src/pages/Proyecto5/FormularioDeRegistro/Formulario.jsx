@@ -131,205 +131,231 @@ export default function Formulario() {
   };
 
   return (
-    <div className="container mt-5">
-      <div className="row justify-content-center">
-        <div className="col-md-8 col-lg-6">
-          <div className="card shadow">
-            <div className="card-body p-4">
-              <h2 className="card-title text-center mb-4">Formulario de Registro</h2>
+    <div className="avg-container">
+      <h1>Formulario de Registro</h1>
 
-              {isSubmitted && (
-                <div className="alert alert-success alert-dismissible fade show" role="alert">
-                  <strong>¡Éxito!</strong> Tus datos han sido guardados correctamente.
-                  <button
-                    type="button"
-                    className="btn-close"
-                    onClick={() => setIsSubmitted(false)}
-                  ></button>
-                </div>
-              )}
+      {isSubmitted && (
+        <div className="resultado" style={{
+          background: "var(--kawaii-green)",
+          borderColor: "var(--kawaii-green)",
+          marginBottom: "20px",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center"
+        }}>
+          <strong>¡Éxito!</strong> Tus datos han sido guardados correctamente.
+          <button
+            type="button"
+            onClick={() => setIsSubmitted(false)}
+            style={{
+              background: "none",
+              border: "none",
+              fontSize: "1.2rem",
+              cursor: "pointer",
+              color: "var(--kawaii-brown)",
+              padding: "0 10px"
+            }}
+          >
+            ×
+          </button>
+        </div>
+      )}
 
-              <form onSubmit={handleSubmit} noValidate>
-                <div className="row">
-                  <div className="col-md-6 mb-3">
-                    <label htmlFor="nombre" className="form-label">
-                      Nombre *
-                    </label>
-                    <input
-                      type="text"
-                      className={`form-control ${errors.nombre ? 'is-invalid' : ''}`}
-                      id="nombre"
-                      name="nombre"
-                      value={formData.nombre}
-                      onChange={handleChange}
-                      placeholder="Ingresa tu nombre"
-                    />
-                    {errors.nombre && (
-                      <div className="invalid-feedback">{errors.nombre}</div>
-                    )}
+      <form onSubmit={handleSubmit} noValidate>
+        <input
+          type="text"
+          name="nombre"
+          value={formData.nombre}
+          onChange={handleChange}
+          placeholder="Nombre *"
+          style={{
+            borderColor: errors.nombre ? "#f44336" : undefined
+          }}
+        />
+        {errors.nombre && (
+          <div style={{
+            color: "#f44336",
+            fontSize: "0.9rem",
+            marginTop: "-5px",
+            marginBottom: "10px",
+            fontFamily: "'KG Candy Cane Stripe', cursive",
+            textAlign: "center"
+          }}>{errors.nombre}</div>
+        )}
+
+        <input
+          type="text"
+          name="apellido"
+          value={formData.apellido}
+          onChange={handleChange}
+          placeholder="Apellido *"
+          style={{
+            borderColor: errors.apellido ? "#f44336" : undefined
+          }}
+        />
+        {errors.apellido && (
+          <div style={{
+            color: "#f44336",
+            fontSize: "0.9rem",
+            marginTop: "-5px",
+            marginBottom: "10px",
+            fontFamily: "'KG Candy Cane Stripe', cursive",
+            textAlign: "center"
+          }}>{errors.apellido}</div>
+        )}
+
+        <input
+          type="email"
+          name="correo"
+          value={formData.correo}
+          onChange={handleChange}
+          placeholder="Correo Electrónico *"
+          style={{
+            borderColor: errors.correo ? "#f44336" : undefined
+          }}
+        />
+        {errors.correo && (
+          <div style={{
+            color: "#f44336",
+            fontSize: "0.9rem",
+            marginTop: "-5px",
+            marginBottom: "10px",
+            fontFamily: "'KG Candy Cane Stripe', cursive",
+            textAlign: "center"
+          }}>{errors.correo}</div>
+        )}
+
+        <input
+          type="text"
+          name="dni"
+          value={formData.dni}
+          onChange={handleChange}
+          placeholder="DNI *"
+          maxLength="8"
+          style={{
+            borderColor: errors.dni ? "#f44336" : undefined
+          }}
+        />
+        {errors.dni && (
+          <div style={{
+            color: "#f44336",
+            fontSize: "0.9rem",
+            marginTop: "-5px",
+            marginBottom: "10px",
+            fontFamily: "'KG Candy Cane Stripe', cursive",
+            textAlign: "center"
+          }}>{errors.dni}</div>
+        )}
+
+        <input
+          type="tel"
+          name="telefono"
+          value={formData.telefono}
+          onChange={handleChange}
+          placeholder="Teléfono *"
+          style={{
+            borderColor: errors.telefono ? "#f44336" : undefined
+          }}
+        />
+        {errors.telefono && (
+          <div style={{
+            color: "#f44336",
+            fontSize: "0.9rem",
+            marginTop: "-5px",
+            marginBottom: "10px",
+            fontFamily: "'KG Candy Cane Stripe', cursive",
+            textAlign: "center"
+          }}>{errors.telefono}</div>
+        )}
+
+        <div style={{ 
+          display: "flex", 
+          gap: "10px", 
+          justifyContent: "center",
+          flexWrap: "wrap",
+          marginTop: "15px"
+        }}>
+          <button
+            type="button"
+            className="modern-btn"
+            onClick={handleReset}
+            style={{
+              background: "var(--kawaii-green)",
+              color: "var(--kawaii-brown)"
+            }}
+          >
+            Limpiar
+          </button>
+          <button
+            type="submit"
+            className="modern-btn"
+          >
+            Enviar Datos
+          </button>
+        </div>
+      </form>
+
+      {/* botón para mostrar lista */}
+      <div style={{ marginTop: "30px" }}>
+        <button
+          className="modern-btn"
+          onClick={toggleList}
+          style={{
+            background: "var(--kawaii-blue)",
+            color: "var(--kawaii-brown)",
+            fontSize: "0.9rem",
+            padding: "10px 20px"
+          }}
+        >
+          {showList ? 'Ocultar datos guardados' : 'Ver datos guardados'}
+        </button>
+
+        {showList && (
+          <div style={{ marginTop: "20px", textAlign: "center" }}>
+            <h2 style={{
+              fontFamily: "'Roundabout', cursive",
+              color: "var(--kawaii-brown)",
+              marginBottom: "15px",
+              textAlign: "center"
+            }}>Datos guardados</h2>
+            {savedData.length === 0 ? (
+              <p style={{
+                fontFamily: "'KG Candy Cane Stripe', cursive",
+                color: "var(--kawaii-brown)",
+                padding: "15px",
+                background: "var(--kawaii-yellow)",
+                borderRadius: "12px",
+                border: "2px solid rgba(139,69,19,0.06)",
+                textAlign: "center"
+              }}>No hay datos guardados</p>
+            ) : (
+              <div>
+                {savedData.map((item, idx) => (
+                  <div key={idx} style={{
+                    background: "var(--kawaii-yellow)",
+                    borderRadius: "12px",
+                    border: "2px solid rgba(139,69,19,0.06)",
+                    padding: "15px",
+                    marginBottom: "15px",
+                    fontFamily: "'KG Candy Cane Stripe', cursive",
+                    color: "var(--kawaii-brown)",
+                    textAlign: "center"
+                  }}>
+                    <strong style={{
+                      fontFamily: "'Roundabout', cursive",
+                      fontSize: "1.1rem",
+                      textAlign: "center"
+                    }}>{item.nombre} {item.apellido}</strong>
+                    <p style={{margin: "5px 0", textAlign: "center"}}>DNI: {item.dni}</p>
+                    <p style={{margin: "5px 0", textAlign: "center"}}>Teléfono: {item.telefono}</p>
+                    <p style={{margin: "5px 0", textAlign: "center"}}>Correo: {item.correo}</p>
                   </div>
-
-                  <div className="col-md-6 mb-3">
-                    <label htmlFor="apellido" className="form-label">
-                      Apellido *
-                    </label>
-                    <input
-                      type="text"
-                      className={`form-control ${errors.apellido ? 'is-invalid' : ''}`}
-                      id="apellido"
-                      name="apellido"
-                      value={formData.apellido}
-                      onChange={handleChange}
-                      placeholder="Ingresa tu apellido"
-                    />
-                    {errors.apellido && (
-                      <div className="invalid-feedback">{errors.apellido}</div>
-                    )}
-                  </div>
-                </div>
-
-                <div className="mb-3">
-                  <label htmlFor="correo" className="form-label">
-                    Correo Electrónico *
-                  </label>
-                  <input
-                    type="email"
-                    className={`form-control ${errors.correo ? 'is-invalid' : ''}`}
-                    id="correo"
-                    name="correo"
-                    value={formData.correo}
-                    onChange={handleChange}
-                    placeholder="ejemplo@correo.com"
-                  />
-                  {errors.correo && (
-                    <div className="invalid-feedback">{errors.correo}</div>
-                  )}
-                </div>
-
-                <div className="row">
-                  <div className="col-md-6 mb-3">
-                    <label htmlFor="dni" className="form-label">
-                      DNI *
-                    </label>
-                    <input
-                      type="text"
-                      className={`form-control ${errors.dni ? 'is-invalid' : ''}`}
-                      id="dni"
-                      name="dni"
-                      value={formData.dni}
-                      onChange={handleChange}
-                      placeholder="12345678"
-                      maxLength="8"
-                    />
-                    {errors.dni && (
-                      <div className="invalid-feedback">{errors.dni}</div>
-                    )}
-                  </div>
-
-                  <div className="col-md-6 mb-4">
-                    <label htmlFor="telefono" className="form-label">
-                      Teléfono *
-                    </label>
-                    <input
-                      type="tel"
-                      className={`form-control ${errors.telefono ? 'is-invalid' : ''}`}
-                      id="telefono"
-                      name="telefono"
-                      value={formData.telefono}
-                      onChange={handleChange}
-                      placeholder="1122334455"
-                    />
-                    {errors.telefono && (
-                      <div className="invalid-feedback">{errors.telefono}</div>
-                    )}
-                  </div>
-                </div>
-
-                <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                  <button
-                    type="button"
-                    className="btn btn-outline-secondary me-md-2"
-                    onClick={handleReset}
-                  >
-                    Limpiar
-                  </button>
-                  <button
-                    type="submit"
-                    className="btn btn-primary"
-                  >
-                    Enviar Datos
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-
-          {/* botón para mostrar lista */}
-          <div className="mt-4">
-            <button
-              className="btn btn-outline-info btn-sm"
-              onClick={toggleList}
-            >
-              {showList ? 'Ocultar datos guardados' : 'Ver datos guardados'}
-            </button>
-
-            {showList && (
-              <div className="mt-3">
-                <h5>Datos guardados</h5>
-                {savedData.length === 0 ? (
-                  <p className="text-muted">No hay datos guardados</p>
-                ) : (
-                  <ul className="list-group">
-                    {savedData.map((item, idx) => (
-                      <li className="list-group-item" key={idx}>
-                        <strong>{item.nombre} {item.apellido}</strong>
-                        <div>DNI: {item.dni}</div>
-                        <div>Teléfono: {item.telefono}</div>
-                        <div>Correo: {item.correo}</div>
-                      </li>
-                    ))}
-                  </ul>
-                )}
+                ))}
               </div>
             )}
           </div>
-        </div>
+        )}
       </div>
-
-      <style jsx>{`
-        .card {
-          border: none;
-          border-radius: 15px;
-          color: #dd8771ff;
-        }
-
-        .form-label {
-          font-weight: 500;
-          color: #a05050ff;
-        }
-
-        .btn-primary {
-          background-color: #f8bd85ff;
-          border-color: #f1724cff;
-        }
-
-        .btn-primary:hover {
-          background-color: #d9673aff;
-          border-color: #d93a3aff;
-        }
-
-        .btn-sm {
-          background-color: #fdfdfdff;
-          border-color: #f1724cff;
-          color: #dd8771ff;
-        }
-
-        .btn-sm:hover {
-          background-color: #f3e0d9ff;
-          border-color: #d93a3aff;
-          color: #dd8771ff;
-        }
-      `}</style>
     </div>
   );
 }

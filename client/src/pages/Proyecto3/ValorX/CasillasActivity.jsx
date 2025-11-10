@@ -103,19 +103,16 @@ export default function CalculadorX() {
   };
 
   return (
-    <div style={{
-      fontFamily: "Arial, sans-serif",
-      textAlign: "center",
-      marginTop: "30px"
-    }}>
+    <div className="avg-container">
+      <h1>Valor de X</h1>
       {/* tabla 3x3 */}
       <div style={{
         display: "grid",
         gridTemplateColumns: "repeat(3, 80px)",
         gridTemplateRows: "repeat(3, 80px)",
-        gap: "5px",
+        gap: "10px",
         justifyContent: "center",
-        margin: "0 auto"
+        margin: "30px auto"
       }}>
         {casilla.map((fila, i) =>
           fila.map((valor, j) => (
@@ -130,8 +127,12 @@ export default function CalculadorX() {
                 height: "70px",
                 textAlign: "center",
                 fontSize: "24px",
-                border: "2px solid black",
-                borderRadius: "10px"
+                border: "3px solid rgba(139,69,19,0.06)",
+                borderRadius: "12px",
+                background: "var(--kawaii-yellow)",
+                fontFamily: "'KG Candy Cane Stripe', cursive",
+                color: "var(--kawaii-brown)",
+                fontWeight: "bold"
               }}
             />
           ))
@@ -140,43 +141,35 @@ export default function CalculadorX() {
 
       {/* resultado */}
       {resultado && (
-        <div style={{
-          marginTop: "20px",
-          fontSize: "22px",
-          fontWeight: "bold",
-          color: "darkblue"
+        <div className="resultado" style={{
+          fontSize: "1.1rem",
+          fontWeight: "900",
+          textAlign: "center"
         }}>
           {resultado}
         </div>
       )}
 
       {/* botones */}
-      <div style={{ marginTop: "20px" }}>
+      <div style={{ 
+        marginTop: "20px", 
+        display: "flex", 
+        gap: "10px", 
+        justifyContent: "center",
+        flexWrap: "wrap"
+      }}>
         <button 
           onClick={calcularX}
-          style={{
-            padding: "10px 20px",
-            fontSize: "16px",
-            backgroundColor: "#4caf50",
-            color: "white",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer",
-            marginRight: "10px"
-          }}
+          className="modern-btn"
         >
           Calcular X
         </button>
         <button 
           onClick={limpiar}
+          className="modern-btn"
           style={{
-            padding: "10px 20px",
-            fontSize: "16px",
-            backgroundColor: "#f44336",
-            color: "white",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer"
+            background: "var(--kawaii-green)",
+            color: "var(--kawaii-brown)"
           }}
         >
           Limpiar

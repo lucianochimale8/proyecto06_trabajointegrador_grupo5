@@ -22,7 +22,7 @@ export default function AverageCalculator() {
       <input placeholder="Número A" value={a} onChange={e=>setA(e.target.value)} />
       <input placeholder="Número B" value={b} onChange={e=>setB(e.target.value)} />
       <input placeholder="Número C" value={c} onChange={e=>setC(e.target.value)} />
-      <button onClick={calcularPromedio}>Calcular promedio</button>
+      <button className="modern-btn" onClick={calcularPromedio}>Calcular promedio</button>
       {resultado && <div className="resultado">{resultado}</div>}
       
     </div>

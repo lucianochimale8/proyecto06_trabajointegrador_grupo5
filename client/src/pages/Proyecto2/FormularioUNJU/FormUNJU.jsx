@@ -11,18 +11,27 @@ export default function FormUNJU() {
   }
 
   return (
-    <div className="formu-container">
+    <div className="avg-container">
       <h1>Formulario Alumno</h1>
-      <label>Nombre</label>
-      <input value={nombre} onChange={e=>setNombre(e.target.value)} />
-      <label>Apellido</label>
-      <input value={apellido} onChange={e=>setApellido(e.target.value)} />
-      <label>Libreta Universitaria</label>
-      <input value={libreta} onChange={e=>setLibreta(e.target.value)} />
-      <button onClick={mostrarDatos}>Mostrar Datos</button>
+      <input 
+        placeholder="Nombre" 
+        value={nombre} 
+        onChange={e=>setNombre(e.target.value)} 
+      />
+      <input 
+        placeholder="Apellido" 
+        value={apellido} 
+        onChange={e=>setApellido(e.target.value)} 
+      />
+      <input 
+        placeholder="Libreta Universitaria" 
+        value={libreta} 
+        onChange={e=>setLibreta(e.target.value)} 
+      />
+      <button className="modern-btn" onClick={mostrarDatos}>Mostrar Datos</button>
 
       {datos && (
-        <div className="datos">
+        <div className="resultado">
           <p><strong>Nombre:</strong> {datos.nombre}</p>
           <p><strong>Apellido:</strong> {datos.apellido}</p>
           <p><strong>Libreta:</strong> {datos.libreta}</p>

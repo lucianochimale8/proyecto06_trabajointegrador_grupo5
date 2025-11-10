@@ -18,12 +18,12 @@ export default function MaxNumber() {
   }
 
   return (
-    <div className="max-container">
+    <div className="avg-container">
       <h1>Calcular número mayor</h1>
       <input type="number" placeholder="Número 1" value={num1} onChange={e=>setNum1(e.target.value)} />
       <input type="number" placeholder="Número 2" value={num2} onChange={e=>setNum2(e.target.value)} />
-      <button onClick={calcular}>Calcular</button>
-      {mensaje && <div className="mensaje">{mensaje}</div>}
+      <button className="modern-btn" onClick={calcular}>Calcular</button>
+      {mensaje && <div className="resultado">{mensaje}</div>}
 
     </div>
   );
