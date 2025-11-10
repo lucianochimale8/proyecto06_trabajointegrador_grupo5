@@ -18,7 +18,7 @@ const Animals = () => {
     const animales = [
         { nombre: 'cebra', english: 'zebra', imagen: cebra },
         { nombre: 'león', english: 'lion', imagen: leon },
-        { nombre: 'rinoceronte', english: 'rinoceronte', imagen: elefante },
+        { nombre: 'rinoceronte', english: 'rhinoceros', imagen: elefante },
         { nombre: 'jirafa', english: 'giraffe', imagen: jirafa },
         { nombre: 'tigre', english: 'tiger', imagen: tigre },
         { nombre: 'hipopotamo', english: 'hippopotamus', imagen: hipopotamo },
