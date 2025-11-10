@@ -754,7 +754,7 @@ h6 {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem 150px;
+  padding: 2rem -100px;
 }
 
 .about-back-btn {
@@ -767,8 +767,8 @@ h6 {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  max-width: 1800px;
+  width: 200%;
+  max-width: 3500px;
   gap: 3rem;
 }
 
@@ -778,12 +778,12 @@ h6 {
   justify-content: center;
   align-items: center;
   animation: fadeIn 0.4s ease-out;
-  width: 100%;
+  width: 200%;
 }
 
 .about-carousel-card .id-card-image-wrapper {
   width: 100%;
-  max-width: 1500px;
+  max-width: 4500px;
   margin: 0 auto;
 }
 
@@ -907,18 +907,21 @@ h6 {
 }
 .header-center {
   flex: 1 1 auto;
+  text-align: center;
 }
 .site-title {
   margin: 0;
   font-size: 1.4rem;
   color: var(--kawaii-brown);
   font-family: 'Roundabout', cursive;
+  text-align: center;
 }
 .site-subtitle {
   margin: 0;
   color: rgba(139,69,19,0.7);
   font-size: 0.95rem;
   font-family: 'KG Candy Cane Stripe', cursive;
+  text-align: center;
 }
 .header-right { 
   display: flex;
