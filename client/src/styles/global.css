@@ -261,6 +261,42 @@
   .gradient-text {
     font-size: 1.5em;
   }
+
+  .about-welcome-card {
+    padding: 40px 30px;
+    max-width: 90%;
+  }
+
+  .about-welcome-title {
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+  }
+
+  .about-carousel-wrapper {
+    gap: 1rem;
+  }
+
+  .about-arrow-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 36px;
+  }
+
+  .about-carousel-container {
+    padding: 2rem 80px;
+  }
+
+  .about-carousel-card .id-card-image-wrapper {
+    max-width: 95vw;
+  }
+
+  .about-arrow-left {
+    left: -60px;
+  }
+
+  .about-arrow-right {
+    right: -60px;
+  }
 }
 
 html {
@@ -634,50 +670,171 @@ h6 {
   font-family: 'KG Candy Cane Stripe', cursive;
 }
 
-.member-card {
-  width: 18rem;
-  height: 26rem;
-  backdrop-filter: blur(15px);
-  border: 2px solid var(--dried-sage);
-  box-shadow: var(--shadow-lg);
-  border-radius: var(--border-radius-lg);
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+/* Contenedor de tarjetas ID - solo imágenes */
+.id-cards-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  padding: 2rem 0;
+  max-width: 1800px;
+  margin: 0 auto;
+  justify-items: center;
 }
 
-.member-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-}
-
-.member-image {
-  height: 280px;
+.id-card-image-wrapper {
   width: 100%;
-  object-fit: cover;
-  filter: brightness(1.05) contrast(1.05);
-  border-radius: var(--border-radius-md) var(--border-radius-md) 0 0;
+  max-width: 1600px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.member-name {
-  color: var(--white-pure);
-  text-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
-  font-size: var(--heading-5-size);
+.about-carousel-card .id-card-image-wrapper:hover {
+  transform: none;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.id-card-image-only {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+.about-carousel-card .id-card-image-wrapper:hover .id-card-image-only {
+  transform: none;
+}
+
+/* Estilos para el cartel inicial de About Us */
+.about-welcome-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  padding: 2rem;
+}
+
+.about-welcome-card {
+  background: var(--card-bg);
+  border: var(--border-kawaii);
+  border-radius: 20px;
+  padding: 60px 80px;
+  text-align: center;
+  max-width: 700px;
+  box-shadow: var(--kawaii-shadow);
+  animation: fadeIn 0.5s ease-out;
+}
+
+.about-welcome-card::before {
+  display: none;
+}
+
+.about-welcome-title {
   font-family: 'Roundabout', cursive;
+  font-size: 2.5rem;
+  color: var(--kawaii-brown);
+  margin-bottom: 40px;
+  line-height: 1.4;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+  font-weight: 700;
 }
 
-.member-lu {
-  color: var(--white-pure);
-  text-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
-  font-size: var(--base-font-size);
-  font-family: 'KG Candy Cane Stripe', cursive;
+.about-welcome-card .modern-btn {
+  font-size: 1.3em;
+  padding: 16px 40px;
+  cursor: pointer;
 }
 
-.member-badge {
-  background: rgba(var(--dried-sage-rgb), 0.5);
-  color: var(--white-pure);
-  backdrop-filter: blur(5px);
-  font-family: 'KG Candy Cane Stripe', cursive;
-  font-size: var(--base-font-size);
-  border: 1px solid rgba(var(--white-pure-rgb), 0.3);
+/* Estilos para el carrusel de About Us */
+.about-carousel-container {
+  position: relative;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 150px;
+}
+
+.about-back-btn {
+  margin-top: 2rem;
+  cursor: pointer;
+}
+
+.about-carousel-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1800px;
+  gap: 3rem;
+}
+
+.about-carousel-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.4s ease-out;
+  width: 100%;
+}
+
+.about-carousel-card .id-card-image-wrapper {
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+.about-carousel-card .id-card-image-only {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.about-arrow-btn {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: var(--kawaii-pink);
+  border: 4px solid var(--kawaii-brown);
+  color: var(--kawaii-yellow);
+  font-size: 48px;
+  font-weight: 900;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 0 rgba(139,69,19,0.08);
+  line-height: 1;
+  padding: 0;
+  flex-shrink: 0;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+}
+
+.about-arrow-btn:hover {
+  transform: translateY(calc(-50% + 2px)) scale(1.1);
+  box-shadow: 0 6px 0 rgba(139,69,19,0.06);
+  background: var(--kawaii-green);
+  color: var(--kawaii-brown);
+}
+
+.about-arrow-btn:active {
+  transform: translateY(-50%) scale(1);
+  box-shadow: 0 4px 0 rgba(139,69,19,0.06) inset;
+}
+
+.about-arrow-left {
+  left: -100px;
+}
+
+.about-arrow-right {
+  right: -100px;
 }
 
 .stats-container {
