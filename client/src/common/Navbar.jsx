@@ -1,9 +1,9 @@
-import { NavLink , useNavigate } from "react-router-dom";
-import { useState, useEffect , useRef } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
 import { useAutorizacion } from "../hooks/useAutorizacion";
 
 export default function Navbar() {
-  const [open, setOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(null);
 
   const tabs = [
     {
@@ -34,10 +34,19 @@ export default function Navbar() {
         { path: "/proyecto5/JuegoEstrellas", label: "Juego de Estrellas" },
       ],
     },
-    { path: "/DiagnosticoIngles/Ejercicio1", label: "Colours" },
-    { path: "/DiagnosticoIngles/Ejercicio2", label: "Animals" },
-    { path: "/Home", label: "Home" },
-    { path: "/aboutMiembros", label: "Miembros" }
+    {
+      label: "Diagnostico Inglés",
+      dropdown: [
+        { path: "/DiagnosticoIngles/Ejercicio1", label: "Colours" },
+        { path: "/DiagnosticoIngles/Ejercicio2", label: "Animals" },
+        { path: "/DiagnosticoIngles/Ejercicio3", label: "Numbers" },
+      ],
+    },
+
+    [
+      { path: "/Home", label: "Home" },
+      { path: "/aboutMiembros", label: "Miembros" },
+    ],
   ];
 
   const { user, isAuthenticated, logout } = useAutorizacion();
@@ -66,25 +75,28 @@ export default function Navbar() {
         <nav ref={navRef} className="app-navbar">
           {tabs.map((tab, index) => {
             if (tab.dropdown) {
+              const isOpen = openDropdown === index;
+
               return (
                 <div
                   key={index}
                   className="navbar-dropdown"
-                  onMouseEnter={() => setOpen(true)}
-                  onMouseLeave={() => setOpen(false)}
+                  onMouseEnter={() => setOpenDropdown(index)}
+                  onMouseLeave={() => setOpenDropdown(null)}
                 >
                   <button
                     className="navbar-dropdown-button"
-                    aria-expanded={open}
+                    aria-expanded={isOpen}
                     aria-haspopup="menu"
                     onClick={(e) => {
                       e.stopPropagation();
-                      setOpen((prev) => !prev);
+                      setOpenDropdown(isOpen ? null : index);
                     }}
                   >
                     {tab.label} ▾
                   </button>
-                  {open && (
+
+                  {isOpen && (
                     <div className="navbar-dropdown-menu" role="menu">
                       {tab.dropdown.map((item, i) => (
                         <NavLink
@@ -95,7 +107,7 @@ export default function Navbar() {
                               ? "navbar-dropdown-item active"
                               : "navbar-dropdown-item"
                           }
-                          onClick={() => setOpen(false)}
+                          onClick={() => setOpenDropdown(null)}
                         >
                           {item.label}
                         </NavLink>
