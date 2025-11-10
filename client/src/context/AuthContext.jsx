@@ -1,30 +1,24 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState } from 'react';
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    // Verificar si hay un estado guardado en localStorage
-    const savedAuth = localStorage.getItem('isAuthenticated');
-    return savedAuth === 'true';
-  });
+  // No usar localStorage - la sesión se borra al refrescar
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [username, setUsername] = useState('');
 
-  useEffect(() => {
-    // Guardar el estado en localStorage cuando cambie
-    localStorage.setItem('isAuthenticated', isAuthenticated.toString());
-  }, [isAuthenticated]);
-
-  const login = () => {
+  const login = (nombreUsuario) => {
     setIsAuthenticated(true);
+    setUsername(nombreUsuario);
   };
 
   const logout = () => {
     setIsAuthenticated(false);
-    localStorage.removeItem('isAuthenticated');
+    setUsername('');
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, username, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

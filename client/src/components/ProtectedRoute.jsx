@@ -6,8 +6,8 @@ export default function ProtectedRoute({ children }) {
   const location = useLocation();
 
   if (!isAuthenticated) {
-    // Redirigir al login y guardar la ruta a la que intentaba acceder
-    return <Navigate to="/login" state={{ from: location.pathname }} replace />;
+    // Redirigir al login con información de que viene de una ruta protegida
+    return <Navigate to="/login" state={{ from: location.pathname, requiresAuth: true }} replace />;
   }
 
   return children;

@@ -7,7 +7,7 @@ export default function Navbar() {
   const [showMessage, setShowMessage] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, username, logout } = useAuth();
 
   const tabs = [
     { label: "Proyectos", dropdown: [
@@ -29,7 +29,8 @@ export default function Navbar() {
     ], id: "juegos" },
     { path: "/Home", label: "Home" },
     { path: "/aboutMiembros", label: "Miembros" },
-    { path: "/login", label: "Login" },
+    // Login solo se muestra si no está autenticado
+    ...(isAuthenticated ? [] : [{ path: "/login", label: "Login" }]),
   ];
 
   const navRef = useRef(null);
@@ -69,7 +70,8 @@ export default function Navbar() {
           Inicia sesión para acceder a esta sección
         </div>
       )}
-      <nav ref={navRef} className="app-navbar">
+      <nav ref={navRef} className="app-navbar" style={{ position: 'relative' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', justifyContent: 'center', flex: 1 }}>
         {tabs.map((tab, index) => {
         if (tab.dropdown) {
           const isOpen = openDropdown === tab.id;
@@ -107,7 +109,12 @@ export default function Navbar() {
                             setOpenDropdown(null);
                             setShowMessage(true);
                             setTimeout(() => setShowMessage(false), 3000);
-                            navigate('/login');
+                            navigate('/login', { 
+                              state: { 
+                                from: item.path, 
+                                requiresAuth: true 
+                              } 
+                            });
                           }}
                           style={{ cursor: 'pointer' }}
                         >
@@ -144,6 +151,41 @@ export default function Navbar() {
           </NavLink>
         );
       })}
+        </div>
+      {/* Mostrar saludo y botón cerrar sesión si está autenticado */}
+      {isAuthenticated && (
+        <div style={{ 
+          display: 'flex', 
+          alignItems: 'center', 
+          gap: '15px',
+          position: 'absolute',
+          right: '20px',
+          top: '50%',
+          transform: 'translateY(-50%)'
+        }}>
+          <span style={{ 
+            color: 'var(--kawaii-brown)', 
+            fontWeight: '600',
+            fontSize: '16px'
+          }}>
+            Hola, {username}
+          </span>
+          <button
+            className="modern-btn"
+            onClick={() => {
+              logout();
+              navigate('/login', { replace: true });
+            }}
+            style={{
+              padding: '8px 16px',
+              fontSize: '14px',
+              cursor: 'pointer'
+            }}
+          >
+            Cerrar sesión
+          </button>
+        </div>
+      )}
       </nav>
     </>
   );

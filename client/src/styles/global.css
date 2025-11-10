@@ -544,7 +544,7 @@ h6 {
   border: 2px solid var(--dried-sage);
   border-radius: var(--border-radius-md);
   padding: 10px 15px;
-  color: var(--accent-color-1);
+  color: var(--kawaii-brown) !important;
   backdrop-filter: blur(5px);
   transition: all 0.3s ease;
   box-shadow: var(--shadow-sm);
@@ -554,6 +554,14 @@ h6 {
   outline: none;
   border-color: var(--desert-peach);
   box-shadow: var(--shadow-md);
+  color: var(--kawaii-brown) !important;
+}
+
+.modern-input:-webkit-autofill,
+.modern-input:-webkit-autofill:hover,
+.modern-input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--kawaii-brown) !important;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 .modern-input::placeholder {
