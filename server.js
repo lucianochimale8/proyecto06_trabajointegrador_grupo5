@@ -12,6 +12,7 @@ const archivosDB = require('./conection.js');
 const usuarios = require('./src/model/usuarios.js');
 
 // Middleware
+app.use(express.json());
 app.use('/api', usuarios);
 
 // Servidor escuchando
