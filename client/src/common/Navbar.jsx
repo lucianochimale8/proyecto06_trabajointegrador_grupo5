@@ -1,8 +1,9 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const location = useLocation();
 
   const tabs = [
     { label: "Proyectos", dropdown: [
@@ -27,6 +28,9 @@ export default function Navbar() {
 
   const navRef = useRef(null);
 
+  // Detectar si estamos en una página de proyecto
+  const isProjectPage = location.pathname.startsWith('/proyecto');
+
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (navRef.current && !navRef.current.contains(e.target)) {
@@ -49,7 +53,7 @@ export default function Navbar() {
               onMouseLeave={() => setOpen(false)}
             >
               <button
-                className="navbar-dropdown-button"
+                className={`navbar-dropdown-button ${isProjectPage ? 'active-project' : ''}`}
                 aria-expanded={open}
                 aria-haspopup="menu"
                 onClick={(e) => { e.stopPropagation(); setOpen(prev => !prev); }}

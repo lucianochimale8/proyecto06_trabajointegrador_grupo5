@@ -111,24 +111,15 @@ function Colores(){
     }
     
     return(
-        <div style={{ 
-            maxWidth: '800px', 
-            margin: '20px auto', 
-            padding: '24px',
-            textAlign: 'center',
-            fontFamily: "'KG Candy Cane Stripe', cursive"
+        <div className="avg-container" style={{ 
+            textAlign: 'center'
         }}>
-            <h1 style={{ 
-                color: 'var(--kawaii-brown)', 
-                fontFamily: "'Roundabout', cursive",
-                marginBottom: '15px'
-            }}>
-                Juego de Colores
-            </h1>
+            <h1>Juego de Colores</h1>
             <p style={{ 
                 marginBottom: '20px',
                 fontSize: '1.1rem',
-                color: 'var(--kawaii-brown)'
+                color: 'var(--kawaii-brown)',
+                fontFamily: "'KG Candy Cane Stripe', cursive"
             }}>
                 Presiona cualquier botón para cambiar los colores. Si todos coinciden, ganas.
             </p>
@@ -169,15 +160,17 @@ function Colores(){
             </div>
             {/* Mensaje de victoria , si hay mensaje mostrar el mensaje*/}
             {mensaje && (
-                <h2 style={{ 
+                <div className="resultado" style={{ 
                     color: "#33ff00", 
                     fontSize: '1.5rem',
                     fontWeight: '900',
                     marginTop: '20px',
-                    animation: 'aparecer 0.45s ease'
+                    background: "var(--kawaii-green)",
+                    borderColor: "#33ff00",
+                    textAlign: "center"
                 }}>
                     {mensaje}
-                </h2>
+                </div>
             )}
         </div>
     );

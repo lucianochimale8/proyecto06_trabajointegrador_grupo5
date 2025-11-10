@@ -144,7 +144,11 @@ export default function Estrellas() {
             <p className="instrucciones">
               Haz clic en las estrellas que aparezcan para ganar puntos
             </p>
-            <button className="boton-juego" onClick={iniciarJuego}>
+            <button className="modern-btn" onClick={iniciarJuego} style={{
+              marginTop: "20px",
+              fontSize: "1.2rem",
+              padding: "15px 30px"
+            }}>
               <i className="fas fa-play me-2"></i> Iniciar Juego
             </button>
           </div>
@@ -154,7 +158,11 @@ export default function Estrellas() {
           <div className="pantalla-ganar">
             <h2 className="titulo-ganar">¡Ganaste!</h2>
             <p className="puntos-finales">Puntuación final: {puntos}</p>
-            <button className="boton-juego" onClick={iniciarJuego}>
+            <button className="modern-btn" onClick={iniciarJuego} style={{
+              marginTop: "20px",
+              fontSize: "1.2rem",
+              padding: "15px 30px"
+            }}>
               <i className="fas fa-redo me-2"></i> Jugar de nuevo
             </button>
           </div>
