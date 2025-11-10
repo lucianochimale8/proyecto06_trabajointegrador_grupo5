@@ -42,6 +42,8 @@ const AboutMiembros = () => {
     );
   }
 
+  const miembroActual = miembros[currentIndex];
+
   return (
     <section className="container py-5">
       <div className="about-carousel-container">
@@ -53,18 +55,30 @@ const AboutMiembros = () => {
           )}
           <div className="about-carousel-card">
             <div className="id-card-image-wrapper">
-              <img 
-                src={miembros[currentIndex].img} 
-                alt={miembros[currentIndex].name}
-                className="id-card-image-only"
-              />
+              <a
+                href={miembroActual.github}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src={miembroActual.img}
+                  alt={miembroActual.name}
+                  className="id-card-image-only"
+                  style={{ cursor: "pointer" }}
+                />
+              </a>
             </div>
+            <h2>{miembroActual.name}</h2>
+            <p>{miembroActual.lu}</p>
             <button className="about-back-btn modern-btn" onClick={handleClose}>
               Atrás
             </button>
           </div>
           {currentIndex < miembros.length - 1 && (
-            <button className="about-arrow-btn about-arrow-right" onClick={handleNext}>
+            <button
+              className="about-arrow-btn about-arrow-right"
+              onClick={handleNext}
+            >
               ›
             </button>
           )}
