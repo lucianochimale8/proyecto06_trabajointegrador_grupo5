@@ -5,7 +5,7 @@ export const ProtectorRutas = ({ children }) => {
     const { isAuthenticated } = useAutorizacion();
 
     if (!isAuthenticated) {
-        return <Navigate to="/login" replace />;
+        return <Navigate to="/Home" replace />;
     }
 
     return children;

@@ -42,9 +42,8 @@ export default function Navbar() {
         { path: "/DiagnosticoIngles/Ejercicio3", label: "Numbers" },
       ],
     },
-
-      { path: "/Home", label: "Home" },
-      { path: "/aboutMiembros", label: "Miembros" }
+    { path: "/Home", label: "Home" },
+    { path: "/aboutMiembros", label: "Miembros" },
   ];
 
   const { user, isAuthenticated, logout } = useAutorizacion();
@@ -52,7 +51,7 @@ export default function Navbar() {
 
   const handleLogout = () => {
     logout();
-    navigate("/login");
+    navigate("/Home");
   };
 
   const navRef = useRef(null);
@@ -60,7 +59,8 @@ export default function Navbar() {
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (navRef.current && !navRef.current.contains(e.target)) {
-        setOpen(false);
+        // cerrar cualquier dropdown abierto
+        setOpenDropdown(null);
       }
     };
     document.addEventListener("click", handleClickOutside);
@@ -70,68 +70,67 @@ export default function Navbar() {
   return (
     <>
       {isAuthenticated && (
-        <nav ref={navRef} className="app-navbar">
-          {tabs.map((tab, index) => {
-            if (tab.dropdown) {
-              const isOpen = openDropdown === index;
-
-              return (
-                <div
-                  key={index}
-                  className="navbar-dropdown"
-                  onMouseEnter={() => setOpenDropdown(index)}
-                  onMouseLeave={() => setOpenDropdown(null)}
-                >
-                  <button
-                    className="navbar-dropdown-button"
-                    aria-expanded={isOpen}
-                    aria-haspopup="menu"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setOpenDropdown(isOpen ? null : index);
-                    }}
-                  >
-                    {tab.label} ▾
-                  </button>
-
-                  {isOpen && (
-                    <div className="navbar-dropdown-menu" role="menu">
-                      {tab.dropdown.map((item, i) => (
-                        <NavLink
-                          key={i}
-                          to={item.path}
-                          className={({ isActive }) =>
-                            isActive
-                              ? "navbar-dropdown-item active"
-                              : "navbar-dropdown-item"
-                          }
-                          onClick={() => setOpenDropdown(null)}
-                        >
-                          {item.label}
-                        </NavLink>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              );
-            }
-
-            return (
-              <NavLink key={index} to={tab.path} className="navbar-link">
-                {tab.label}
-              </NavLink>
-            );
-          })}
-
-          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-            <span>Hola, {user?.name || user?.username}</span>
-            <span>({user?.rol})</span>
-            <button onClick={handleLogout} style={{ padding: "0.5rem 1rem" }}>
-              Cerrar Sesión
-            </button>
-          </div>
-        </nav>
+        <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+          <span>Hola, {user?.name || user?.username}</span>
+          <span>({user?.rol})</span>
+          <button onClick={handleLogout} style={{ padding: "0.5rem 1rem" }}>
+            Cerrar Sesión
+          </button>
+        </div>
       )}
+
+      <nav ref={navRef} className="app-navbar">
+        {tabs.map((tab, index) => {
+          if (tab.dropdown) {
+            const isOpen = openDropdown === index;
+            return (
+              <div
+                key={index}
+                className="navbar-dropdown"
+                onMouseEnter={() => setOpenDropdown(index)}
+                onMouseLeave={() => setOpenDropdown(null)}
+              >
+                <button
+                  className="navbar-dropdown-button"
+                  aria-expanded={isOpen}
+                  aria-haspopup="menu"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setOpenDropdown(isOpen ? null : index);
+                  }}
+                >
+                  {tab.label} ▾
+                </button>
+
+                {isOpen && (
+                  <div className="navbar-dropdown-menu" role="menu">
+                    {tab.dropdown.map((item, i) => (
+                      <NavLink
+                        key={i}
+                        to={item.path}
+                        className={({ isActive }) =>
+                          isActive
+                            ? "navbar-dropdown-item active"
+                            : "navbar-dropdown-item"
+                        }
+                        onClick={() => setOpenDropdown(null)}
+                      >
+                        {item.label}
+                      </NavLink>
+                    ))}
+                  </div>
+                )}
+              </div>
+            );
+          }
+
+          return (
+            <NavLink key={index} to={tab.path} className="navbar-link">
+              {tab.label}
+            </NavLink>
+          );
+        })}
+      </nav>
     </>
   );
 }

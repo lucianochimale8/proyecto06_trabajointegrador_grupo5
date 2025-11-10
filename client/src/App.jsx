@@ -28,8 +28,9 @@ function App() {
       <Header />
       <Navbar />
       <Routes>
-        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/" element={<Navigate to="/Home" />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/Home" element={<Home />} />
         <Route
           path="/home"
           element={
@@ -65,89 +66,67 @@ function App() {
         <Route
           path="/proyecto2/CalculadorDePromedio"
           element={
-            <ProtectorRutas>
               <CalculadorDePromedio />
-            </ProtectorRutas>
           }
         />
         <Route
           path="/proyecto2/FormularioUNJU"
           element={
-            <ProtectorRutas>
               <FormUNJU />
-            </ProtectorRutas>
           }
         />
         <Route
           path="/proyecto2/NumeroMayor"
           element={
-            <ProtectorRutas>
               <NumeroMayor />
-            </ProtectorRutas>
           }
         />
         <Route
           path="/proyecto2/SimuladorDeSalario"
           element={
-            <ProtectorRutas>
               <SimuladorDeSalario />
-            </ProtectorRutas>
           }
         />
         <Route
           path="/proyecto2/SumaLaterales"
           element={
-            <ProtectorRutas>
               <SumaLaterales />
-            </ProtectorRutas>
           }
         />
         <Route
           path="/proyecto3/RegistroMascotas"
           element={
-            <ProtectorRutas>
               <RegistroMascotas />
-            </ProtectorRutas>
           }
         />
         <Route
           path="/proyecto3/ValorX"
           element={
-            <ProtectorRutas>
               <ValorX />
-            </ProtectorRutas>
           }
         />
         <Route
           path="/proyecto4/AdivinaElNumero"
           element={
-            <ProtectorRutas>
               <AdivinaElNumero />
-            </ProtectorRutas>
           }
         />
         <Route
           path="/proyecto4/JuegoDeColores"
           element={
-            <ProtectorRutas>
               <JuegoDeColores />
-            </ProtectorRutas>
           }
         />
         <Route
           path="/proyecto5/FormularioDeRegistro"
           element={
-            <ProtectorRutas>
               <Formulario />
-            </ProtectorRutas>
           }
         />
         <Route
           path="/proyecto5/JuegoEstrellas"
           element={
-            <ProtectorRutas>
               <JuegoEstrellas />
-            </ProtectorRutas>
           }
         />
         <Route

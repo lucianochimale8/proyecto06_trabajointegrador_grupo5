@@ -1,4 +1,4 @@
-import React from "react";
+import Login from "../common/Login";
 
 export default function Home() {
 	return (
@@ -18,6 +18,7 @@ export default function Home() {
 					</p>
 				</div>
 			</div>
+			<Login/>
 		</div>
 	);
 }
