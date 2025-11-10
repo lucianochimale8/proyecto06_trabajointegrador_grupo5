@@ -2,7 +2,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 
 export default function Navbar() {
-  const [open, setOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(null);
   const location = useLocation();
 
   const tabs = [
@@ -18,9 +18,11 @@ export default function Navbar() {
       { path: "/proyecto4/JuegoDeColores", label: "Juego de Colores" },
       { path: "/proyecto5/FormularioDeRegistro", label: "Formulario de Registro" },
       { path: "/proyecto5/JuegoEstrellas", label: "Juego de Estrellas" },
-    ]},
-    { path: "/DiagnosticoIngles/Ejercicio1", label: "Colours" },   
-    { path: "/DiagnosticoIngles/Ejercicio2", label: "Animals" },   
+    ], id: "proyectos" },
+    { label: "Juegos", dropdown: [
+      { path: "/DiagnosticoIngles/Ejercicio2", label: "Animals" },
+      { path: "/DiagnosticoIngles/Ejercicio1", label: "Colors" },
+    ], id: "juegos" },
     { path: "/Home", label: "Home" },
     { path: "/aboutMiembros", label: "Miembros" },
     { path: "/login", label: "Login" },
@@ -30,11 +32,13 @@ export default function Navbar() {
 
   // Detectar si estamos en una página de proyecto
   const isProjectPage = location.pathname.startsWith('/proyecto');
+  // Detectar si estamos en una página de juego
+  const isGamePage = location.pathname.startsWith('/DiagnosticoIngles');
 
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (navRef.current && !navRef.current.contains(e.target)) {
-        setOpen(false);
+        setOpenDropdown(null);
       }
     };
     document.addEventListener('click', handleClickOutside);
@@ -45,22 +49,28 @@ export default function Navbar() {
     <nav ref={navRef} className="app-navbar">
       {tabs.map((tab, index) => {
         if (tab.dropdown) {
+          const isOpen = openDropdown === tab.id;
+          const isActive = (tab.id === "proyectos" && isProjectPage) || (tab.id === "juegos" && isGamePage);
+          
           return (
             <div
               key={index}
               className="navbar-dropdown"
-              onMouseEnter={() => setOpen(true)}
-              onMouseLeave={() => setOpen(false)}
+              onMouseEnter={() => setOpenDropdown(tab.id)}
+              onMouseLeave={() => setOpenDropdown(null)}
             >
               <button
-                className={`navbar-dropdown-button ${isProjectPage ? 'active-project' : ''}`}
-                aria-expanded={open}
+                className={`navbar-dropdown-button ${isActive ? 'active-project' : ''}`}
+                aria-expanded={isOpen}
                 aria-haspopup="menu"
-                onClick={(e) => { e.stopPropagation(); setOpen(prev => !prev); }}
+                onClick={(e) => { 
+                  e.stopPropagation(); 
+                  setOpenDropdown(isOpen ? null : tab.id); 
+                }}
               >
                 {tab.label} ▾
               </button>
-              {open && (
+              {isOpen && (
                 <div className="navbar-dropdown-menu" role="menu">
                   {tab.dropdown.map((item, i) => (
                     <NavLink
@@ -69,7 +79,7 @@ export default function Navbar() {
                       className={({ isActive }) =>
                         isActive ? "navbar-dropdown-item active" : "navbar-dropdown-item"
                       }
-                      onClick={() => setOpen(false)}
+                      onClick={() => setOpenDropdown(null)}
                     >
                       {item.label}
                     </NavLink>
