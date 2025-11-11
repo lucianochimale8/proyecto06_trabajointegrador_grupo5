@@ -67,8 +67,8 @@ const AboutMiembros = () => {
                   style={{ 
                     cursor: "pointer",
                     width: "820px",
-                    height: "580px",
-                    objectFit: "cover"
+                    height: "auto",
+                    objectFit: "contain"
                   }}
                 />
               </a>
