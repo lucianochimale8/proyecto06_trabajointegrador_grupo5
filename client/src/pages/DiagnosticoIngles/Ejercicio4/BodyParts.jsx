@@ -29,16 +29,16 @@ const BodyParts = () => {
   };
 
   const slotSizes = {
-    head: { width: "75px", height: "75px" },
-    ear: { width: "75px", height: "75px" },
-    eye: { width: "75px", height: "75px" },
-    nose: { width: "75px", height: "75px" },
-    mouth: { width: "75px", height: "75px" },
-    arm: { width: "75px", height: "75px" },
-    hand: { width: "75px", height: "75px" },
-    leg: { width: "75px", height: "75px" },
-    foot: { width: "75px", height: "75px" },
-    lip: { width: "75px", height: "75px" }
+    head: { width: "90px", height: "90px" },
+    ear: { width: "90px", height: "90px" },
+    eye: { width: "90px", height: "90px" },
+    nose: { width: "90px", height: "90px" },
+    mouth: { width: "90px", height: "90px" },
+    arm: { width: "90px", height: "90px" },
+    hand: { width: "90px", height: "90px" },
+    leg: { width: "90px", height: "90px" },
+    foot: { width: "90px", height: "90px" },
+    lip: { width: "90px", height: "90px" }
   };
 
   // piezas disponibles
@@ -96,18 +96,18 @@ const BodyParts = () => {
 
   const handleDragOver = (e) => e.preventDefault();
 
-  // posiciones
+  // posiciones (usando porcentajes relativos al contenedor de 800x600px para mantener posiciones fijas)
   const posiciones = {
-    head: { top: "50px", left: "235px" },
-    ear: { top: "150px", left: "235px" },
-    eye: { top: "50px", left: "555px" },
-    nose: { top: "245px", left: "235px" },
-    mouth: { top: "340px", left: "235px" },
-    arm: { top: "245px", left: "555px" },
-    hand: { top: "440px", left: "235px" },
-    leg: { top: "340px", left: "555px" },
-    foot: { top: "440px", left: "555px" },
-    lip: { top: "150px", left: "555px" },
+    head: { top: "9.17%", left: "34.13%" },
+    ear: { top: "28.33%", left: "34.13%" },
+    eye: { top: "9.17%", left: "81.63%" },
+    nose: { top: "47.5%", left: "34.13%" },
+    mouth: { top: "66.67%", left: "34.13%" },
+    arm: { top: "47.17%", left: "81.88%" },
+    hand: { top: "85%", left: "34.13%" },
+    leg: { top: "66.67%", left: "81.63%" },
+    foot: { top: "85%", left: "81.88%" },
+    lip: { top: "28.33%", left: "81.63%" },
   };
 
   return (
