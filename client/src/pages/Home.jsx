@@ -24,13 +24,13 @@ export default function Home() {
 
           <div className="modern-card no-top-accent" style={{ padding: "24px", minHeight: "200px" }}>
             <p style={{ margin: 0, textAlign: "center", fontFamily: "'KG Candy Cane Stripe', cursive", fontSize: "1.1rem", color: "var(--kawaii-brown)" }}>
-              Aqui encontraras juegos de practica ademas de encontrar juegos simples para practicar tu ingles...
+              Aqui encontraras juegos de practica ademas de encontrar juegos simples para practicar tu ingles, esta pagina fue trabajada con la inclusion de niños con cualquier neurodivergencia en mente, para que no importe cualquier dificultad que solo importe que puedas seguir aprendiendo
             </p>
           </div>
 
-          <div className="modern-card no-top-accent" style={{ minHeight: "120px" }}>
-            <p style={{ margin: 0, textAlign: "center", fontWeight: 700 }}>
-              Explora nuestra pagina para descubrir todo lo que preparamos para ti &lt;3
+          <div className="modern-card no-top-accent" style={{ padding: "40px" }}>
+					<p style={{ margin: 0, textAlign: "center", color: "var(--kawaii-brown)", fontWeight: 900, fontFamily: "'KG Candy Cane Stripe', cursive", fontSize: "1.35rem", WebkitTextStroke: "1px var(--kawaii-brown)" }}>
+              Explora nuestra pagina para descubrir todo lo que preparamos para ti &lt;3!!
             </p>
           </div>
         </div>
