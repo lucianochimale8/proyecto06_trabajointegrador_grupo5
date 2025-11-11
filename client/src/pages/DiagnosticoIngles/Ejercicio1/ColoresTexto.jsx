@@ -5,6 +5,8 @@ import sonidoCorrecto from "../../../assets/audio/correct.mp3";
 import sonidoError from "../../../assets/audio/gameover.mp3";
 import sonidoNextLevel from "../../../assets/audio/next-level-m.mp3";
 import sonidoGanar from "../../../assets/audio/win.mp3";
+import { saveScore } from '../../../utils/scores';
+import { useAutorizacion } from '../../../hooks/useAutorizacion';
 // import Confetti from '../../../common/Confetti.jsx';
 
 const Colores = () => {
@@ -95,6 +97,8 @@ const Colores = () => {
   // rastrear qué botón fue seleccionado y si fue correcto
   const [botonSeleccionado, setBotonSeleccionado] = useState(null);
   const [respuestaCorrecta, setRespuestaCorrecta] = useState(null);
+  
+  const { user } = useAutorizacion();
 
   // funcion para generar una ronda nueva del juego:
   // seleccionar un color objetivo aleatorio
@@ -244,17 +248,24 @@ const Colores = () => {
       }, 1500);
     }
   };
+  
   // finalizacion y reinicio del juego
   // finalizar y calcular los resultados finales
   const finalizarJuegos = () => {
     setJuegoActivo(false);
+    const totalPuntos = puntajeTextoAColor + puntajeColorATexto;
     // calcular y almacenar resultados finales
     setResultados({
       textoAColor: puntajeTextoAColor, // del primero
       colorATexto: puntajeColorATexto, // del segundo
-      total: puntajeTextoAColor + puntajeColorATexto, // el total
+      total: totalPuntos, // el total
       maximo: 12 // los intentos maximos posibles
     });
+    // Guardar puntuación si hay usuario autenticado
+    if (user?.username || user?.name) {
+      const username = user?.username || user?.name;
+      saveScore(username, 'colores', totalPuntos, 12);
+    }
     // Reproducir sonido de victoria cuando se muestra la pantalla de resultados
     reproducirSonido(sonidoGanarRef);
   };

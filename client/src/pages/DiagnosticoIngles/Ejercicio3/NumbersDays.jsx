@@ -4,6 +4,8 @@ import sonidoCorrecto from "../../../assets/audio/correct.mp3";
 import sonidoError from "../../../assets/audio/gameover.mp3";
 import sonidoNextLevel from "../../../assets/audio/next-level-m.mp3";
 import sonidoGanar from "../../../assets/audio/win.mp3";
+import { saveScore } from '../../../utils/scores';
+import { useAutorizacion } from '../../../hooks/useAutorizacion';
 
 // Juego 3: Números (nivel 1) y Días de la semana (nivel 2)
 export default function NumbersDays() {
@@ -88,6 +90,8 @@ export default function NumbersDays() {
   const [aciertosNivel1, setAciertosNivel1] = useState(0);
   const [aciertosNivel2, setAciertosNivel2] = useState(0);
   const MAX_ACIERTOS = 5;
+  
+  const { user } = useAutorizacion();
 
   // generar ronda
   const datasetActual = nivel === 1 ? numeros : dias;
@@ -139,6 +143,12 @@ export default function NumbersDays() {
           reproducirSonido(sonidoGanarRef);
           setJuegoActivo(false);
           setAciertosNivel2(nuevos);
+          // Guardar puntuación si hay usuario autenticado
+          if (user?.username || user?.name) {
+            const username = user?.username || user?.name;
+            const totalPuntos = aciertosNivel1 + nuevos;
+            saveScore(username, 'numbersdays', totalPuntos, MAX_ACIERTOS * 2);
+          }
         }
       } else {
         setTimeout(() => generarRonda(), 1200);

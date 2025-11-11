@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "../../../styles/cuerpo.css";
+import { saveScore } from '../../../utils/scores';
+import { useAutorizacion } from '../../../hooks/useAutorizacion';
 
 import cuerpo from "../../../assets/img/ImageBody/cuerpo.png";
 
@@ -61,6 +63,7 @@ const BodyParts = () => {
   })));
 
   const [completed, setCompleted] = useState(false);
+  const { user } = useAutorizacion();
 
   const playSound = (type) => {
     console.log(type + " sound");
@@ -83,7 +86,14 @@ const BodyParts = () => {
       const allFilled = slots.every(
         (slot) => slot.id === targetId || slot.filled
       );
-      if (allFilled) setCompleted(true);
+      if (allFilled) {
+        setCompleted(true);
+        // Guardar puntuación si hay usuario autenticado (completado = 1 punto)
+        if (user?.username || user?.name) {
+          const username = user?.username || user?.name;
+          saveScore(username, 'bodyparts', 1, 1);
+        }
+      }
     } else {
       playSound("wrong");
       const el = document.querySelector(`.slot[data-id="${targetId}"]`);
