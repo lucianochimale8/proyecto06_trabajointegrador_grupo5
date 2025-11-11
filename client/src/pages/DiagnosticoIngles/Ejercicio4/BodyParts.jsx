@@ -29,16 +29,16 @@ const BodyParts = () => {
   };
 
   const slotSizes = {
-    head: { width: "75px", height: "75px" },
-    ear: { width: "75px", height: "75px" },
-    eye: { width: "75px", height: "75px" },
-    nose: { width: "75px", height: "75px" },
-    mouth: { width: "75px", height: "75px" },
-    arm: { width: "75px", height: "75px" },
-    hand: { width: "75px", height: "75px" },
-    leg: { width: "75px", height: "75px" },
-    foot: { width: "75px", height: "75px" },
-    lip: { width: "75px", height: "75px" }
+    head: { width: "90px", height: "90px" },
+    ear: { width: "90px", height: "90px" },
+    eye: { width: "90px", height: "90px" },
+    nose: { width: "90px", height: "90px" },
+    mouth: { width: "90px", height: "90px" },
+    arm: { width: "90px", height: "90px" },
+    hand: { width: "90px", height: "90px" },
+    leg: { width: "90px", height: "90px" },
+    foot: { width: "90px", height: "90px" },
+    lip: { width: "90px", height: "90px" }
   };
 
   // piezas disponibles
@@ -98,16 +98,16 @@ const BodyParts = () => {
 
   // posiciones
   const posiciones = {
-    head: { top: "50px", left: "235px" },
-    ear: { top: "150px", left: "235px" },
-    eye: { top: "50px", left: "555px" },
-    nose: { top: "245px", left: "235px" },
-    mouth: { top: "340px", left: "235px" },
-    arm: { top: "245px", left: "555px" },
-    hand: { top: "440px", left: "235px" },
-    leg: { top: "340px", left: "555px" },
-    foot: { top: "440px", left: "555px" },
-    lip: { top: "150px", left: "555px" },
+    head: { top: "55px", left: "273px" },
+    ear: { top: "170px", left: "273px" },
+    eye: { top: "55px", left: "653px" },
+    nose: { top: "285px", left: "273px" },
+    mouth: { top: "400px", left: "273px" },
+    arm: { top: "283px", left: "655px" },
+    hand: { top: "510px", left: "273px" },
+    leg: { top: "400px", left: "653px" },
+    foot: { top: "510px", left: "655px" },
+    lip: { top: "170px", left: "653px" },
   };
 
   return (
