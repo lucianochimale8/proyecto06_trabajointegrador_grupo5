@@ -1182,3 +1182,52 @@ h6 {
     transform: translateY(0);
   }
 }
+
+.auth-column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.register-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-bottom: 12px;
+}
+
+.auth-column .modern-input,
+.register-wrapper .modern-input,
+.auth-column input,
+.register-wrapper input,
+.auth-column select,
+.register-wrapper select {
+  width: 100%;
+  box-sizing: border-box;
+  font-family: 'KG Candy Cane Stripe', cursive;
+  font-size: 14px;
+}
+
+.auth-column .modern-card {
+  width: 100%;
+  max-width: 360px;
+}
+
+.modern-card > h2,
+.modern-card > h3 {
+  position: relative;
+  z-index: 1;
+  margin-top: 4px;
+  margin-bottom: 6px;
+}
+
+@media (max-width: 900px) {
+  .page-transition > div[style] {
+    grid-template-columns: 1fr !important;
+  }
+  .auth-column .modern-card {
+    max-width: 100%;
+    margin: 0 10px;
+  }
+}
