@@ -1,4 +1,5 @@
 import Login from "../common/Login";
+import Register from "../common/Register";
 
 export default function Home() {
 	return (
@@ -19,6 +20,7 @@ export default function Home() {
 				</div>
 			</div>
 			<Login/>
+			<Register/>
 		</div>
 	);
 }

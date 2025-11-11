@@ -29,16 +29,16 @@ const BodyParts = () => {
   };
 
   const slotSizes = {
-    head: { width: "90px", height: "90px" },
-    ear: { width: "90px", height: "90px" },
-    eye: { width: "90px", height: "90px" },
-    nose: { width: "90px", height: "90px" },
-    mouth: { width: "90px", height: "90px" },
-    arm: { width: "90px", height: "90px" },
-    hand: { width: "90px", height: "90px" },
-    leg: { width: "90px", height: "90px" },
-    foot: { width: "90px", height: "90px" },
-    lip: { width: "90px", height: "90px" }
+    head: { width: "70px", height: "70px" },
+    ear: { width: "70px", height: "70px" },
+    eye: { width: "70px", height: "70px" },
+    nose: { width: "70px", height: "70px" },
+    mouth: { width: "70px", height: "70px" },
+    arm: { width: "70px", height: "70px" },
+    hand: { width: "70px", height: "70px" },
+    leg: { width: "70px", height: "70px" },
+    foot: { width: "70px", height: "70px" },
+    lip: { width: "70px", height: "70px" }
   };
 
   // piezas disponibles
@@ -96,19 +96,18 @@ const BodyParts = () => {
 
   const handleDragOver = (e) => e.preventDefault();
 
-  // posiciones (usando porcentajes relativos al contenedor de 800x600px para mantener posiciones fijas)
   const posiciones = {
-    head: { top: "9.17%", left: "34.13%" },
-    ear: { top: "28.33%", left: "34.13%" },
-    eye: { top: "9.17%", left: "81.63%" },
-    nose: { top: "47.5%", left: "34.13%" },
-    mouth: { top: "66.67%", left: "34.13%" },
-    arm: { top: "47.17%", left: "81.88%" },
-    hand: { top: "85%", left: "34.13%" },
-    leg: { top: "66.67%", left: "81.63%" },
-    foot: { top: "85%", left: "81.88%" },
-    lip: { top: "28.33%", left: "81.63%" },
-  };
+  head: { top: "8%", left: "26.5%" },
+  ear: { top: "22%", left: "26.5%" },
+  eye: { top: "8%", left: "62%" },
+  nose: { top: "36%", left: "26.5%" },
+  mouth: { top: "51%", left: "26.5%" },
+  arm: { top: "36%", left: "62%" },
+  hand: { top: "65%", left: "26.5%" },
+  leg: { top: "51%", left: "62%" },
+  foot: { top: "65%", left: "62%" },
+  lip: { top: "22%", left: "62%" },
+};
 
   return (
     <div className="body-game-container">
