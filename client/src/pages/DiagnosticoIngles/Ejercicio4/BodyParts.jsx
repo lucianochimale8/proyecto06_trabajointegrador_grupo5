@@ -96,18 +96,18 @@ const BodyParts = () => {
 
   const handleDragOver = (e) => e.preventDefault();
 
-  // posiciones
+  // posiciones (usando porcentajes relativos al contenedor de 800x600px para mantener posiciones fijas)
   const posiciones = {
-    head: { top: "55px", left: "273px" },
-    ear: { top: "170px", left: "273px" },
-    eye: { top: "55px", left: "653px" },
-    nose: { top: "285px", left: "273px" },
-    mouth: { top: "400px", left: "273px" },
-    arm: { top: "283px", left: "655px" },
-    hand: { top: "510px", left: "273px" },
-    leg: { top: "400px", left: "653px" },
-    foot: { top: "510px", left: "655px" },
-    lip: { top: "170px", left: "653px" },
+    head: { top: "9.17%", left: "34.13%" },
+    ear: { top: "28.33%", left: "34.13%" },
+    eye: { top: "9.17%", left: "81.63%" },
+    nose: { top: "47.5%", left: "34.13%" },
+    mouth: { top: "66.67%", left: "34.13%" },
+    arm: { top: "47.17%", left: "81.88%" },
+    hand: { top: "85%", left: "34.13%" },
+    leg: { top: "66.67%", left: "81.63%" },
+    foot: { top: "85%", left: "81.88%" },
+    lip: { top: "28.33%", left: "81.63%" },
   };
 
   return (

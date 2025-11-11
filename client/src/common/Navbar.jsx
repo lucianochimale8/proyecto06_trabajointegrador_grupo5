@@ -72,17 +72,17 @@ export default function Navbar() {
 
   return (
     <>
-      {isAuthenticated && (
-        <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-          <span>Hola, {user?.name || user?.username}</span>
-          <span>({user?.rol})</span>
-          <button onClick={handleLogout} style={{ padding: "0.5rem 1rem" }}>
-            Cerrar Sesión
-          </button>
-        </div>
-      )}
-
       <nav ref={navRef} className="app-navbar">
+        {isAuthenticated && (
+          <>
+            <span style={{ color: "var(--kawaii-brown)", fontFamily: "'KG Candy Cane Stripe', cursive", fontSize: "var(--base-font-size)" }}>
+              Hola! "{user?.name || user?.username}"
+            </span>
+            <button onClick={handleLogout} className="modern-btn">
+              Cerrar Sesión
+            </button>
+          </>
+        )}
         {tabs.map((tab, index) => {
           if (tab.dropdown) {
             const isOpen = openDropdown === index;
