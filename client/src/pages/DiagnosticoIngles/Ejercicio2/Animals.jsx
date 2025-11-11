@@ -11,6 +11,8 @@ import hipopotamo from "../../../assets/img/imageAnimal/hipopotamo.png";
 import sonidoCorrecto from "../../../assets/audio/correct.mp3";
 import sonidoError from "../../../assets/audio/gameover.mp3";
 import sonidoGanar from "../../../assets/audio/win.mp3";
+import { saveScore } from '../../../utils/scores';
+import { useAutorizacion } from '../../../hooks/useAutorizacion';
 
 import '../../../styles/animales.css';
 
@@ -34,6 +36,8 @@ const Animals = () => {
     const [resultados, setResultados] = useState(null);
     const [botonSeleccionado, setBotonSeleccionado] = useState(null);
     const [respuestaCorrecta, setRespuestaCorrecta] = useState(null);
+    
+    const { user } = useAutorizacion();
 
     // referencias para el sonido
     const sonidoCorrectoRef = useRef(null);
@@ -124,6 +128,11 @@ const Animals = () => {
                     setMensaje('¡Felicidades! ¡Has ganado!');
                     setGameState('won');
                     setResultados({ total: newPuntaje, maximo: WINNING_SCORE });
+                    // Guardar puntuación si hay usuario autenticado
+                    if (user?.username || user?.name) {
+                        const username = user?.username || user?.name;
+                        saveScore(username, 'animals', newPuntaje, WINNING_SCORE);
+                    }
                     // Reproducir sonido de victoria cuando se muestra la pantalla de resultados
                     setTimeout(() => {
                         reproducirSonido(sonidoGanarRef);

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAutorizacion } from "../hooks/useAutorizacion.js";
 
-export default function Login() {
+export default function Login({ onShowRegister }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState("");
@@ -79,9 +79,20 @@ export default function Login() {
             type="submit" 
             className="login-button"
           >
-            Entrar
+            Iniciar
           </button>
         </form>
+        
+        {onShowRegister && (
+          <button 
+            type="button"
+            onClick={onShowRegister}
+            className="modern-btn"
+            style={{ width: "100%", marginTop: "12px" }}
+          >
+            Registrarse
+          </button>
+        )}
       </div>
     </div>
   );
