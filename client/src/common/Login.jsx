@@ -51,35 +51,27 @@ export default function Login() {
   return (
     <div className="login-container">
       <div className="login-card">
-        <div className="login-header">
-          <h2>Iniciar Sesión</h2>
-          <p>Use: admin / 1234</p>
-        </div>
-
+        <h2 className="login-title">INICIAR SESIÓN</h2>
         <form onSubmit={handleSubmit} className="login-form">
-          <div className="form-group">
-            <label htmlFor="username">Nombre de Usuario</label>
-            <input
-              type="text"
-              id="username"
-              placeholder="Ingrese su nombre de usuario"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
-          </div>
+          <input
+            type="text"
+            id="username"
+            className="login-input"
+            placeholder="Admin"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
 
-          <div className="form-group">
-            <label htmlFor="password">Contraseña</label>
-            <input
-              type="password"
-              id="password"
-              placeholder="Ingrese su contraseña"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
+          <input
+            type="password"
+            id="password"
+            className="login-input"
+            placeholder="...."
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
 
           {loginError && <div className="error-message">{loginError}</div>}
 
@@ -87,7 +79,7 @@ export default function Login() {
             type="submit" 
             className="login-button"
           >
-            Iniciar sesión
+            Entrar
           </button>
         </form>
       </div>
